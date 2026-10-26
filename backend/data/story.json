@@ -1,0 +1,366 @@
+{
+  "prototype_question": "How might we help first-time visitors reach the right department the first time?",
+  "prototype_question_group": "B",
+  "scope_note": "WayMed prototypes Group B navigation and parts of Groups A and C. It does not fully solve Groups A, C, D, or E. The hospital layout and data are fictional.",
+  "research_site": "Civil Hospital Karachi",
+  "team": [
+    "Syed Hashir Ali (026)",
+    "Danish Saleem (002)",
+    "Muhammad Umar (024)",
+    "Ibadullah (028)"
+  ],
+  "personas": [
+    {
+      "code": "P1",
+      "name": "Khurshid",
+      "role": "attendant from Thatta",
+      "color": "yellow",
+      "description": "Strong quotes on footpath sitting, costs, early discharge."
+    },
+    {
+      "code": "P2",
+      "name": "Shams",
+      "role": "father of a 7-year-old, Paediatrics",
+      "color": "yellow",
+      "description": "Lost between departments; no updates; communication gap."
+    },
+    {
+      "code": "P3",
+      "name": "Ashok",
+      "role": "attendant from Sanghar",
+      "color": "yellow",
+      "description": "One-month stay: floor sleeping, food costs, delayed lab reports."
+    },
+    {
+      "code": "D1",
+      "name": "Dr. Tahira",
+      "role": "child specialist, Child Emergency",
+      "color": "pink",
+      "description": "Doctor view: crowding, resources, pharmacy, oversight."
+    },
+    {
+      "code": "S1",
+      "name": "Abdullah",
+      "role": "doctor's assistant, M5 (10 years)",
+      "color": "green",
+      "description": "Long-serving staff view of poverty, follow-up gap, accommodation."
+    },
+    {
+      "code": "S2",
+      "name": "Adil",
+      "role": "nurse intern, Emergency",
+      "color": "green",
+      "description": "Frontline junior staff view of staffing gaps and unpaid work."
+    }
+  ],
+  "research_note": "There was no compounder in our research, so there is no C code.",
+  "groups": [
+    {
+      "code": "A",
+      "title": "No safe place to rest",
+      "insight": "Families stay close to the patient out of care, but the hospital has no place for them, so they are moved on.",
+      "pov": "A low-income attendant staying with an admitted family member needs a safe and dignified way to rest close to the patient because the hospital has no attendant accommodation, so families end up on footpaths and floors and are moved on without direction.",
+      "display_translations": {
+        "ur": {
+          "title": "آرام کرنے کے لیے کوئی محفوظ جگہ نہیں",
+          "insight": "خاندان دیکھ بھال کی وجہ سے مریض کے قریب رہتے ہیں، لیکن ہسپتال میں ان کے لیے کوئی جگہ نہیں ہے، اس لیے انہیں وہاں سے ہٹا دیا جاتا ہے۔",
+          "pov": "ایک کم آمدنی والے تیماردار کو، جو داخل مریض کے ساتھ ٹھہرا ہوا ہے، مریض کے قریب آرام کرنے کے لیے ایک محفوظ اور باوقار طریقے کی ضرورت ہے کیونکہ ہسپتال میں تیمارداروں کے لیے رہائش کا کوئی انتظام نہیں ہے، اس لیے خاندان فٹ پاتھوں اور فرشوں پر سوتے ہیں اور انہیں بغیر کسی رہنمائی کے وہاں سے ہٹا دیا جاتا ہے۔",
+          "hmws": [
+            "ہم تیمارداروں کو مریض کے قریب رہتے ہوئے محفوظ طریقے سے اور عزت کے ساتھ آرام کرنے میں کیسے مدد دے سکتے ہیں؟",
+            "ہم خاندانوں کو یہ جاننے میں کیسے مدد دے سکتے ہیں کہ انہیں کہاں بیٹھنے اور انتظار کرنے کی اجازت ہے؟",
+            "ہم تیمارداروں کے کھلے آسمان تلے سونے کی راتوں کو کیسے کم کر سکتے ہیں؟"
+          ]
+        },
+        "sd": {
+          "title": "آرام ڪرڻ لاءِ ڪا به محفوظ جاءِ ناهي",
+          "insight": "خاندان سارسنڀال جي ڪري مريض جي ويجهو رهن ٿا، پر اسپتال ۾ انهن لاءِ ڪا جاءِ ناهي، ان ڪري کين اتان هٽايو وڃي ٿو.",
+          "pov": "هڪ گهٽ آمدني واري تيماردار کي، جيڪو داخل مريض سان گڏ رهي ٿو، مريض جي ويجهو آرام ڪرڻ لاءِ هڪ محفوظ ۽ عزت واري طريقي جي ضرورت آهي ڇاڪاڻ ته اسپتال ۾ تيماردارن لاءِ رهائش جو ڪو انتظام ناهي، ان ڪري خاندان فوٽ پاٿن ۽ فرشن تي سمهن ٿا ۽ کين بغير ڪنهن رهنمائي جي اتان هٽايو وڃي ٿو.",
+          "hmws": [
+            "اسان تيماردارن کي مريض جي ويجهو رهندي محفوظ طريقي سان ۽ عزت سان آرام ڪرڻ ۾ ڪيئن مدد ڪري سگهون ٿا؟",
+            "اسان خاندانن کي اها ڄاڻڻ ۾ ڪيئن مدد ڪري سگهون ٿا ته کين ڪٿي ويهڻ ۽ انتظار ڪرڻ جي اجازت آهي؟",
+            "اسان تيماردارن جي کليل آسمان هيٺ سمهڻ وارين راتين کي ڪيئن گهٽ ڪري سگهون ٿا؟"
+          ]
+        }
+      },
+      "hmws": [
+        "How might we help attendants rest safely and with dignity while staying close to their patient?",
+        "How might we help families know where they are allowed to sit and wait?",
+        "How might we reduce the nights attendants spend sleeping in the open?"
+      ]
+    },
+    {
+      "code": "B",
+      "title": "Lost without guidance",
+      "insight": "The hospital is hard to navigate, and one wrong turn costs time a sick patient may not have.",
+      "pov": "A first-time or rural family arriving at the hospital needs to know exactly where to go next because directions are unclear and conflicting, so hours are lost, and for a sick child those hours made the condition worse.",
+      "display_translations": {
+        "ur": {
+          "title": "رہنمائی کے بغیر راستہ بھٹکنا",
+          "insight": "ہسپتال میں راستہ تلاش کرنا مشکل ہے، اور ایک غلط موڑ سے وہ وقت ضائع ہو سکتا ہے جو ایک بیمار مریض کے پاس شاید نہ ہو۔",
+          "pov": "پہلی بار آنے والے یا دیہی علاقے سے آئے خاندان کو یہ جاننے کی ضرورت ہے کہ اگلا قدم کہاں ہے، کیونکہ ہدایات غیر واضح اور ایک دوسرے سے متضاد ہیں۔ اس وجہ سے گھنٹے ضائع ہوتے ہیں، اور ایک بیمار بچے کی حالت مزید خراب ہو سکتی ہے۔",
+          "hmws": [
+            "ہم پہلی بار آنے والوں کو پہلی ہی کوشش میں درست شعبے تک پہنچنے میں کیسے مدد دے سکتے ہیں؟",
+            "ہم دیہی خاندانوں کو آمد سے پہلے اور پہنچنے پر واضح رہنمائی کیسے دے سکتے ہیں؟"
+          ],
+          "evidence": "اسٹکی 6 (P1): الجھن اور بے بسی محسوس کرتا ہے؛ اسے معلوم نہیں کہ کہاں جانا ہے یا کس سے پوچھنا ہے۔ اسٹکی 7 (P2): شعبے کے بارے میں کئی لوگوں سے پوچھا؛ ایک نے ایمرجنسی نمبر 3 کہا، دوسروں نے کہیں اور بھیج دیا۔ اسٹکی 8 (P2): «کوئی کہیں اور بھیج دیتا ہے۔» (اصل قول رومن اردو میں برقرار ہے؛ ترجمہ مقامی جائزے کے لیے ہے)۔ اسٹکی 9 (P2): تلاش میں گھنٹے ضائع ہوئے جبکہ اس کے 7 سالہ بیٹے کی حالت بگڑ گئی۔ اسٹکی 11 (S1): مریض سول ہسپتال بہت کم ابتدائی رہنمائی کے ساتھ پہنچتے ہیں۔"
+        },
+        "sd": {
+          "title": "رهنمائي کان سواءِ رستو وڃائڻ",
+          "insight": "اسپتال ۾ رستو ڳولڻ ڏکيو آهي، ۽ هڪ غلط موڙ اهڙو وقت ضايع ڪري ٿو جيڪو بيمار مريض وٽ شايد نه هجي.",
+          "pov": "پهريون ڀيرو ايندڙ يا ٻهراڙيءَ مان آيل خاندان کي ڄاڻڻ جي ضرورت آهي ته اڳتي ڪيڏانهن وڃڻو آهي، ڇاڪاڻ ته هدايتون اڻ چٽيون ۽ پاڻ ۾ مختلف آهن. ان ڪري ڪلاڪ ضايع ٿين ٿا، ۽ بيمار ٻار جي حالت وڌيڪ خراب ٿي سگهي ٿي.",
+          "hmws": [
+            "اسان پهريون ڀيرو ايندڙن کي پهرين ئي ڪوشش ۾ صحيح شعبي تائين پهچڻ ۾ ڪيئن مدد ڪري سگهون ٿا؟",
+            "اسان ٻهراڙيءَ جي خاندانن کي اچڻ کان اڳ ۽ پهچڻ وقت صاف رهنمائي ڪيئن ڏئي سگهون ٿا؟"
+          ],
+          "evidence": "اسٽڪي 6 (P1): منجهيل ۽ لاچار محسوس ڪري ٿو؛ کيس خبر ناهي ته ڪيڏانهن وڃي يا ڪنهن کان پڇي. اسٽڪي 7 (P2): شعبي بابت ڪيترن ماڻهن کان پڇيائين؛ هڪ ايمرجنسي نمبر 3 چيو، ٻين کيس ٻئي هنڌ موڪليو. اسٽڪي 8 (P2): «ڪو کيس ٻئي هنڌ موڪلي ٿو.» (اصل قول رومن اردو ۾ برقرار آهي؛ هي ترجمو مقامي جائزي لاءِ آهي). اسٽڪي 9 (P2): ڳولها ۾ ڪلاڪ ضايع ٿيا، جڏهن ته سندس 7 سالن جي پٽ جي حالت خراب ٿي. اسٽڪي 11 (S1): مريض سول اسپتال تمام ٿوري اڳواٽ رهنمائي سان پهچن ٿا."
+        }
+      },
+      "hmws": [
+        "How might we help first-time visitors reach the right department the first time?",
+        "How might we give rural families clear guidance before and on arrival?"
+      ]
+    },
+    {
+      "code": "C",
+      "title": "Left in the dark",
+      "insight": "Families are present but poorly informed, so they cannot make good decisions at the hospital or at home.",
+      "pov": "The family of an admitted patient needs clear, timely information they can understand about the patient's condition, reports and next steps because news is kept outside, lost in medical language, or slow to arrive, which leaves families confused and has led to patients going home too early.",
+      "display_translations": {
+        "ur": {
+          "title": "اندھیرے میں چھوڑ دیا گیا",
+          "insight": "خاندان موجود ہیں لیکن انہیں بہت کم معلومات دی جاتی ہیں، اس لیے وہ ہسپتال میں یا گھر پر اچھے فیصلے نہیں کر سکتے۔",
+          "pov": "داخل مریض کے خاندان کو مریض کی حالت، رپورٹس اور اگلے اقدامات کے بارے میں واضح اور بروقت معلومات کی ضرورت ہے جسے وہ سمجھ سکیں، کیونکہ خبریں باہر رکھی جاتی ہیں، طبی زبان میں کھو جاتی ہیں، یا پہنچنے میں دیر ہو جاتی ہے، جس سے خاندان پریشان رہتے ہیں اور مریضوں کو بہت جلدی گھر لے جانے کی نوبت آتی ہے۔",
+          "hmws": [
+            "ہم انتظار کرنے والے خاندانوں کو ان کے مریض کی حالت کے بارے میں کیسے باخبر رکھ سکتے ہیں؟",
+            "ہم ڈسچارج اور فالو اپ کی ہدایات کو کم خواندہ خاندانوں کے لیے کیسے قابلِ فہم بنا سکتے ہیں؟",
+            "ہم خاندانوں کو یہ جاننے میں کیسے مدد دے سکتے ہیں کہ لیبارٹری کی رپورٹس کب آئیں گی؟"
+          ]
+        },
+        "sd": {
+          "title": "اونداهيءَ ۾ ڇڏيل",
+          "insight": "خاندان موجود آهن پر کين تمام گهٽ ڄاڻ ڏني وڃي ٿي، ان ڪري هو اسپتال ۾ يا گهر ۾ سٺا فيصلا نٿا ڪري سگهن.",
+          "pov": "داخل مريض جي خاندان کي مريض جي حالت، رپورٽن ۽ اڳتي کڻڻ وارن قدمن بابت صاف ۽ وقتائتي ڄاڻ جي ضرورت آهي جيڪا هو سمجهي سگهن، ڇاڪاڻ ته خبرون ٻاهر رکيون وڃن ٿيون، طبي ٻوليءَ ۾ منجهي وڃن ٿيون، يا پهچڻ ۾ دير ٿئي ٿي، جنهن ڪري خاندان پريشان رهن ٿا ۽ مريضن کي تمام جلدي گهر کڻي وڃڻ جي نوبت اچي ٿي.",
+          "hmws": [
+            "اسان انتظار ڪندڙ خاندانن کي سندن مريض جي حالت بابت ڪيئن باخبر رکي سگهون ٿا؟",
+            "اسان ڊسچارج ۽ فالو اپ هدايتن کي گهٽ پڙهيل لکيل خاندانن لاءِ ڪيئن سمجهڻ لائق بڻائي سگهون ٿا؟",
+            "اسان خاندانن کي اها ڄاڻڻ ۾ ڪيئن مدد ڪري سگهون ٿا ته ليبارٽري رپورٽون ڪڏهن اينديون؟"
+          ]
+        }
+      },
+      "hmws": [
+        "How might we keep waiting families informed about their patient's condition?",
+        "How might we make discharge and follow-up instructions understandable for families with low literacy?",
+        "How might we help families know when pending test reports will arrive?"
+      ]
+    },
+    {
+      "code": "D",
+      "title": "Money and lost work",
+      "insight": "Treatment at Civil Hospital may be free, but staying for it is not.",
+      "pov": "A low-income family from outside Karachi needs to keep the cost and time of a hospital stay manageable because every trip, meal and day away from work drains income, and for some it means leaving treatment unfinished.",
+      "display_translations": {
+        "ur": {
+          "title": "پیسہ اور روزگار کا نقصان",
+          "insight": "سول ہسپتال میں علاج مفت ہو سکتا ہے، لیکن وہاں قیام مفت نہیں ہے۔",
+          "pov": "کراچی سے باہر کے ایک کم آمدنی والے خاندان کو ہسپتال میں قیام کے اخراجات اور وقت کو قابو میں رکھنے کی ضرورت ہے کیونکہ ہر سفر، کھانا اور کام سے چھٹی آمدنی کو کم کرتی ہے، اور کچھ لوگوں کے لیے اس کا مطلب علاج ادھورا چھوڑنا ہوتا ہے۔",
+          "hmws": [
+            "ہم داخل مریضوں کے خاندانوں کے لیے روزانہ کے کھانے اور قیام کے اخراجات کیسے کم کر سکتے ہیں؟",
+            "ہم ان سفروں اور دنوں کو کیسے کم کر سکتے ہیں جو خاندانوں کو کام سے دور گزارنے پڑتے ہیں؟",
+            "ہم ان مریضوں کی فالو اپ کی دیکھ بھال مکمل کرنے میں کیسے مدد کر سکتے ہیں جو قیام کا خرچ برداشت نہیں کر سکتے؟"
+          ]
+        },
+        "sd": {
+          "title": "پئسا ۽ روزگار جو نقصان",
+          "insight": "سول اسپتال ۾ علاج مفت ٿي سگهي ٿو، پر اتي رهڻ مفت ناهي.",
+          "pov": "ڪراچي کان ٻاهر جي هڪ گهٽ آمدني واري خاندان کي اسپتال ۾ رهڻ جي خرچن ۽ وقت کي ضابطي ۾ رکڻ جي ضرورت آهي ڇاڪاڻ ته هر سفر, کاڌو ۽ ڪم تان موڪل آمدني گهٽائي ٿي، ۽ ڪجهه ماڻهن لاءِ ان جو مطلب علاج اڌ ۾ ڇڏڻ هوندو آهي.",
+          "hmws": [
+            "اسان داخل مريضن جي خاندانن لاءِ روزاني کاڌي ۽ رهڻ جا خرچ ڪيئن گهٽ ڪري سگهون ٿا؟",
+            "اسان انهن سفرن ۽ ڏينهن کي ڪيئن گهٽ ڪري سگهون ٿا جيڪي خاندانن کي ڪم کان پري گذارڻا پون ٿا؟",
+            "اسان انهن مريضن جي فالو اپ سنڀال مڪمل ڪرڻ ۾ ڪيئن مدد ڪري سگهون ٿا جيڪي رهڻ جو خرچ برداشت نٿا ڪري سگهن؟"
+          ]
+        }
+      },
+      "hmws": [
+        "How might we reduce daily food and stay costs for families of admitted patients?",
+        "How might we reduce the trips and days families must spend away from work?",
+        "How might we help patients who cannot afford to stay finish their follow-up care?"
+      ]
+    },
+    {
+      "code": "E",
+      "title": "An overstretched system",
+      "insight": "Staff care about patients, but the system around them gives them too little to work with.",
+      "pov": "Emergency doctors, nurses and assistants need enough staff, resources and orderly working conditions to give timely care because crowds around each patient, too few doctors, pharmacy gaps and weak oversight overload the system.",
+      "display_translations": {
+        "ur": {
+          "title": "ایک دباؤ کا شکار نظام",
+          "insight": "عملہ مریضوں کا خیال رکھتا ہے، لیکن ان کے ارد گرد کا نظام انہیں کام کرنے کے لیے بہت کم وسائل دیتا ہے۔",
+          "pov": "ایمرجنسی ڈاکٹروں، نرسوں اور معاونین کو بروقت علاج فراہم کرنے کے لیے کافی عملے، وسائل اور منظم کام کے حالات کی ضرورت ہے کیونکہ ہر مریض کے گرد ہجوم، ڈاکٹروں کی کمی، فارمیسی کے مسائل اور کمزور نگرانی نظام پر بوجھ ڈال دیتے ہیں۔",
+          "hmws": [
+            "ہم ہر مریض کے گرد جمع ہونے والے تیمارداروں کی تعداد کیسے کم کر سکتے ہیں؟",
+            "ہم مریضوں تک تجویز کردہ ادویات تیزی سے کیسے پہنچا سکتے ہیں؟",
+            "ہم دباؤ کا شکار عملے کو واضح شفٹوں اور منصفانہ مدد کے ساتھ کام کرنے میں کیسے مدد دے سکتے ہیں؟"
+          ]
+        },
+        "sd": {
+          "title": "هڪ دٻاءُ هيٺ نظام",
+          "insight": "عملو مريضن جو خيال رکي ٿو، پر سندن آس پاس جو نظام کين ڪم ڪرڻ لاءِ تمام گهٽ وسيلا ڏئي ٿو.",
+          "pov": "ايمرجنسي ڊاڪٽرن، نرسن ۽ مددگارن کي وقتائتو علاج فراهم ڪرڻ لاءِ ڪافي عملي، وسيلن ۽ منظم ڪم جي حالتن جي ضرورت آهي ڇاڪاڻ ته هر مريض جي چوڌاري رش، ڊاڪٽرن جي گهٽتائي، فارميسي جا مسئلا ۽ ڪمزور نگراني نظام تي بار وجهي ڇڏين ٿا.",
+          "hmws": [
+            "اسان هر مريض جي چوڌاري گڏ ٿيندڙ تيماردارن جو تعداد ڪيئن گهٽ ڪري سگهون ٿا؟",
+            "اسان مريضن تائين تجويز ڪيل دوائون تيزيءَ سان ڪيئن پهچائي سگهون ٿا؟",
+            "اسان دٻاءُ هيٺ عملي کي صاف شفٽن ۽ منصفانه مدد سان ڪم ڪرڻ ۾ ڪيئن مدد ڪري سگهون ٿا؟"
+          ]
+        }
+      },
+      "hmws": [
+        "How might we reduce the number of attendants crowding around each patient?",
+        "How might we get prescribed medicines to patients faster?",
+        "How might we help overstretched staff work with clear shifts and fair support?"
+      ]
+    }
+  ],
+  "selected_hmw": {
+    "group": "B",
+    "number": 1,
+    "text": "How might we help first-time visitors reach the right department the first time?"
+  },
+  "stickies": [
+    {"number": 1, "code": "P1", "group": "A", "type": "Did", "text": "Sat on the footpath; told to move elsewhere with no direction given."},
+    {"number": 2, "code": "P1", "group": "A", "type": "Said", "text": "\"Jahan baithte hain, wahan se utha dete hain.\" (paraphrased)", "quote_display_translations": {"ur": "«جہاں بیٹھتے ہیں، وہاں سے اٹھا دیتے ہیں۔» (اصل قول رومن اردو میں برقرار ہے؛ یہ ترجمہ مقامی جائزے کے لیے ہے)", "sd": "«جتي ويهون ٿا، اتان اٿاري ڇڏين ٿا.» (اصل قول رومن اردو ۾ برقرار آهي؛ هي ترجمو مقامي جائزي لاءِ آهي)"}},
+    {"number": 3, "code": "P3", "group": "A", "type": "Did", "text": "Family of four sleeps on a bedsheet on the floor outside the ward for a month."},
+    {"number": 4, "code": "P3", "group": "A", "type": "Pain", "text": "Open-air sleeping in the heat gives little, broken sleep."},
+    {"number": 5, "code": "S1", "group": "A", "type": "Pain", "text": "Attendants have no accommodation, so they sleep on streets or floors outside the wards."},
+    {"number": 6, "code": "P1", "group": "B", "type": "Felt", "text": "Confused and helpless: does not know where to go or who to ask.", "display_translations": {"ur": "الجھن اور بے بسی محسوس کرتا ہے: اسے معلوم نہیں کہ کہاں جائے یا کس سے پوچھے۔", "sd": "منجهيل ۽ لاچار محسوس ڪري ٿو: کيس خبر ناهي ته ڪيڏانهن وڃي يا ڪنهن کان پڇي."}},
+    {"number": 7, "code": "P2", "group": "B", "type": "Did", "text": "Asked many people for the department; one said emergency no. 3, others sent him elsewhere.", "display_translations": {"ur": "شعبے کا پتا پوچھنے کے لیے کئی لوگوں سے پوچھا؛ ایک نے ایمرجنسی نمبر 3 کہا، دوسروں نے اسے کہیں اور بھیج دیا۔", "sd": "شعبي جو پتو پڇڻ لاءِ ڪيترن ماڻهن کان پڇيائين؛ هڪ ايمرجنسي نمبر 3 چيو، ٻين کيس ٻئي هنڌ موڪليو."}},
+    {"number": 8, "code": "P2", "group": "B", "type": "Said", "text": "\"Koi kahin aur bhej deta hai.\" (paraphrased)", "quote_display_translations": {"ur": "«کوئی کہیں اور بھیج دیتا ہے۔» (اصل قول رومن اردو میں برقرار ہے؛ یہ ترجمہ مقامی جائزے کے لیے ہے)", "sd": "«ڪو کيس ٻئي هنڌ موڪلي ٿو.» (اصل قول رومن اردو ۾ برقرار آهي؛ هي ترجمو مقامي جائزي لاءِ آهي)"}},
+    {"number": 9, "code": "P2", "group": "B", "type": "Pain", "text": "Hours lost searching while his 7-year-old son's condition got worse.", "display_translations": {"ur": "تلاش میں گھنٹے ضائع ہوئے جبکہ اس کے 7 سالہ بیٹے کی حالت بگڑ گئی۔", "sd": "ڳولها ۾ ڪلاڪ ضايع ٿيا، جڏهن ته سندس 7 سالن جي پٽ جي حالت خراب ٿي."}},
+    {"number": 10, "code": "P3", "group": "B", "type": "Did", "text": "Spent 3-4 days in a Mirpur hospital with no improvement before referral to Karachi."},
+    {"number": 11, "code": "S1", "group": "B", "type": "Pain", "text": "Patients reach Civil Hospital with little early guidance on where to go.", "display_translations": {"ur": "مریض سول ہسپتال پہنچتے ہیں مگر انہیں ابتدا میں یہ رہنمائی بہت کم ملتی ہے کہ کہاں جانا ہے۔", "sd": "مريض سول اسپتال پهچن ٿا، پر کين شروعات ۾ اهو ٻڌائڻ لاءِ تمام ٿوري رهنمائي ملي ٿي ته ڪيڏانهن وڃڻو آهي."}},
+    {"number": 12, "code": "P2", "group": "C", "type": "Pain", "text": "Only the mother may go inside, briefly; the father waits outside with no news."},
+    {"number": 13, "code": "P2", "group": "C", "type": "Said", "text": "\"Humein pata hi nahi wo kaisa hai.\" (paraphrased)", "quote_display_translations": {"ur": "«ہمیں پتا ہی نہیں وہ کیسا ہے۔» (اصل قول رومن اردو میں برقرار ہے؛ یہ ترجمہ مقامی جائزے کے لیے ہے)", "sd": "«اسان کي خبر ئي ناهي ته هو ڪيئن آهي.» (اصل قول رومن اردو ۾ برقرار آهي؛ هي ترجمو مقامي جائزي لاءِ آهي)"}},
+    {"number": 14, "code": "P2", "group": "C", "type": "Pain", "text": "Mother cannot follow medical language, so the father gets incomplete information."},
+    {"number": 15, "code": "P1", "group": "C", "type": "Pain", "text": "Next visit date was 10 days away; family took patient home, he worsened and was readmitted."},
+    {"number": 16, "code": "P1", "group": "C", "type": "Need", "text": "Wants discharge and follow-up instructions he can understand."},
+    {"number": 17, "code": "S1", "group": "C", "type": "Pain", "text": "Patients given a 10-day follow-up date cannot afford to wait in Karachi, so treatment stays incomplete."},
+    {"number": 18, "code": "P3", "group": "C", "type": "Pain", "text": "Tests are done but lab reports are still pending after weeks, slowing treatment."},
+    {"number": 19, "code": "P1", "group": "D", "type": "Did", "text": "Each trip from Thatta costs Rs 800 by bus; two brothers stay in turns."},
+    {"number": 20, "code": "P1", "group": "D", "type": "Pain", "text": "Two brothers lose work days to stay at the hospital."},
+    {"number": 21, "code": "P3", "group": "D", "type": "Pain", "text": "Daily food costs drain the family; the eldest brother at home pays."},
+    {"number": 22, "code": "P3", "group": "D", "type": "Pain", "text": "Farm work has stopped, so income is lost while brothers are at the hospital."},
+    {"number": 23, "code": "P3", "group": "D", "type": "Said", "text": "\"Roz ka khana aur rehne ka intezaam bohat mushkil hai.\" (paraphrased)", "quote_display_translations": {"ur": "«روز کا کھانا اور رہنے کا انتظام بہت مشکل ہے۔» (اصل قول رومن اردو میں برقرار ہے؛ یہ ترجمہ مقامی جائزے کے لیے ہے)", "sd": "«روزانو کائڻ ۽ رهڻ جو انتظام تمام ڏکيو آهي.» (اصل قول رومن اردو ۾ برقرار آهي؛ هي ترجمو مقامي جائزي لاءِ آهي)"}},
+    {"number": 24, "code": "S1", "group": "D", "type": "Pain", "text": "Extreme poverty: patients lack proper food, clean water and medicines the hospital does not supply."},
+    {"number": 25, "code": "D1", "group": "E", "type": "Pain", "text": "Each child arrives with 6-9 attendants, crowding the emergency."},
+    {"number": 26, "code": "D1", "group": "E", "type": "Did", "text": "Attendants refuse to go to the pharmacy and want medicines given in the emergency."},
+    {"number": 27, "code": "D1", "group": "E", "type": "Pain", "text": "Pharmacy is not digitised and does not always stock medicines, so prescriptions go unfilled."},
+    {"number": 28, "code": "D1", "group": "E", "type": "Pain", "text": "Irregular shift timings with no check and balance from authorities.", "needs_teacher_review": true},
+    {"number": 29, "code": "D1", "group": "E", "type": "Felt", "text": "Frustrated by the lack of accountability in the administration.", "needs_teacher_review": true},
+    {"number": 30, "code": "S2", "group": "E", "type": "Pain", "text": "More intern nurses than doctors and nurses; sometimes a patient needs a doctor but only an intern is there."},
+    {"number": 31, "code": "S2", "group": "E", "type": "Pain", "text": "About 6 people crowd around each patient, with few resources in the emergency."},
+    {"number": 32, "code": "S2", "group": "E", "type": "Did", "text": "Works unpaid as an intern and takes a part-time paid job at another hospital.", "needs_teacher_review": true},
+    {"number": 33, "code": "S1", "group": "E", "type": "Pain", "text": "Too many patients per doctor plus admin delays push response times beyond acceptable limits.", "needs_teacher_review": true},
+    {"number": 34, "code": "S1", "group": "E", "type": "Pain", "text": "Patients arrive in dirty clothes, making infection control hard."}
+  ],
+  "ideate": {
+    "status": "Ideate stage: Evaluating potential navigation and guidance solutions.",
+    "selected_idea": "WayMed",
+    "selection_reason": "WayMed was selected because it directly addresses the Group B pain points by providing an explainable, trilingual guided intake and indoor navigation, ensuring first-time visitors reach the right department without conflicting verbal directions.",
+    "scoring_table": {
+      "columns": ["Idea", "Advantages", "Disadvantages", "Usability", "Adaptability"],
+      "rows": [
+        {
+          "idea": "WayMed",
+          "advantages": "Addresses multiple B/C/A pain points; trilingual and mobile-first; explainable logic.",
+          "disadvantages": "Requires phone and some literacy/assistance; offline map logic is a demo prototype only.",
+          "usability": "High: uses big buttons, icons, and voice input.",
+          "adaptability": "High: can be expanded to include other languages or facilities.",
+          "selected": true
+        },
+        {
+          "idea": "Printed Trilingual Signage",
+          "advantages": "Cheap; no phone needed; always visible.",
+          "disadvantages": "Static; hard to update; does not help with department selection.",
+          "usability": "Medium: depends on placement and literacy.",
+          "adaptability": "Low: requires physical printing and installation.",
+          "selected": false
+        }
+      ]
+    }
+  },
+  "test": {
+    "status": "Test stage: Collecting feedback on the WayMed prototype.",
+    "what_we_changed_after_testing": [
+      "Clarified trilingual labeling on the emergency screen.",
+      "Added 'Ask a human at reception' fallback on all major screens.",
+      "Improved the visibility of the 'I'm lost' button during navigation."
+    ]
+  },
+  "traceability": [
+    {"evidence": "Stickies 6, 7, 8, 9, 11 (lost, conflicting directions)", "feature": "Smart Intake + Department Recommender (right department first time)", "target": "intake"},
+    {"evidence": "Stickies 6, 7, 9 (hours lost searching)", "feature": "Indoor Wayfinding, step-by-step route, \"I'm lost\" re-route, estimated walking time", "target": "wayfinding"},
+    {"evidence": "Stickies 14, 16 (medical language, low literacy)", "feature": "trilingual interface, plain-language explanations, read-aloud, icon-based big buttons", "target": "intake"},
+    {"evidence": "Sticky 13 (no news)", "feature": "Journey Tracker \"Next step\" card so families always know what happens next", "target": "journey"},
+    {"evidence": "Group A HMW 2 (where can we sit and wait)", "feature": "\"Where can I wait?\" button showing family waiting areas on the map", "target": "wayfinding"},
+    {"evidence": "Sticky 26, 27 (pharmacy)", "feature": "pharmacy location and directions in the route graph", "target": "wayfinding"},
+    {"evidence": "Sticky 25, 31 (crowding)", "feature": "future scope only", "target": "future_scope"},
+    {"evidence": "Groups A, C (reports ETA, discharge), D, E", "feature": "shown honestly as FUTURE SCOPE, not claimed as solved", "target": "future_scope"}
+  ],
+  "future_scope": [
+    {
+      "item": "Pending lab report ETA",
+      "evidence": "Group C, sticky 18, HMW C3",
+      "display_translations": {
+        "ur": {
+          "item": "زیرِ التوا لیبارٹری رپورٹ کا متوقع وقت",
+          "evidence": "گروپ C، اسٹکی 18، HMW C3"
+        },
+        "sd": {
+          "item": "رهيل ليبارٽري رپورٽ جو متوقع وقت",
+          "evidence": "گروپ C، اسٽڪي 18، HMW C3"
+        }
+      }
+    },
+    {
+      "item": "Attendant accommodation",
+      "evidence": "Group A",
+      "display_translations": {
+        "ur": {
+          "item": "تیمارداروں کے لیے رہائش",
+          "evidence": "گروپ A"
+        },
+        "sd": {
+          "item": "تيماردارن لاءِ رهائش",
+          "evidence": "گروپ A"
+        }
+      }
+    },
+    {
+      "item": "Cost and trips",
+      "evidence": "Group D",
+      "display_translations": {
+        "ur": {
+          "item": "اخراجات اور سفر",
+          "evidence": "گروپ D"
+        },
+        "sd": {
+          "item": "خرچ ۽ سفر",
+          "evidence": "گروپ D"
+        }
+      }
+    },
+    {
+      "item": "Pharmacy and crowding",
+      "evidence": "Group E",
+      "display_translations": {
+        "ur": {
+          "item": "فارمیسی اور بھیڑ",
+          "evidence": "گروپ E"
+        },
+        "sd": {
+          "item": "فارميسي ۽ رش",
+          "evidence": "گروپ E"
+        }
+      }
+    }
+  ]
+}

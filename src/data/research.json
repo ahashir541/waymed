@@ -1,0 +1,347 @@
+{
+ "source": "Team field research at Civil Hospital Karachi (backend/data/story.json). Sticky text is the original wording; Urdu/Sindhi group titles are drafts awaiting native review.",
+ "personas": [
+  {
+   "code": "P1",
+   "name": "Khurshid",
+   "role": "attendant from Thatta"
+  },
+  {
+   "code": "P2",
+   "name": "Shams",
+   "role": "father of a 7-year-old, Paediatrics"
+  },
+  {
+   "code": "P3",
+   "name": "Ashok",
+   "role": "attendant from Sanghar"
+  },
+  {
+   "code": "D1",
+   "name": "Dr. Tahira",
+   "role": "child specialist, Child Emergency"
+  },
+  {
+   "code": "S1",
+   "name": "Abdullah",
+   "role": "doctor's assistant, M5 (10 years)"
+  },
+  {
+   "code": "S2",
+   "name": "Adil",
+   "role": "nurse intern, Emergency"
+  }
+ ],
+ "groups": [
+  {
+   "code": "A",
+   "title": {
+    "en": "No safe place to rest",
+    "ur": "آرام کرنے کے لیے کوئی محفوظ جگہ نہیں",
+    "sd": "آرام ڪرڻ لاءِ ڪا به محفوظ جاءِ ناهي"
+   },
+   "insight": {
+    "en": "Families stay close to the patient out of care, but the hospital has no place for them, so they are moved on.",
+    "ur": "خاندان دیکھ بھال کی وجہ سے مریض کے قریب رہتے ہیں، لیکن ہسپتال میں ان کے لیے کوئی جگہ نہیں ہے، اس لیے انہیں وہاں سے ہٹا دیا جاتا ہے۔",
+    "sd": "خاندان سارسنڀال جي ڪري مريض جي ويجهو رهن ٿا، پر اسپتال ۾ انهن لاءِ ڪا جاءِ ناهي، ان ڪري کين اتان هٽايو وڃي ٿو."
+   }
+  },
+  {
+   "code": "B",
+   "title": {
+    "en": "Lost without guidance",
+    "ur": "رہنمائی کے بغیر راستہ بھٹکنا",
+    "sd": "رهنمائي کان سواءِ رستو وڃائڻ"
+   },
+   "insight": {
+    "en": "The hospital is hard to navigate, and one wrong turn costs time a sick patient may not have.",
+    "ur": "ہسپتال میں راستہ تلاش کرنا مشکل ہے، اور ایک غلط موڑ سے وہ وقت ضائع ہو سکتا ہے جو ایک بیمار مریض کے پاس شاید نہ ہو۔",
+    "sd": "اسپتال ۾ رستو ڳولڻ ڏکيو آهي، ۽ هڪ غلط موڙ اهڙو وقت ضايع ڪري ٿو جيڪو بيمار مريض وٽ شايد نه هجي."
+   }
+  },
+  {
+   "code": "C",
+   "title": {
+    "en": "Left in the dark",
+    "ur": "اندھیرے میں چھوڑ دیا گیا",
+    "sd": "اونداهيءَ ۾ ڇڏيل"
+   },
+   "insight": {
+    "en": "Families are present but poorly informed, so they cannot make good decisions at the hospital or at home.",
+    "ur": "خاندان موجود ہیں لیکن انہیں بہت کم معلومات دی جاتی ہیں، اس لیے وہ ہسپتال میں یا گھر پر اچھے فیصلے نہیں کر سکتے۔",
+    "sd": "خاندان موجود آهن پر کين تمام گهٽ ڄاڻ ڏني وڃي ٿي، ان ڪري هو اسپتال ۾ يا گهر ۾ سٺا فيصلا نٿا ڪري سگهن."
+   }
+  },
+  {
+   "code": "D",
+   "title": {
+    "en": "Money and lost work",
+    "ur": "پیسہ اور روزگار کا نقصان",
+    "sd": "پئسا ۽ روزگار جو نقصان"
+   },
+   "insight": {
+    "en": "Treatment at Civil Hospital may be free, but staying for it is not.",
+    "ur": "سول ہسپتال میں علاج مفت ہو سکتا ہے، لیکن وہاں قیام مفت نہیں ہے۔",
+    "sd": "سول اسپتال ۾ علاج مفت ٿي سگهي ٿو، پر اتي رهڻ مفت ناهي."
+   }
+  },
+  {
+   "code": "E",
+   "title": {
+    "en": "An overstretched system",
+    "ur": "ایک دباؤ کا شکار نظام",
+    "sd": "هڪ دٻاءُ هيٺ نظام"
+   },
+   "insight": {
+    "en": "Staff care about patients, but the system around them gives them too little to work with.",
+    "ur": "عملہ مریضوں کا خیال رکھتا ہے، لیکن ان کے ارد گرد کا نظام انہیں کام کرنے کے لیے بہت کم وسائل دیتا ہے۔",
+    "sd": "عملو مريضن جو خيال رکي ٿو، پر سندن آس پاس جو نظام کين ڪم ڪرڻ لاءِ تمام گهٽ وسيلا ڏئي ٿو."
+   }
+  }
+ ],
+ "stickies": [
+  {
+   "number": 1,
+   "code": "P1",
+   "group": "A",
+   "type": "Did",
+   "text": "Sat on the footpath; told to move elsewhere with no direction given."
+  },
+  {
+   "number": 2,
+   "code": "P1",
+   "group": "A",
+   "type": "Said",
+   "text": "\"Jahan baithte hain, wahan se utha dete hain.\" (paraphrased)"
+  },
+  {
+   "number": 3,
+   "code": "P3",
+   "group": "A",
+   "type": "Did",
+   "text": "Family of four sleeps on a bedsheet on the floor outside the ward for a month."
+  },
+  {
+   "number": 4,
+   "code": "P3",
+   "group": "A",
+   "type": "Pain",
+   "text": "Open-air sleeping in the heat gives little, broken sleep."
+  },
+  {
+   "number": 5,
+   "code": "S1",
+   "group": "A",
+   "type": "Pain",
+   "text": "Attendants have no accommodation, so they sleep on streets or floors outside the wards."
+  },
+  {
+   "number": 6,
+   "code": "P1",
+   "group": "B",
+   "type": "Felt",
+   "text": "Confused and helpless: does not know where to go or who to ask."
+  },
+  {
+   "number": 7,
+   "code": "P2",
+   "group": "B",
+   "type": "Did",
+   "text": "Asked many people for the department; one said emergency no. 3, others sent him elsewhere."
+  },
+  {
+   "number": 8,
+   "code": "P2",
+   "group": "B",
+   "type": "Said",
+   "text": "\"Koi kahin aur bhej deta hai.\" (paraphrased)"
+  },
+  {
+   "number": 9,
+   "code": "P2",
+   "group": "B",
+   "type": "Pain",
+   "text": "Hours lost searching while his 7-year-old son's condition got worse."
+  },
+  {
+   "number": 10,
+   "code": "P3",
+   "group": "B",
+   "type": "Did",
+   "text": "Spent 3-4 days in a Mirpur hospital with no improvement before referral to Karachi."
+  },
+  {
+   "number": 11,
+   "code": "S1",
+   "group": "B",
+   "type": "Pain",
+   "text": "Patients reach Civil Hospital with little early guidance on where to go."
+  },
+  {
+   "number": 12,
+   "code": "P2",
+   "group": "C",
+   "type": "Pain",
+   "text": "Only the mother may go inside, briefly; the father waits outside with no news."
+  },
+  {
+   "number": 13,
+   "code": "P2",
+   "group": "C",
+   "type": "Said",
+   "text": "\"Humein pata hi nahi wo kaisa hai.\" (paraphrased)"
+  },
+  {
+   "number": 14,
+   "code": "P2",
+   "group": "C",
+   "type": "Pain",
+   "text": "Mother cannot follow medical language, so the father gets incomplete information."
+  },
+  {
+   "number": 15,
+   "code": "P1",
+   "group": "C",
+   "type": "Pain",
+   "text": "Next visit date was 10 days away; family took patient home, he worsened and was readmitted."
+  },
+  {
+   "number": 16,
+   "code": "P1",
+   "group": "C",
+   "type": "Need",
+   "text": "Wants discharge and follow-up instructions he can understand."
+  },
+  {
+   "number": 17,
+   "code": "S1",
+   "group": "C",
+   "type": "Pain",
+   "text": "Patients given a 10-day follow-up date cannot afford to wait in Karachi, so treatment stays incomplete."
+  },
+  {
+   "number": 18,
+   "code": "P3",
+   "group": "C",
+   "type": "Pain",
+   "text": "Tests are done but lab reports are still pending after weeks, slowing treatment."
+  },
+  {
+   "number": 19,
+   "code": "P1",
+   "group": "D",
+   "type": "Did",
+   "text": "Each trip from Thatta costs Rs 800 by bus; two brothers stay in turns."
+  },
+  {
+   "number": 20,
+   "code": "P1",
+   "group": "D",
+   "type": "Pain",
+   "text": "Two brothers lose work days to stay at the hospital."
+  },
+  {
+   "number": 21,
+   "code": "P3",
+   "group": "D",
+   "type": "Pain",
+   "text": "Daily food costs drain the family; the eldest brother at home pays."
+  },
+  {
+   "number": 22,
+   "code": "P3",
+   "group": "D",
+   "type": "Pain",
+   "text": "Farm work has stopped, so income is lost while brothers are at the hospital."
+  },
+  {
+   "number": 23,
+   "code": "P3",
+   "group": "D",
+   "type": "Said",
+   "text": "\"Roz ka khana aur rehne ka intezaam bohat mushkil hai.\" (paraphrased)"
+  },
+  {
+   "number": 24,
+   "code": "S1",
+   "group": "D",
+   "type": "Pain",
+   "text": "Extreme poverty: patients lack proper food, clean water and medicines the hospital does not supply."
+  },
+  {
+   "number": 25,
+   "code": "D1",
+   "group": "E",
+   "type": "Pain",
+   "text": "Each child arrives with 6-9 attendants, crowding the emergency."
+  },
+  {
+   "number": 26,
+   "code": "D1",
+   "group": "E",
+   "type": "Did",
+   "text": "Attendants refuse to go to the pharmacy and want medicines given in the emergency."
+  },
+  {
+   "number": 27,
+   "code": "D1",
+   "group": "E",
+   "type": "Pain",
+   "text": "Pharmacy is not digitised and does not always stock medicines, so prescriptions go unfilled."
+  },
+  {
+   "number": 28,
+   "code": "D1",
+   "group": "E",
+   "type": "Pain",
+   "text": "Irregular shift timings with no check and balance from authorities."
+  },
+  {
+   "number": 29,
+   "code": "D1",
+   "group": "E",
+   "type": "Felt",
+   "text": "Frustrated by the lack of accountability in the administration."
+  },
+  {
+   "number": 30,
+   "code": "S2",
+   "group": "E",
+   "type": "Pain",
+   "text": "More intern nurses than doctors and nurses; sometimes a patient needs a doctor but only an intern is there."
+  },
+  {
+   "number": 31,
+   "code": "S2",
+   "group": "E",
+   "type": "Pain",
+   "text": "About 6 people crowd around each patient, with few resources in the emergency."
+  },
+  {
+   "number": 32,
+   "code": "S2",
+   "group": "E",
+   "type": "Did",
+   "text": "Works unpaid as an intern and takes a part-time paid job at another hospital."
+  },
+  {
+   "number": 33,
+   "code": "S1",
+   "group": "E",
+   "type": "Pain",
+   "text": "Too many patients per doctor plus admin delays push response times beyond acceptable limits."
+  },
+  {
+   "number": 34,
+   "code": "S1",
+   "group": "E",
+   "type": "Pain",
+   "text": "Patients arrive in dirty clothes, making infection control hard."
+  }
+ ],
+ "selected": {
+  "group": "B",
+  "number": 1,
+  "text": "How might we help first-time visitors reach the right department the first time?"
+ }
+}

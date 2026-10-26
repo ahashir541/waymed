@@ -1,0 +1,28 @@
+# Render Blueprint: New > Blueprint > pick this repo. Render builds the Dockerfile and gives you an HTTPS URL;
+# add your own domain under Settings > Custom Domains. A persistent disk needs the Starter plan or higher.
+services:
+  - type: web
+    name: waymed
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    numInstances: 1 # SQLite + live updates: always a single instance
+    disk:
+      name: waymed-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /data/waymed.db
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PUBLIC_ORIGIN
+        sync: false # e.g. https://waymed.example.org
+      - key: ADMIN_EMAIL
+        sync: false # first admin, created on first start
+      - key: ADMIN_PASSWORD
+        sync: false # at least 10 characters; remove after the first start
+      - key: GEMINI_API_KEY
+        sync: false # optional

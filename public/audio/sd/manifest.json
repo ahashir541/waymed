@@ -1,0 +1,4 @@
+{
+  "note": "Map clip ids to audio files in this folder once native Sindhi recordings exist. Empty means the app shows text only.",
+  "clips": {}
+}

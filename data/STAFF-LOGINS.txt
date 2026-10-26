@@ -1,0 +1,13 @@
+WayMed staff logins (local server). Keep this file private. Change passwords in Admin > Staff accounts.
+Password for all accounts below: 4HGt85b_LwsH
+
+admin@waymed.local      Admin (everything: /admin, /insights, /register, /staff)
+desk@waymed.local       Registration desk (/register)
+children@waymed.local   Children department queue (/staff)
+lab@waymed.local        Laboratory queue (/staff)
+medicine@waymed.local   Medicine queue (/staff)
+pharmacy@waymed.local   Pharmacy queue (/staff)
+emergency@waymed.local  Emergency queue (/staff)
+
+Open on this computer:  http://localhost:8080
+Open on phones (same Wi-Fi):  http://192.168.18.34:8080

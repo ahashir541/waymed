@@ -1,0 +1,17 @@
+node_modules/
+dist/
+data/*.db
+data/*.db-*
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+coverage/
+*.log
+legacy/frontend/node_modules/
+backups/
+
+!.env.static
+.claude/
+static-extra/

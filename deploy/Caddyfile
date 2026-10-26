@@ -1,0 +1,8 @@
+# Caddy gets and renews the HTTPS certificate for your domain automatically.
+{$WAYMED_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy waymed:8080 {
+		# Live updates use Server-Sent Events: never buffer them.
+		flush_interval -1
+	}
+}

@@ -1,0 +1,8 @@
+legacy
+frontend
+backend
+data
+backups
+test-results
+playwright-report
+dist
