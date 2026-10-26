@@ -1,8 +1,9 @@
-legacy
-frontend
-backend
-data
-backups
-test-results
-playwright-report
-dist
+# Leading slash: only these top-level folders (not src/data or src/lib/backend).
+/legacy
+/frontend
+/backend
+/data
+/backups
+/test-results
+/playwright-report
+/dist

@@ -13,10 +13,12 @@ legacy/frontend/node_modules/
 backups/
 
 !.env.static
-.claude/
-static-extra/
+/.claude/
 
-# Old prototype (not part of the deployed app)
-frontend/
-backend/
-legacy/
+# Old prototype (not part of the deployed app); leading slash = top-level folders only
+/frontend/
+/backend/
+/legacy/
+
+# Local database, logins and backups never go to git
+/data/
