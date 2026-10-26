@@ -15,3 +15,8 @@ backups/
 !.env.static
 .claude/
 static-extra/
+
+# Old prototype (not part of the deployed app)
+frontend/
+backend/
+legacy/
