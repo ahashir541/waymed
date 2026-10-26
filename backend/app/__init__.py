@@ -1,1 +1,0 @@
-"""WayMed backend package."""
