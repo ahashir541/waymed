@@ -4,6 +4,7 @@ import { Layout } from '../components/Layout.tsx';
 import { Icon } from '../components/Icon.tsx';
 import { DeptBadge } from '../components/DeptMark.tsx';
 import { FloorPlan } from '../components/FloorPlan.tsx';
+import { JourneySteps } from '../components/JourneySteps.tsx';
 import { usePrefs, safeStorage } from '../lib/prefs.tsx';
 import { useHospital, useQueues, useStore } from '../lib/store.tsx';
 import { findRoute } from '../lib/route.ts';
@@ -43,23 +44,27 @@ function HeroPlan() {
   );
 }
 
+const TOP_DEPTS = ['medicine', 'paediatrics', 'lab'];
+
 function QuickCard({ to, icon, title, sub, tone }: { to: string; icon: string; title: string; sub?: string; tone?: 'danger' }) {
   return (
-    <Link to={to} className={`vtile group flex items-start gap-3 rounded-2xl border p-4 ${tone === 'danger' ? 'border-[#D92D20]/40 bg-[#D92D20]/10' : 'border-line bg-surface'}`}>
-      <span className={`grid size-10 shrink-0 place-items-center rounded-xl ${tone === 'danger' ? 'bg-[#D92D20] text-white' : 'bg-accent-soft text-accent'}`}>
+    <Link to={to} className={`vtile group flex h-full items-center gap-2.5 rounded-2xl border p-3 sm:items-start sm:gap-3 sm:p-4 ${tone === 'danger' ? 'border-[#D92D20]/40 bg-[#D92D20]/10' : 'border-line bg-surface'}`}>
+      <span className={`grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 ${tone === 'danger' ? 'bg-[#D92D20] text-white' : 'bg-accent-soft text-accent'}`}>
         <Icon name={icon} size={20} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block font-bold leading-snug">{title}</span>
-        {sub && <span className="mt-0.5 line-clamp-2 block text-sm text-muted">{sub}</span>}
+        <span className="block text-[0.9375rem] font-bold leading-snug [overflow-wrap:normal] sm:text-base">{title}</span>
+        {sub && <span className="mt-0.5 line-clamp-2 hidden text-sm text-muted sm:block">{sub}</span>}
       </span>
-      <Icon name="arrowRight" size={16} className="mt-1 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
+      <Icon name="arrowRight" size={16} className="mt-1 hidden shrink-0 text-muted transition-transform group-hover:translate-x-0.5 rtl:rotate-180 sm:block" />
     </Link>
   );
 }
 
 export function Home() {
   const { t, L } = usePrefs();
+  // The animated plan is decoration: phones skip it entirely (it is not just hidden).
+  const [wideScreen] = useState(() => matchMedia('(min-width: 768px)').matches);
   const navigate = useNavigate();
   const visit = useVisit();
   const { data } = useHospital();
@@ -71,16 +76,11 @@ export function Home() {
     safeStorage.set('wm_visit_ended', null, true);
     return v;
   });
-  const steps = [
-    { icon: 'ticket', text: t('v.how1') },
-    { icon: 'route', text: t('v.how2') },
-    { icon: 'bell', text: t('v.how3') },
-  ];
   const sectionTitle = 'mb-4 text-sm font-bold uppercase tracking-wide text-muted';
 
   return (
     <Layout visitor wide>
-      <div className="mx-auto grid max-w-6xl gap-12 lg:gap-16">
+      <div className="mx-auto grid max-w-6xl gap-9 sm:gap-12 lg:gap-16">
         {/* Hero */}
         <section className="grid items-center gap-8 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
           <div className="v-stagger grid gap-5">
@@ -96,7 +96,8 @@ export function Home() {
             </p>
             <div>
               <p className="text-sm font-bold uppercase tracking-wide text-accent">{t('v.home.eyebrow')}</p>
-              <h1 className="mt-2 text-[1.625rem] font-extrabold leading-tight lg:text-[2rem]">{t('v.focus')}</h1>
+              <h1 className="mt-2 max-w-[22ch] text-[1.75rem] font-extrabold leading-[1.15] tracking-tight lg:text-[2rem]">{t('v.focus')}</h1>
+              <p className="mt-3 max-w-md text-lg text-muted">{t('v.home.sub')}</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {visit ? (
@@ -135,31 +136,17 @@ export function Home() {
               <Icon name="lock" size={16} className="mt-0.5 shrink-0 text-accent" /> {t('home.privacy')}
             </p>
           </div>
-          <HeroPlan />
+          {wideScreen && <HeroPlan />}
         </section>
 
-        {/* How it works */}
-        <section aria-labelledby="how-h">
-          <h2 id="how-h" className={sectionTitle}>
-            {t('v.howTitle')}
-          </h2>
-          <ol className="grid gap-3 md:grid-cols-3">
-            {steps.map((s, i) => (
-              <li key={i} className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-base font-black text-on-accent">{i + 1}</span>
-                <Icon name={s.icon} size={20} className="shrink-0 text-accent" />
-                <span className="font-semibold leading-snug">{s.text}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
+        <JourneySteps />
 
         {/* Quick actions */}
         <section aria-labelledby="quick-h">
           <h2 id="quick-h" className={sectionTitle}>
             {t('v.home.quick')}
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3">
             <QuickCard to="/g" icon="pin" title={t('v.map.title')} sub={t('guide.whereTitle')} />
             <QuickCard to="/emergency" icon="siren" title={t('emergency.title')} sub={t('emergency.lead')} tone="danger" />
             <QuickCard to="/book" icon="calendar" title={t('home.book')} sub={t('book.window')} />
@@ -182,8 +169,10 @@ export function Home() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {data.departments.map((d) => {
               const q = queues[d.id];
+              // Phones show the three most used departments; the rest are one tap away on the Map tab.
+              const top = TOP_DEPTS.includes(d.id);
               return (
-                <Link key={d.id} to={`/g/${d.id}`} className="vtile flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4">
+                <Link key={d.id} to={`/g/${d.id}`} className={`vtile flex-col gap-3 rounded-2xl border border-line bg-surface p-4 ${top ? 'flex' : 'hidden sm:flex'}`}>
                   <span className="flex items-center gap-3">
                     <DeptBadge dept={d} size={36} />
                     <span className="min-w-0 font-bold leading-snug">{L(d.name)}</span>
@@ -198,6 +187,9 @@ export function Home() {
               );
             })}
           </div>
+          <Link to="/g" className="vbtn-2 mt-3 sm:hidden">
+            {t('v.home.seeAll', { n: data.departments.length })} <Icon name="arrowRight" size={16} className="rtl:rotate-180" />
+          </Link>
         </section>
 
         {/* Hours and help */}

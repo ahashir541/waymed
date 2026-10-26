@@ -16,9 +16,9 @@ export const sampleHospital: HospitalData = {
       sd: 'سول اسپتال ڪراچي (پائلٽ)', // TODO: native review
     },
     openHours: {
-      en: 'Demo hours: Outpatient clinics Monday to Saturday, 8:00 am to 2:00 pm. Emergency, Laboratory and Pharmacy open 24 hours.',
-      ur: 'ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے۔ ایمرجنسی، لیبارٹری اور فارمیسی 24 گھنٹے کھلی۔',
-      sd: 'ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي. ايمرجنسي، ليبارٽري ۽ فارميسي 24 ڪلاڪ کليل.', // TODO: native review
+      en: 'Demo hours: Outpatient clinics Monday to Saturday, 8:00 am to 2:00 pm (some evening clinics). Laboratory and Pharmacy every day, 8:00 am to 8:00 pm. Emergency and Radiology open 24 hours.',
+      ur: 'ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے (کچھ شام کے کلینک)۔ لیبارٹری اور فارمیسی روزانہ صبح 8 سے رات 8۔ ایمرجنسی اور ریڈیالوجی 24 گھنٹے کھلی۔',
+      sd: 'ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي (ڪجهه شام جون ڪلينڪون). ليبارٽري ۽ فارميسي روزانو صبح 8 کان رات 8. ايمرجنسي ۽ ريڊيالاجي 24 ڪلاڪ کليل.', // TODO: native review
     },
     helpline: '',
     address: { en: 'Baba-e-Urdu Road, Saddar, Karachi', ur: 'بابائے اردو روڈ، صدر، کراچی', sd: 'بابائي اردو روڊ، صدر، ڪراچي' }, // TODO: native review
@@ -35,7 +35,8 @@ export const sampleHospital: HospitalData = {
       shape: 'triangle',
       floor: 0,
       avgServiceMin: 10,
-      openHours: { en: 'Open 24 hours', ur: '24 گھنٹے کھلی', sd: '24 ڪلاڪ کليل' }, // TODO: native review
+      openHours: { en: 'Demo hours: open 24 hours', ur: 'ڈیمو اوقات: 24 گھنٹے کھلا', sd: 'ڊيمو وقت: 24 ڪلاڪ کليل' }, // TODO: native review
+      hours: [{ days: [0, 1, 2, 3, 4, 5, 6], open: '00:00', close: '24:00' }],
       nodeId: 'door_emr',
       room: { x: 40, y: 190, w: 240, h: 110 },
       bookable: false,
@@ -52,7 +53,8 @@ export const sampleHospital: HospitalData = {
       shape: 'circle',
       floor: 0,
       avgServiceMin: 8,
-      openHours: { en: 'Sample: 8:00 to 14:00', ur: 'نمونہ: صبح 8 سے دوپہر 2', sd: 'نمونو: صبح 8 کان منجهند 2' }, // TODO: native review
+      openHours: { en: 'Demo hours: Mon to Sat, 8:00 to 14:00', ur: 'ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2', sd: 'ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2' }, // TODO: native review
+      hours: [{ days: [1, 2, 3, 4, 5, 6], open: '08:00', close: '14:00' }],
       nodeId: 'door_ped',
       room: { x: 560, y: 20, w: 200, h: 90 },
       bookable: true,
@@ -68,7 +70,8 @@ export const sampleHospital: HospitalData = {
       shape: 'square',
       floor: 0,
       avgServiceMin: 8,
-      openHours: { en: 'Sample: 8:00 to 14:00', ur: 'نمونہ: صبح 8 سے دوپہر 2', sd: 'نمونو: صبح 8 کان منجهند 2' }, // TODO: native review
+      openHours: { en: 'Demo hours: Mon to Sat, 8:00 to 14:00. Evening clinic Sun, Tue, Thu, Sat, 14:00 to 20:00', ur: 'ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2۔ شام کا کلینک اتوار، منگل، جمعرات، ہفتہ، دوپہر 2 سے رات 8', sd: 'ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2. شام جي ڪلينڪ آچر، اڱارو، خميس، ڇنڇر، منجهند 2 کان رات 8' }, // TODO: native review
+      hours: [{ days: [1, 2, 3, 4, 5, 6], open: '08:00', close: '14:00' }, { days: [0, 2, 4, 6], open: '14:00', close: '20:00' }],
       nodeId: 'door_med',
       room: { x: 240, y: 20, w: 200, h: 90 },
       bookable: true,
@@ -84,7 +87,8 @@ export const sampleHospital: HospitalData = {
       shape: 'hexagon',
       floor: 0,
       avgServiceMin: 5,
-      openHours: { en: 'Sample: 8:00 to 20:00', ur: 'نمونہ: صبح 8 سے رات 8', sd: 'نمونو: صبح 8 کان رات 8' }, // TODO: native review
+      openHours: { en: 'Demo hours: every day, 8:00 to 20:00', ur: 'ڈیمو اوقات: روزانہ، صبح 8 سے رات 8', sd: 'ڊيمو وقت: روزانو، صبح 8 کان رات 8' }, // TODO: native review
+      hours: [{ days: [0, 1, 2, 3, 4, 5, 6], open: '08:00', close: '20:00' }],
       nodeId: 'door_lab',
       room: { x: 860, y: 170, w: 120, h: 110 },
       bookable: true,
@@ -100,7 +104,8 @@ export const sampleHospital: HospitalData = {
       shape: 'diamond',
       floor: 0,
       avgServiceMin: 4,
-      openHours: { en: 'Sample: 8:00 to 20:00', ur: 'نمونہ: صبح 8 سے رات 8', sd: 'نمونو: صبح 8 کان رات 8' }, // TODO: native review
+      openHours: { en: 'Demo hours: every day, 8:00 to 20:00', ur: 'ڈیمو اوقات: روزانہ، صبح 8 سے رات 8', sd: 'ڊيمو وقت: روزانو، صبح 8 کان رات 8' }, // TODO: native review
+      hours: [{ days: [0, 1, 2, 3, 4, 5, 6], open: '08:00', close: '20:00' }],
       nodeId: 'door_pha',
       room: { x: 860, y: 600, w: 120, h: 30 },
       bookable: false,
@@ -118,7 +123,8 @@ export const sampleHospital: HospitalData = {
       shape: 'square',
       floor: 0,
       avgServiceMin: 10,
-      openHours: { en: 'Demo: Mon to Sat, 8:00 to 14:00', ur: 'ڈیمو: پیر تا ہفتہ، صبح 8 سے دوپہر 2', sd: 'ڊيمو: سومر کان ڇنڇر، صبح 8 کان منجهند 2' }, // TODO: native review
+      openHours: { en: 'Demo hours: Mon to Sat, 8:00 to 14:00', ur: 'ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2', sd: 'ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2' }, // TODO: native review
+      hours: [{ days: [1, 2, 3, 4, 5, 6], open: '08:00', close: '14:00' }],
       nodeId: 'door_sur',
       room: { x: 250, y: 140, w: 150, h: 70 },
       bookable: true,
@@ -134,7 +140,8 @@ export const sampleHospital: HospitalData = {
       shape: 'circle',
       floor: 0,
       avgServiceMin: 10,
-      openHours: { en: 'Demo: Mon to Sat, 8:00 to 14:00', ur: 'ڈیمو: پیر تا ہفتہ، صبح 8 سے دوپہر 2', sd: 'ڊيمو: سومر کان ڇنڇر، صبح 8 کان منجهند 2' }, // TODO: native review
+      openHours: { en: 'Demo hours: Mon to Sat, 8:00 to 14:00. Evening clinic Sun, Tue, Thu, Sat, 14:00 to 20:00', ur: 'ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2۔ شام کا کلینک اتوار، منگل، جمعرات، ہفتہ، دوپہر 2 سے رات 8', sd: 'ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2. شام جي ڪلينڪ آچر، اڱارو، خميس، ڇنڇر، منجهند 2 کان رات 8' }, // TODO: native review
+      hours: [{ days: [1, 2, 3, 4, 5, 6], open: '08:00', close: '14:00' }, { days: [0, 2, 4, 6], open: '14:00', close: '20:00' }],
       nodeId: 'door_gyn',
       room: { x: 600, y: 140, w: 150, h: 70 },
       bookable: true,
@@ -150,7 +157,8 @@ export const sampleHospital: HospitalData = {
       shape: 'hexagon',
       floor: 0,
       avgServiceMin: 8,
-      openHours: { en: 'Demo: Mon, Wed, Fri, 9:00 to 13:00', ur: 'ڈیمو: پیر، بدھ، جمعہ، صبح 9 سے دوپہر 1', sd: 'ڊيمو: سومر، اربع، جمعو، صبح 9 کان منجهند 1' }, // TODO: native review
+      openHours: { en: 'Demo hours: Mon, Wed, Fri, 9:00 to 13:00', ur: 'ڈیمو اوقات: پیر، بدھ، جمعہ، صبح 9 سے دوپہر 1', sd: 'ڊيمو وقت: سومر، اربع، جمعو، صبح 9 کان منجهند 1' }, // TODO: native review
+      hours: [{ days: [1, 3, 5], open: '09:00', close: '13:00' }],
       nodeId: 'door_ent',
       room: { x: 330, y: 592, w: 160, h: 42 },
       bookable: true,
@@ -166,7 +174,8 @@ export const sampleHospital: HospitalData = {
       shape: 'diamond',
       floor: 0,
       avgServiceMin: 8,
-      openHours: { en: 'Demo: Tue, Thu, Sat, 9:00 to 13:00', ur: 'ڈیمو: منگل، جمعرات، ہفتہ، صبح 9 سے دوپہر 1', sd: 'ڊيمو: اڱارو، خميس، ڇنڇر، صبح 9 کان منجهند 1' }, // TODO: native review
+      openHours: { en: 'Demo hours: Tue, Thu, Sat, 9:00 to 13:00', ur: 'ڈیمو اوقات: منگل، جمعرات، ہفتہ، صبح 9 سے دوپہر 1', sd: 'ڊيمو وقت: اڱارو، خميس، ڇنڇر، صبح 9 کان منجهند 1' }, // TODO: native review
+      hours: [{ days: [2, 4, 6], open: '09:00', close: '13:00' }],
       nodeId: 'door_eye',
       room: { x: 520, y: 592, w: 160, h: 42 },
       bookable: true,
@@ -182,7 +191,8 @@ export const sampleHospital: HospitalData = {
       shape: 'triangle',
       floor: 0,
       avgServiceMin: 6,
-      openHours: { en: 'Demo: open 24 hours', ur: 'ڈیمو: 24 گھنٹے کھلا', sd: 'ڊيمو: 24 ڪلاڪ کليل' }, // TODO: native review
+      openHours: { en: 'Demo hours: open 24 hours', ur: 'ڈیمو اوقات: 24 گھنٹے کھلا', sd: 'ڊيمو وقت: 24 ڪلاڪ کليل' }, // TODO: native review
+      hours: [{ days: [0, 1, 2, 3, 4, 5, 6], open: '00:00', close: '24:00' }],
       nodeId: 'door_rad',
       room: { x: 860, y: 312, w: 120, h: 64 },
       bookable: false,
@@ -245,10 +255,10 @@ export const sampleHospital: HospitalData = {
     { id: 'f_help_junction', type: 'helpdesk', nodeId: 'junction', x: 460, y: 430, name: { en: 'Help desk', ur: 'ہیلپ ڈیسک', sd: 'هيلپ ڊيسڪ' } }, // TODO: native review
   ],
   doctors: [
-    { id: 'd_ped_1', deptId: 'paediatrics', name: { en: 'Dr. Sample A (Children)', ur: 'ڈاکٹر نمونہ اے (بچے)', sd: 'ڊاڪٽر نمونو اي (ٻار)' }, schedule: { days: [1, 2, 3, 4, 5, 6], start: '08:00', end: '14:00' }, slotMin: 15, available: true }, // TODO: native review
-    { id: 'd_ped_2', deptId: 'paediatrics', name: { en: 'Dr. Sample B (Children)', ur: 'ڈاکٹر نمونہ بی (بچے)', sd: 'ڊاڪٽر نمونو بي (ٻار)' }, schedule: { days: [0, 1, 3, 5], start: '10:00', end: '18:00' }, slotMin: 20, available: true }, // TODO: native review
-    { id: 'd_med_1', deptId: 'medicine', name: { en: 'Dr. Sample C (Medicine)', ur: 'ڈاکٹر نمونہ سی (میڈیسن)', sd: 'ڊاڪٽر نمونو سي (ميڊيسن)' }, schedule: { days: [1, 2, 3, 4, 5, 6], start: '08:00', end: '14:00' }, slotMin: 15, available: true }, // TODO: native review
-    { id: 'd_med_2', deptId: 'medicine', name: { en: 'Dr. Sample D (Medicine)', ur: 'ڈاکٹر نمونہ ڈی (میڈیسن)', sd: 'ڊاڪٽر نمونو ڊي (ميڊيسن)' }, schedule: { days: [0, 2, 4, 6], start: '14:00', end: '20:00' }, slotMin: 15, available: true }, // TODO: native review
+    { id: 'd_ped_1', deptId: 'paediatrics', name: { en: 'Dr. Ayesha Khan (demo)', ur: 'ڈاکٹر عائشہ خان (ڈیمو)', sd: 'ڊاڪٽر عائشه خان (ڊيمو)' }, schedule: { days: [1, 2, 3, 4, 5, 6], start: '08:00', end: '14:00' }, slotMin: 15, available: true }, // TODO: native review
+    { id: 'd_ped_2', deptId: 'paediatrics', name: { en: 'Dr. Bilal Ahmed (demo)', ur: 'ڈاکٹر بلال احمد (ڈیمو)', sd: 'ڊاڪٽر بلال احمد (ڊيمو)' }, schedule: { days: [1, 3, 5], start: '09:00', end: '13:00' }, slotMin: 20, available: true }, // TODO: native review
+    { id: 'd_med_1', deptId: 'medicine', name: { en: 'Dr. Saima Siddiqui (demo)', ur: 'ڈاکٹر صائمہ صدیقی (ڈیمو)', sd: 'ڊاڪٽر صائمه صديقي (ڊيمو)' }, schedule: { days: [1, 2, 3, 4, 5, 6], start: '08:00', end: '14:00' }, slotMin: 15, available: true }, // TODO: native review
+    { id: 'd_med_2', deptId: 'medicine', name: { en: 'Dr. Asif Soomro (demo)', ur: 'ڈاکٹر آصف سومرو (ڈیمو)', sd: 'ڊاڪٽر آصف سومرو (ڊيمو)' }, schedule: { days: [0, 2, 4, 6], start: '14:00', end: '20:00' }, slotMin: 15, available: true }, // TODO: native review
     { id: 'd_lab_1', deptId: 'lab', name: { en: 'Sample collection counter', ur: 'نمونہ جمع کرنے کا کاؤنٹر', sd: 'نمونو گڏ ڪرڻ جو ڪائونٽر' }, schedule: { days: [0, 1, 2, 3, 4, 5, 6], start: '08:00', end: '20:00' }, slotMin: 10, available: true }, // TODO: native review
 
     { id: 'd_sur_1', deptId: 'surgery', name: { en: 'Dr. Imran Qureshi (demo)', ur: 'ڈاکٹر عمران قریشی (ڈیمو)', sd: 'ڊاڪٽر عمران قريشي (ڊيمو)' }, schedule: { days: [1, 2, 3, 4, 5, 6], start: '08:00', end: '14:00' }, slotMin: 15, available: true }, // TODO: native review

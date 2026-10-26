@@ -23,10 +23,10 @@ const check = async (name: string, fn: () => Promise<void>) => {
     console.log(`FAIL ${name}: ${(e as Error).message.split('\n')[0]}`);
   }
 };
-const see = (text: string | RegExp) => page.getByText(text).first().waitFor({ state: 'visible', timeout: 8000 });
+const see = (text: string | RegExp) => page.getByText(text).filter({ visible: true }).first().waitFor({ state: 'visible', timeout: 8000 });
 
 for (const [path, text] of [
-  ['/', 'WayMed takes you from the hospital gate'],
+  ['/', 'From the hospital gate to the right department'],
   ['/g', 'Where do you want to go?'],
   ['/g/washroom', 'Washrooms: right here'],
   ['/more', 'Appointments'],
@@ -56,7 +56,7 @@ await check('journey: gate > slip > map > wait > your turn', async () => {
   await page.getByRole('button', { name: 'I am at the hospital gate' }).click();
   await page.getByRole('button', { name: 'Start my visit' }).click();
   await page.getByRole('button', { name: 'I am at the Slip Room' }).click();
-  await page.getByRole('button', { name: /Check-up/ }).click();
+  await page.getByRole('button', { name: /X-ray or ultrasound/ }).click();
   await page.getByRole('button', { name: 'Get my slip' }).click();
   await see(/has your token \d+ and knows you are coming/);
   await page.getByRole('button', { name: 'Show me the way' }).click();

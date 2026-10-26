@@ -25,6 +25,8 @@ interface Scene {
 }
 
 const S = (en: string, ur: string, sd: string): L10n => ({ en, ur, sd });
+const STAGE_W = 1280;
+const STAGE_H = 720;
 
 export default function Show() {
   useAllLanguages();
@@ -38,6 +40,32 @@ export default function Show() {
   const [elapsed, setElapsed] = useState(0);
   const [tick, setTick] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
+  const touch = useRef<{ x: number; y: number; swiped: boolean } | null>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setScale(el.clientWidth / STAGE_W));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const [narrow, setNarrow] = useState(() => matchMedia('(max-width: 767px), (pointer: coarse)').matches);
+  const [portrait, setPortrait] = useState(() => matchMedia('(orientation: portrait)').matches);
+  useEffect(() => {
+    const a = matchMedia('(max-width: 767px), (pointer: coarse)');
+    const b = matchMedia('(orientation: portrait)');
+    const on = () => {
+      setNarrow(a.matches);
+      setPortrait(b.matches);
+    };
+    a.addEventListener('change', on);
+    b.addEventListener('change', on);
+    return () => {
+      a.removeEventListener('change', on);
+      b.removeEventListener('change', on);
+    };
+  }, []);
   const L = (s: L10n) => s[lang] || s.en;
 
   const ped = data.departments.find((d) => d.id === 'paediatrics') ?? data.departments[0];
@@ -69,7 +97,7 @@ export default function Show() {
           <div>
             <img src="/icon.svg" alt="" className="mx-auto mb-[0.5em] size-[4em] rounded-[0.8em]" />
             <p className="text-[3.2em] font-black">WayMed</p>
-            <p className="text-[1.4em] text-teal-300">{translate(lang, 'app.tagline')}</p>
+            <p className="text-[1.4em] text-[#E0A800]">{translate(lang, 'app.tagline')}</p>
             <p className="mx-auto mt-[1em] max-w-[22em] text-[1.25em] leading-snug">{L(HMW)}</p>
           </div>
         </div>
@@ -85,7 +113,7 @@ export default function Show() {
           {PERSONAS.slice(0, 4).map((p, k) => (
             <div key={p.id} className="fade-up rounded-[0.6em] bg-white/[0.07] p-[0.6em]" style={{ animationDelay: `${k * 300}ms` }}>
               <p className="text-[1.1em] font-black">
-                {L(p.name)} <span className="font-normal text-teal-300">· {p.code} · {L(p.role)}</span>
+                {L(p.name)} <span className="font-normal text-[#E0A800]">· {p.code} · {L(p.role)}</span>
               </p>
               <p className="mt-[0.2em] text-[0.95em] leading-snug">“{L(p.evidence[0])}”</p>
               {p.evidence[1] && <p className="text-[0.85em] leading-snug opacity-80">“{L(p.evidence[1])}”</p>}
@@ -113,7 +141,7 @@ export default function Show() {
                 <p className="text-[1.3em] font-black leading-tight">
                   {g.code} · {g.title[lang] ?? g.title.en}
                 </p>
-                <p className="text-teal-200">
+                <p className="text-[#F5C842]">
                   {items.length} {L(S('stickies', 'نوٹس', 'نوٽس'))}
                 </p>
                 {items.slice(0, 3).map((x) => (
@@ -137,7 +165,7 @@ export default function Show() {
         <div className="grid h-full grid-cols-3 items-center gap-[0.8em]">
           {LANGS.map((l, k) => (
             <div key={l} lang={l} dir={l === 'en' ? 'ltr' : 'rtl'} className="fade-up rounded-[0.8em] bg-white/[0.08] p-[1em] text-center" style={{ animationDelay: `${k * 400}ms` }}>
-              <Icon name="globe" size="2em" className="mx-auto text-teal-300" />
+              <Icon name="globe" size="2em" className="mx-auto text-[#E0A800]" />
               <p className="mt-[0.3em] text-[1.8em] font-black">{l === 'en' ? 'English' : l === 'ur' ? 'اردو' : 'سنڌي'}</p>
               <p className="text-[0.95em]">{translate(l, 'home.whereTo')}</p>
             </div>
@@ -159,7 +187,7 @@ export default function Show() {
             <ul className="grid gap-[0.5em] text-[1.2em]">
               {[S('Token only', 'صرف ٹوکن', 'رڳو ٽوڪن'), S('Colour + shape + icon', 'رنگ + شکل + نشان', 'رنگ + شڪل + نشاني'), S('QR opens live status', 'کیو آر سے تازہ صورتحال', 'ڪيو آر سان تازي صورتحال'), S('Deleted after 24 hours', '24 گھنٹے بعد مٹ جاتا ہے', '24 ڪلاڪن بعد ختم')].map((x, k) => (
                 <li key={k} className="fade-up flex items-center gap-[0.4em]" style={{ animationDelay: `${600 + k * 400}ms` }}>
-                  <Icon name="check" className="text-teal-300" size="1.2em" /> {L(x)}
+                  <Icon name="check" className="text-[#E0A800]" size="1.2em" /> {L(x)}
                 </li>
               ))}
             </ul>
@@ -174,13 +202,13 @@ export default function Show() {
       body: ({ tick: tk }) => (
         <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-[0.8em] text-center">
           <div className="fade-up rounded-[0.8em] bg-white/[0.08] p-[0.8em]">
-            <Icon name="qr" size="2.4em" className="mx-auto text-teal-300" />
+            <Icon name="qr" size="2.4em" className="mx-auto text-[#E0A800]" />
             <p className="text-[1.4em] font-black">{L(S('Phone', 'فون', 'فون'))}</p>
             <p>{L(S('Scan slip, live status, route', 'پرچی اسکین، صورتحال، راستہ', 'پرچي اسڪين، صورتحال، رستو'))}</p>
           </div>
           <div className={`text-[2.5em] transition-opacity ${tk % 2 ? 'opacity-100' : 'opacity-40'}`}>→</div>
           <div className="fade-up rounded-[0.8em] bg-white/[0.08] p-[0.8em]" style={{ animationDelay: '500ms' }}>
-            <Icon name="keyboard" size="2.4em" className="mx-auto text-teal-300" />
+            <Icon name="keyboard" size="2.4em" className="mx-auto text-[#E0A800]" />
             <p className="text-[1.4em] font-black">{L(S('Kiosk + board', 'کیوسک + بورڈ', 'ڪيوسڪ + بورڊ'))}</p>
             <p>{L(S('Type token, big touch buttons', 'ٹوکن لکیں، بڑے بٹن', 'ٽوڪن لکو، وڏا بٽڻ'))}</p>
           </div>
@@ -224,7 +252,7 @@ export default function Show() {
             <FloorPlan data={data} route={lostRoute} routeColor={ped?.color} />
           </div>
           <div className="grid gap-[0.6em]">
-            <div className="rounded-[0.6em] bg-[#0b1e3f] p-[0.6em] ring-2 ring-teal-300">
+            <div className="rounded-[0.6em] bg-[#121212] p-[0.6em] ring-2 ring-[#E0A800]">
               <p className="opacity-80">{translate(lang, 'landmark.title')}</p>
               <p className="text-[1.4em] font-black">{L(data.landmarks.find((x) => x.id === 'labCorridor')?.name ?? S('', '', ''))}</p>
             </div>
@@ -243,10 +271,10 @@ export default function Show() {
       title: S('Waiting, with news', 'خبر کے ساتھ انتظار', 'خبر سان انتظار'),
       caption: S('The entrance board and the phone update live. Wait is shown as a range from real service times, never false precision.', 'داخلی بورڈ اور فون فوراً اپ ڈیٹ۔ انتظار اصل اوقات سے ایک حد کے طور پر، جھوٹی درستی نہیں۔', 'داخلا بورڊ ۽ فون هڪدم اپڊيٽ. انتظار اصل وقتن مان هڪ حد طور، ڪوڙي درستي ناهي.'),
       body: ({ tick: tk }) => (
-        <div className="grid h-full content-center gap-[0.4em] rounded-[0.8em] bg-[#050d1c] p-[0.8em]">
+        <div className="grid h-full content-center gap-[0.4em] rounded-[0.8em] bg-black/60 p-[0.8em]">
           {data.departments.slice(0, 4).map((d, k) => (
             <div key={d.id} className="grid grid-cols-[auto_1fr_auto] items-center gap-[0.6em] rounded-[0.4em] bg-white/[0.05] px-[0.5em] py-[0.2em]" style={{ borderInlineStart: `0.3em solid ${d.color}` }}>
-              <DeptMark dept={d} size={52} />
+              <DeptMark dept={d} size={40} />
               <span className="text-[1.1em] font-bold">
                 {d.name.en} · <span lang="ur">{d.name.ur}</span> · <span lang="sd">{d.name.sd}</span>
               </span>
@@ -284,7 +312,7 @@ export default function Show() {
         <div className="grid h-full grid-cols-5 gap-[0.3em] text-[0.7em]">
           {JOURNEY.map((j, k) => (
             <div key={k} className="fade-up grid grid-rows-[auto_1fr_1fr_auto] gap-[0.3em]" style={{ animationDelay: `${k * 250}ms` }}>
-              <p className="rounded-[0.4em] bg-teal-300 p-[0.3em] text-center text-[1.2em] font-black text-black">{L(j.stage)}</p>
+              <p className="rounded-[0.4em] bg-[#E0A800] p-[0.3em] text-center text-[1.2em] font-black text-black">{L(j.stage)}</p>
               <div className="rounded-[0.4em] bg-[#b91c1c]/30 p-[0.4em]">
                 <p className="font-bold text-red-200">{translate(lang, 'walk.today')} · {j.source}</p>
                 <p>{L(j.today)}</p>
@@ -293,7 +321,7 @@ export default function Show() {
                 <p className="font-bold text-green-200">{translate(lang, 'walk.expected')}</p>
                 <p>{L(j.expected)}</p>
               </div>
-              <p className="text-teal-200">{L(j.feature)}</p>
+              <p className="text-[#F5C842]">{L(j.feature)}</p>
             </div>
           ))}
         </div>
@@ -309,7 +337,7 @@ export default function Show() {
           <ul className="grid content-start gap-[0.3em]">
             {FEATURE_EVIDENCE.map((f, k) => (
               <li key={k} className="fade-up grid grid-cols-[auto_1fr] items-center gap-[0.4em] rounded-[0.4em] bg-white/[0.07] px-[0.4em] py-[0.2em]" style={{ animationDelay: `${k * 200}ms` }}>
-                <Icon name={f.icon} className="text-teal-300" size="1.3em" />
+                <Icon name={f.icon} className="text-[#E0A800]" size="1.3em" />
                 <span>
                   <b>{L(f.feature)}</b> <span className="ltr opacity-80">← {f.evidence}</span>
                 </span>
@@ -354,7 +382,7 @@ export default function Show() {
         <ul className="grid h-full content-center gap-[0.5em] text-[1.15em]">
           {PILOT.map((p, k) => (
             <li key={k} className="fade-up flex items-center gap-[0.5em]" style={{ animationDelay: `${k * 300}ms` }}>
-              <span className="grid size-[1.6em] shrink-0 place-items-center rounded-full bg-teal-300 font-black text-black">{k + 1}</span> {L(p)}
+              <span className="grid size-[1.6em] shrink-0 place-items-center rounded-full bg-[#E0A800] font-black text-black">{k + 1}</span> {L(p)}
             </li>
           ))}
         </ul>
@@ -414,15 +442,49 @@ export default function Show() {
   }, [next, prev]);
 
   const totalSec = scenes.reduce((s, x) => s + x.sec, 0);
+  // Phones and tablets: swipe or tap, a small bottom bar, no keyboard hints.
+  const onTouchStart = (e: React.TouchEvent) => {
+    touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, swiped: false };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const t0 = touch.current;
+    if (!t0) return;
+    const dx = e.changedTouches[0].clientX - t0.x;
+    const dy = e.changedTouches[0].clientY - t0.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      t0.swiped = true;
+      const forward = lang === 'en' ? dx < 0 : dx > 0;
+      if (forward) next();
+      else prev();
+    }
+  };
   return (
-    <div ref={rootRef} className={`grid min-h-dvh place-items-center bg-[#030915] text-white ${safe ? 'reduce-motion' : ''}`} dir={lang === 'en' ? 'ltr' : 'rtl'}>
+    <div
+      ref={rootRef}
+      className={`grid min-h-dvh place-items-center bg-black text-white ${safe ? 'reduce-motion' : ''} ${narrow && !hide ? 'content-center gap-3 pb-16' : ''}`}
+      dir={lang === 'en' ? 'ltr' : 'rtl'}
+    >
+      {/* Every slide is laid out at 1280 x 720 and scaled to the screen, so nothing is cut on a phone. */}
       <div
-        className="relative flex flex-col overflow-hidden bg-gradient-to-br from-[#0b1e3f] via-[#0b2a4a] to-[#0f4c5c]"
-        style={{ width: 'min(100vw, 177.78vh)', aspectRatio: '16 / 9', fontSize: 'max(28px, min(2vw, 3.55vh))' }}
-        onClick={next}
+        ref={frameRef}
+        className="relative overflow-hidden"
+        style={{ width: narrow ? 'min(100vw, calc((100dvh - 72px) * 16 / 9))' : 'min(100vw, 177.78vh)', aspectRatio: '16 / 9' }}
+        onClick={() => {
+          if (touch.current?.swiped) {
+            touch.current = null;
+            return;
+          }
+          next();
+        }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
+        <div
+          className="absolute top-0 flex flex-col overflow-hidden bg-gradient-to-br from-[#0B0B0B] via-[#121212] to-[#211A05]"
+          style={{ width: STAGE_W, height: STAGE_H, fontSize: STAGE_W * 0.02, insetInlineStart: 0, transform: `scale(${scale})`, transformOrigin: lang === 'en' ? 'top left' : 'top right' }}
+        >
         <header className="flex items-center gap-[0.6em] px-[1.2em] pt-[0.8em]">
-          <span className="text-[0.8em] text-teal-300">
+          <span className="text-[0.8em] text-[#E0A800]">
             {i + 1} / {total}
           </span>
           <h1 key={scene.id} className="fade-up text-[1.6em] font-black">
@@ -431,7 +493,7 @@ export default function Show() {
           {(auto || paused) && <span className="ms-auto rounded-full bg-white/10 px-[0.5em] text-[0.8em]">{paused ? translate(lang, 'show.paused') : translate(lang, 'show.auto')}</span>}
           {safe && <span className="rounded-full bg-white/10 px-[0.5em] text-[0.8em]">{translate(lang, 'show.safe')}</span>}
         </header>
-        <div key={`b${scene.id}`} className="min-h-0 flex-1 px-[1.2em] py-[0.6em]">
+        <div key={`b${scene.id}`} className="min-h-0 flex-1 overflow-hidden px-[1.2em] py-[0.6em]">
           {scene.body({ lang, tick })}
         </div>
         <footer className="bg-black/30 px-[1.2em] py-[0.4em]">
@@ -440,11 +502,24 @@ export default function Show() {
           </p>
         </footer>
         <div className="absolute inset-x-0 bottom-0 h-[0.18em] bg-white/10">
-          <div className="h-full bg-teal-300 transition-[width]" style={{ width: `${((i + (auto ? elapsed / scene.sec : 0)) / total) * 100}%` }} />
+          <div className="h-full bg-[#E0A800] transition-[width]" style={{ width: `${((i + (auto ? elapsed / scene.sec : 0)) / total) * 100}%` }} />
+        </div>
         </div>
       </div>
+      {narrow && (
+        <p className="px-4 text-center text-sm text-white/70">
+          {translate(lang, 'show.swipe')}
+          {portrait && <span className="block">{translate(lang, 'show.rotate')}</span>}
+        </p>
+      )}
       {!hide && (
-        <div className="fixed end-2 top-2 flex max-w-[46vw] flex-wrap items-center gap-2 rounded-2xl bg-black/70 px-3 py-2 text-base opacity-60 transition-opacity hover:opacity-100">
+        <div
+          className={
+            narrow
+              ? 'fixed inset-x-0 bottom-0 z-10 flex items-center justify-between gap-2 bg-black/90 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-sm [&_.btn]:min-h-10 [&_.btn]:border-0 [&_.btn]:bg-white/10 [&_.btn]:px-3 [&_.btn]:text-white'
+              : 'fixed end-2 top-2 flex max-w-[46vw] flex-wrap items-center gap-2 rounded-2xl bg-black/70 px-3 py-2 text-base opacity-60 transition-opacity hover:opacity-100'
+          }
+        >
           <button className="btn min-h-11 px-3" onClick={prev} aria-label="Back">
             <Icon name="arrowLeft" />
           </button>
@@ -454,8 +529,16 @@ export default function Show() {
           <button className="btn min-h-11 px-3" onClick={next} aria-label="Next">
             <Icon name="arrowRight" />
           </button>
-          <span className="text-white/80">{translate(lang, 'show.controls')}</span>
-          <span className="text-white/60">~{Math.round(totalSec / 60)} min</span>
+          {narrow ? (
+            <span className="min-w-0 flex-1 truncate text-center text-white/70">
+              {i + 1} / {total}
+            </span>
+          ) : (
+            <>
+              <span className="text-white/80">{translate(lang, 'show.controls')}</span>
+              <span className="text-white/60">~{Math.round(totalSec / 30) / 2} min</span>
+            </>
+          )}
           <Link to="/demo" className="btn min-h-11 px-3">
             <Icon name="x" />
           </Link>

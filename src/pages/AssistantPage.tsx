@@ -7,7 +7,7 @@ export default function AssistantPage() {
   const { t } = usePrefs();
   return (
     <Layout visitor>
-      <VTitle sub={t('assistant.label')}>{t('v.more.assistant')}</VTitle>
+      <VTitle>{t('v.more.assistant')}</VTitle>
       <Assistant inline />
     </Layout>
   );

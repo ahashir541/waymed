@@ -48,6 +48,8 @@ export function startVisit(): Visit {
 export function updateVisit(patch: Partial<Visit>) {
   const cur = read() ?? startVisit();
   write({ ...cur, ...patch });
+  // The Map tab and the Emergency button start routes from the last confirmed place.
+  if (patch.here) safeStorage.set('wm_here', patch.here, true);
 }
 
 export function endVisit() {

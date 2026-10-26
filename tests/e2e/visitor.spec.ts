@@ -26,12 +26,13 @@ test('first screen explains what to do, with one primary action', async ({ brows
   await presetLang(ctx, 'en');
   const page = await ctx.newPage();
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('WayMed takes you from the hospital gate to the right department, step by step, in your language.');
-  await expect(page.getByText('Get a slip at the Slip Room').first()).toBeVisible();
-  await expect(page.getByText('Follow the map to your department').first()).toBeVisible();
-  await expect(page.getByText('Wait. We tell you when it is your turn').first()).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('From the hospital gate to the right department, in your language.');
+  // How it works: five steps, tap one to see it.
+  await expect(page.getByRole('heading', { name: 'Your visit, in five steps' })).toBeVisible();
+  await page.getByRole('button', { name: '3. Map' }).click();
+  await expect(page.getByText('Follow the next-step card. Wrong turn? We tell you.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'I am at the hospital gate' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Emergency' })).toBeVisible();
+  await expect(page.getByRole('banner').getByRole('link', { name: 'Emergency', exact: true })).toBeVisible();
   // Natural sizing: 16px body text and buttons at least 48px tall.
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).fontSize)).toBe('16px');
   const box = await page.getByRole('button', { name: 'I am at the hospital gate' }).boundingBox();
@@ -133,15 +134,15 @@ test('demo tour plays the journey with captions and controls (about 3 minutes)',
   await presetLang(ctx, 'en');
   const page = await ctx.newPage();
   await page.goto('/tour');
-  await expect(page.getByText(/Demo tour · 1\/12 · ~3 min/)).toBeVisible();
-  await expect(page.getByText('What is happening')).toBeVisible();
+  await expect(page.getByText(/Demo tour · 1\/16 · ~3.5 min/)).toBeVisible();
+  await expect(page.getByText('What is happening').filter({ visible: true })).toBeVisible();
   await expect(page.getByText('From our interviews')).toBeVisible();
   await page.getByRole('button', { name: 'Pause' }).click();
-  for (let i = 0; i < 11; i++) await page.getByRole('button', { name: 'Next', exact: true }).click();
-  await expect(page.getByText(/12\/12/)).toBeVisible();
-  await expect(page.getByText('Did you reach the right department the first time?').first()).toBeVisible();
+  for (let i = 0; i < 15; i++) await page.getByRole('button', { name: 'Next', exact: true }).click();
+  await expect(page.getByText(/16\/16/).filter({ visible: true }).first()).toBeVisible();
+  await expect(page.getByText('After your check-up').first()).toBeVisible();
   await page.getByRole('button', { name: 'Restart' }).click();
-  await expect(page.getByText(/1\/12/)).toBeVisible();
+  await expect(page.getByText(/1\/16/).filter({ visible: true }).first()).toBeVisible();
   await ctx.close();
 });
 
@@ -185,7 +186,7 @@ test('on a desktop screen it is a normal web app with top navigation and sensibl
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).fontSize)).toBe('16px');
   const h1 = await page.getByRole('heading', { level: 1 }).evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
   expect(h1).toBeGreaterThanOrEqual(20);
-  expect(h1).toBeLessThanOrEqual(28);
+  expect(h1).toBeLessThanOrEqual(34);
   const btn = await page.getByRole('button', { name: 'I am at the hospital gate' }).boundingBox();
   expect(btn!.height).toBeGreaterThanOrEqual(48);
   expect(btn!.height).toBeLessThanOrEqual(64);

@@ -1,7 +1,7 @@
 // The visitor journey in five chapters: Gate > Slip > Map > Wait > Your turn.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, Navigate, useNavigate, useParams } from 'react-router';
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router';
 import { Layout } from '../components/Layout.tsx';
 import { VCard, VTitle } from '../components/VisitorShell.tsx';
 import { Icon } from '../components/Icon.tsx';
@@ -10,7 +10,7 @@ import { FloorPlan, PLAN_H, PLAN_W } from '../components/FloorPlan.tsx';
 import { QRCode } from '../components/QRCode.tsx';
 import { ListenButton, useStepFree } from '../components/RouteView.tsx';
 import { Feedback, ShareButton } from '../components/TokenStatus.tsx';
-import { Assistant } from '../components/Assistant.tsx';
+import { FacilityGrid } from '../components/FacilityGrid.tsx';
 import { LostHelp } from './Landmark.tsx';
 import { TokenLookupForm } from './Token.tsx';
 import { usePrefs, safeStorage } from '../lib/prefs.tsx';
@@ -22,6 +22,7 @@ import { OffRouteDetector, farFromPlan, gpsToPlan, nearestNode, softChime } from
 import { ApiError } from '../lib/backend/types.ts';
 import { sampleHospital } from '../data/sampleHospital.ts';
 import { FACILITY_TYPES, type HospitalData, type TokenView } from '../lib/types.ts';
+import { isOpen, nextOpening, openingWords } from '../lib/hours.ts';
 import type { DictKey } from '../lib/i18n/core.ts';
 
 const STEP_ICON: Record<string, string> = {
@@ -62,26 +63,27 @@ function go(navigate: ReturnType<typeof useNavigate>, chapter: Chapter, patch: P
 function Gate() {
   const { t } = usePrefs();
   const navigate = useNavigate();
-  const steps = [
-    { icon: 'ticket', text: t('v.how1') },
-    { icon: 'route', text: t('v.how2') },
-    { icon: 'bell', text: t('v.how3') },
-  ];
+  // The same five parts as the progress bar above.
+  const icons: Record<Chapter, string> = { gate: 'entrance', slip: 'ticket', map: 'route', wait: 'clock', turn: 'bell' };
   return (
-    <div className="v-stagger grid gap-4">
+    <div className="v-stagger grid gap-3">
       <VTitle sub={t('v.gate.calm')}>{t('v.gate.title')}</VTitle>
       <p className="font-semibold">{t('v.gate.lead')}</p>
-      {steps.map((s, i) => (
-        <VCard key={i} className="flex items-center gap-4">
-          <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-soft text-accent">
-            <Icon name={s.icon} size={24} />
-          </span>
-          <span>
-            <span className="block text-xs font-bold text-accent">{i + 1}</span>
-            <span className="font-semibold">{s.text}</span>
-          </span>
-        </VCard>
-      ))}
+      <ol className="grid gap-2">
+        {CHAPTERS.map((c, i) => (
+          <li key={c} className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
+              <Icon name={icons[c]} size={20} />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-xs font-bold text-accent">
+                {i + 1}. {t(`v.ch.${c}` as DictKey)}
+              </span>
+              <span className="text-[0.9375rem] font-semibold leading-snug">{t(`v.journey.${c}` as DictKey)}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
       <button className="vbtn v-glow mt-2" onClick={() => go(navigate, 'slip', { here: 'entrance' })}>
         {t('v.gate.start')} <Icon name="arrowRight" size={20} className="rtl:rotate-180" />
       </button>
@@ -92,13 +94,13 @@ function Gate() {
 // ---------- 2. Get your slip ----------
 
 function StepList({ route, data }: { route: RouteResult; data: HospitalData }) {
-  const { lang } = usePrefs();
+  const { t, lang } = usePrefs();
   return (
     <ol className="grid gap-2">
       {route.steps.slice(1).map((s, i) => (
         <li key={i} className="flex items-center gap-3 rounded-xl bg-solid px-3 py-2.5">
           <Icon name={STEP_ICON[s.kind]} size={20} className="shrink-0 text-accent" />
-          <span className="text-[0.9375rem]">{stepText(s, data, lang)}</span>
+          <span className="text-[0.9375rem]">{s.kind === 'arrive' ? t('v.map.destination', { place: placeName(data, route.nodes[route.nodes.length - 1], lang) }) : stepText(s, data, lang)}</span>
         </li>
       ))}
     </ol>
@@ -115,7 +117,6 @@ function SlipCard({ view, data }: { view: TokenView; data: HospitalData }) {
         <div className="h-2" style={{ background: dept?.color }} />
         <div className="flex items-center gap-4 p-4">
           <div className="min-w-0 flex-1">
-            <p className="text-sm text-muted">{t('v.slip.yours')}</p>
             <p className="ltr text-[2.5rem] font-black leading-none tracking-tight">{view.label}</p>
             {dept && (
               <p className="mt-2 flex items-center gap-2 font-semibold">
@@ -154,8 +155,19 @@ function Slip({ visit }: { visit: Visit }) {
   const need = NEEDS.find((x) => x.id === visit.need);
   const dept = need ? data.departments.find((d) => d.id === need.deptId) : null;
 
+  // Each part of this chapter has its own address (?step=walk|need|yours), so refresh and Back
+  // return to the same part. The address wins when it is allowed; otherwise the saved visit decides.
+  const [q, setQ] = useSearchParams();
+  const derived = visit.tokenId ? 'yours' : visit.here === 'registration' ? 'need' : 'walk';
+  const asked = q.get('step');
+  const step = asked === 'walk' || (asked === 'need' && visit.here === 'registration') || (asked === 'yours' && visit.tokenId) ? asked : derived;
+  useEffect(() => {
+    if (asked !== step) setQ({ step }, { replace: true });
+  }, [asked, step, setQ]);
+  const toStep = (next: 'walk' | 'need' | 'yours') => setQ({ step: next });
+
   // Phase 3: slip in hand.
-  if (visit.tokenId && view) {
+  if (step === 'yours' && visit.tokenId && view) {
     return (
       <div className="v-stagger grid gap-4">
         <VTitle>{t('v.slip.yours')}</VTitle>
@@ -168,7 +180,7 @@ function Slip({ visit }: { visit: Visit }) {
   }
 
   // Phase 1: walk from the gate to the Slip Room.
-  if (visit.here !== 'registration') {
+  if (step === 'walk') {
     return (
       <div className="v-stagger grid gap-4">
         <VTitle sub={t('v.slip.go')}>{t('v.slip.title')}</VTitle>
@@ -180,7 +192,13 @@ function Slip({ visit }: { visit: Visit }) {
             <StepList route={toRoom} data={data} />
           </>
         )}
-        <button className="vbtn v-glow" onClick={() => updateVisit({ here: 'registration' })}>
+        <button
+          className="vbtn v-glow"
+          onClick={() => {
+            updateVisit({ here: 'registration' });
+            toStep(visit.tokenId ? 'yours' : 'need');
+          }}
+        >
           <Icon name="check" size={20} /> {t('v.slip.atRoom')}
         </button>
       </div>
@@ -200,8 +218,8 @@ function Slip({ visit }: { visit: Visit }) {
               key={n.id}
               aria-pressed={visit.need === n.id}
               onClick={() => (emergency ? navigate('/emergency?from=registration') : updateVisit({ need: n.id, deptId: n.deptId }))}
-              className={`vtile flex min-h-[96px] flex-col items-start justify-between gap-2 rounded-2xl border p-3 text-start ${
-                emergency ? 'col-span-full min-h-0 flex-row items-center border-[#D92D20]/50 bg-[#D92D20]/10' : 'border-line bg-surface'
+              className={`vtile flex h-full min-h-[112px] flex-col items-start justify-between gap-2 rounded-2xl border p-3 text-start ${
+                emergency ? 'col-span-full min-h-0 flex-row items-center justify-start border-[#D92D20]/50 bg-[#D92D20]/10' : 'border-line bg-surface'
               }`}
             >
               {d && <DeptBadge dept={d} size={emergency ? 34 : 40} />}
@@ -219,7 +237,11 @@ function Slip({ visit }: { visit: Visit }) {
           {error}
         </p>
       )}
-      {!printed ? (
+      {visit.tokenId ? (
+        <button className="vbtn v-glow" onClick={() => toStep('yours')}>
+          <Icon name="ticket" size={20} /> {t('v.slip.yours')}
+        </button>
+      ) : !printed ? (
         <>
           <button
             className="vbtn v-glow"
@@ -231,6 +253,7 @@ function Slip({ visit }: { visit: Visit }) {
               try {
                 const v = await backend.selfIssue(dept.id);
                 updateVisit({ tokenId: v.id, label: v.label, deptId: v.deptId });
+                toStep('yours');
               } catch (e) {
                 setError(e instanceof ApiError && e.status === 429 ? t('v.slip.limit') : t('common.error'));
               } finally {
@@ -249,7 +272,10 @@ function Slip({ visit }: { visit: Visit }) {
           <TokenLookupForm
             onFound={async (id) => {
               const v = await backend.getToken(id);
-              if (v) updateVisit({ tokenId: v.id, label: v.label, deptId: v.deptId, need: NEEDS.find((n) => n.deptId === v.deptId)?.id });
+              if (v) {
+                updateVisit({ tokenId: v.id, label: v.label, deptId: v.deptId, need: NEEDS.find((n) => n.deptId === v.deptId)?.id });
+                toStep('yours');
+              }
             }}
           />
         </VCard>
@@ -493,7 +519,7 @@ function MapChapter({ visit }: { visit: Visit }) {
 
       <div className="grid items-start gap-4 md:grid-cols-[1.4fr_1fr] md:gap-6">
       <div className="grid gap-3">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ${mode === 'gps' ? 'bg-[#3b82f6]/15 text-[#93c5fd]' : 'bg-accent-soft text-accent'}`}>
           <Icon name={mode === 'gps' ? 'pin' : 'flag'} size={14} /> {mode === 'gps' ? t('v.map.gps') : t('v.map.checkpoint')}
         </span>
@@ -585,20 +611,23 @@ function Wait({ visit }: { visit: Visit }) {
   const { data } = useHospital();
   const { backend, demo } = useStore();
   const { view } = useToken(visit.tokenId);
-  const [ask, setAsk] = useState(false);
   const dept = data.departments.find((d) => d.id === visit.deptId);
+  const now = Date.now();
+  const closed = dept ? isOpen(dept, now) === false : false;
+  const opensAt = dept && closed ? nextOpening(dept, now) : null;
   const base = dept?.nodeId ?? 'waiting';
 
   useEffect(() => {
     if (view?.status === 'called') go(navigate, 'turn');
   }, [view?.status, navigate]);
 
-  // Demo mode only: the simulated department keeps calling tokens so the tour reaches "Your turn".
+  // Demo mode only: the simulated department keeps calling tokens so the journey reaches "Your turn".
+  // A closed department calls nobody, in the demo too.
   useEffect(() => {
-    if (!demo || !visit.deptId) return;
+    if (!demo || !visit.deptId || closed) return;
     const id = setInterval(() => void backend.queueOp(visit.deptId!, 'next'), 6000);
     return () => clearInterval(id);
-  }, [demo, backend, visit.deptId]);
+  }, [demo, backend, visit.deptId, closed]);
 
   if (!visit.tokenId) return <Navigate to={chapterPath('slip')} replace />;
   const statusTone = view?.status === 'next' ? 'bg-accent text-on-accent' : view?.status === 'skipped' ? 'bg-[#D92D20] text-white' : 'bg-solid text-ink';
@@ -619,8 +648,23 @@ function Wait({ visit }: { visit: Visit }) {
               {(view.status === 'waiting' || view.status === 'next') && (
                 <div className="mt-3 grid gap-1">
                   <p className="font-bold">{view.ahead === 0 ? t('token.aheadNone') : view.ahead === 1 ? t('token.aheadOne') : t('token.ahead', { n: view.ahead })}</p>
-                  {view.wait && <p>{t('token.wait', { min: view.wait.minMin, max: view.wait.maxMin })}</p>}
-                  {view.wait && <p className="text-xs text-muted">{view.wait.measured ? t('token.waitMeasured') : t('token.waitConfig')}</p>}
+                  {closed && dept ? (
+                    <div className="mt-1 rounded-xl border border-warn/40 bg-warn/10 p-3">
+                      <p className="font-bold text-warn">{t('v.wait.closed', { dept: L(dept.name) })}</p>
+                      {opensAt && <p className="mt-0.5">{t('v.wait.opens', { when: openingWords(opensAt, now, { today: t('common.today'), tomorrow: t('common.tomorrow') }, lang) })}</p>}
+                      <p className="mt-1 text-sm text-muted">{t('v.wait.closedHint')}</p>
+                      {dept.bookable && (
+                        <Link to={`/book?dept=${dept.id}`} className="vbtn mt-3 min-h-12 text-base">
+                          <Icon name="calendar" size={18} /> {t('v.wait.bookTime')}
+                        </Link>
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      {view.wait && <p>{t('token.wait', { min: view.wait.minMin, max: view.wait.maxMin })}</p>}
+                      {view.wait && <p className="text-xs text-muted">{view.wait.measured ? t('token.waitMeasured') : t('token.waitConfig')}</p>}
+                    </>
+                  )}
                   {demo && <p className="text-xs font-bold text-accent">{t('common.simulation')} · {t('v.demoData')}</p>}
                 </div>
               )}
@@ -636,31 +680,14 @@ function Wait({ visit }: { visit: Visit }) {
         <h2 id="near-h" className="mb-2 text-sm font-bold uppercase tracking-wide text-muted">
           {t('v.wait.near')} {data.sample && <span className="normal-case text-accent">· {t('v.demoData')}</span>}
         </h2>
-        <div className="grid grid-cols-2 gap-2">
-          {FACILITY_TYPES.filter((f) => f !== 'helpdesk').map((f) => {
-            const node = resolveDestination(data, f, base);
-            return node ? (
-              <Link key={f} to={`/g/${f}?from=${base}`} className="vtile flex items-center gap-2 rounded-2xl border border-line bg-surface p-3">
-                <Icon name={f} size={20} className="shrink-0 text-accent" />
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-bold">{t(`facility.${f}` as DictKey)}</span>
-                  <span className="block truncate text-xs text-muted">{placeName(data, node, lang)}</span>
-                </span>
-              </Link>
-            ) : null;
-          })}
-        </div>
+        <FacilityGrid data={data} from={base} types={FACILITY_TYPES.filter((f) => f !== 'helpdesk')} />
       </section>
 
-      <div className="grid grid-cols-2 gap-2">
+      {!closed && (
         <Link to={`/book${dept?.bookable ? `?dept=${dept.id}` : ''}`} className="vbtn-2 text-sm">
           <Icon name="calendar" size={18} className="text-accent" /> {t('v.wait.book')}
         </Link>
-        <button className="vbtn-2 text-sm" aria-expanded={ask} onClick={() => setAsk(!ask)}>
-          <Icon name="mic" size={18} className="text-accent" /> {t('v.wait.ask')}
-        </button>
-      </div>
-      {ask && <Assistant inline />}
+      )}
       {dept && <p className="text-xs text-muted">{L(dept.openHours)}</p>}
     </div>
   );

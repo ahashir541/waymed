@@ -48,6 +48,8 @@ export interface Department {
   /** Fallback service time used only until real service times have been measured. */
   avgServiceMin: number;
   openHours: L10n;
+  /** Opening windows in hospital time (0 = Sunday). Used to say "closed now" and when it opens. */
+  hours?: Array<{ days: number[]; open: string; close: string }>;
   /** Graph node of the department door. */
   nodeId: string;
   /** Room rectangle drawn on the floor plan. */

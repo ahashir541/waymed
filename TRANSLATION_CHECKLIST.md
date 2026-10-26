@@ -13,7 +13,7 @@ and then remove the `// TODO: native review` marker on that line.
 Review **safety strings first** (Emergency, medical-advice refusal, "come to Emergency if worse", token status).
 Also check that simple, everyday Sindhi is used for visitors with low literacy.
 
-Total strings: 610
+Total strings: 675
 
 | Done | Area | Key | English | Urdu | Sindhi (draft) |
 |---|---|---|---|---|---|
@@ -192,7 +192,7 @@ Total strings: 610
 | [ ] | UI | `book.estimate` | Please come between {start} and {end}. | براہ کرم {start} سے {end} کے درمیان آئیں۔ | مهرباني ڪري {start} کان {end} جي وچ ۾ اچو. |
 | [ ] | UI | `book.taken` | Sorry, this time was just taken. Please choose another. | معذرت، یہ وقت ابھی کسی اور نے لے لیا۔ دوسرا وقت چنیں۔ | معاف ڪجو، هي وقت هاڻي ڪنهن ٻئي ورتو. ٻيو وقت چونڊيو. |
 | [ ] | UI | `book.noSlots` | No bookable times in the next 22 hours. | اگلے 22 گھنٹوں میں کوئی وقت خالی نہیں۔ | ايندڙ 22 ڪلاڪن ۾ ڪو وقت خالي ناهي. |
-| [ ] | UI | `book.window` | Bookings are open for the next 22 hours only. | صرف اگلے 22 گھنٹوں کے لیے بکنگ کھلی ہے۔ | رڳو ايندڙ 22 ڪلاڪن لاءِ بُڪنگ کليل آهي. |
+| [ ] | UI | `book.window` | You can book for today or tomorrow. | آپ آج یا کل کے لیے وقت لے سکتے ہیں۔ | توهان اڄ يا سڀاڻي لاءِ وقت وٺي سگهو ٿا. |
 | [ ] | UI | `book.notBookable` | This department does not take bookings. Please come to the Slip Room. | یہ شعبہ بکنگ نہیں لیتا۔ رجسٹریشن کاؤنٹر پر آئیں۔ | هي شعبو بُڪنگ نٿو وٺي. رجسٽريشن ڪائونٽر تي اچو. |
 | [ ] | UI | `book.doctorAway` | Not available today | آج دستیاب نہیں | اڄ دستياب ناهي |
 | [ ] | UI | `prepare.title` | Before you come | آنے سے پہلے | اچڻ کان اڳ |
@@ -215,7 +215,7 @@ Total strings: 610
 | [ ] | UI | `followup.r1` | Bring this card and all your reports on your next visit. | اگلی بار یہ کارڈ اور اپنی تمام رپورٹیں ساتھ لائیں۔ | ايندڙ ڀيري هي ڪارڊ ۽ سڀ رپورٽون ساڻ آڻيو. |
 | [ ] | UI | `followup.r2` | Ask the Laboratory counter on which day your reports will be ready. | لیبارٹری کاؤنٹر سے پوچھیں کہ رپورٹ کس دن ملے گی۔ | ليبارٽري ڪائونٽر کان پڇو ته رپورٽ ڪهڙي ڏينهن ملندي. |
 | [ ] | UI | `followup.r3` | Take medicines only as written by your doctor. | دوا صرف ڈاکٹر کے لکھے کے مطابق لیں۔ | دوا رڳو ڊاڪٽر جي لکيل مطابق کائو. |
-| [ ] | UI | `followup.staffNote` | Staff: write the date and department, then print or hand over. Nothing is saved. | عملہ: تاریخ اور شعبہ لکھیں، پھر پرنٹ کریں یا دے دیں۔ کچھ محفوظ نہیں ہوتا۔ | عملو: تاريخ ۽ شعبو لکو، پوءِ پرنٽ ڪريو يا ڏيو. ڪجهه به محفوظ نٿو ٿئي. |
+| [ ] | UI | `followup.staffNote` | For you and your family. Write your next visit date and department if you like. Nothing is saved. | آپ اور آپ کے گھر والوں کے لیے۔ چاہیں تو اگلی تاریخ اور شعبہ لکھ لیں۔ کچھ محفوظ نہیں ہوتا۔ | توهان ۽ توهان جي گهر وارن لاءِ. چاهيو ته ايندڙ تاريخ ۽ شعبو لکو. ڪجهه محفوظ ناهي ٿيندو. |
 | [ ] | UI | `desk.title` | Registration desk | رجسٹریشن کاؤنٹر | رجسٽريشن ڪائونٽر |
 | [ ] | UI | `desk.issue` | Issue slip | پرچی جاری کریں | پرچي جاري ڪريو |
 | [ ] | UI | `desk.urgent` | Urgent (call first) | فوری (پہلے بلائیں) | تڪڙو (پهريان سڏيو) |
@@ -389,7 +389,7 @@ Total strings: 610
 | [ ] | UI | `health.assistant` | Assistant | مددگار | مددگار |
 | [ ] | UI | `health.llm` | Language model connected | لینگویج ماڈل جڑا ہوا ہے | لينگويج ماڊل ڳنڍيل آهي |
 | [ ] | UI | `health.rules` | Simple answers mode (no model key) | سادہ جوابات موڈ (ماڈل کی کلید نہیں) | سادا جواب موڊ (ماڊل جي ڪنجي ناهي) |
-| [ ] | UI | `v.focus` | WayMed takes you from the hospital gate to the right department, step by step, in your language. | وے میڈ آپ کو ہسپتال کے دروازے سے صحیح شعبے تک، قدم بہ قدم، آپ کی زبان میں لے جاتا ہے۔ | وي ميڊ توهان کي اسپتال جي دروازي کان صحيح شعبي تائين، قدم به قدم، توهان جي ٻوليءَ ۾ وٺي وڃي ٿو. |
+| [ ] | UI | `v.focus` | From the hospital gate to the right department, in your language. | ہسپتال کے دروازے سے صحیح شعبے تک، آپ کی زبان میں۔ | اسپتال جي دروازي کان صحيح شعبي تائين، توهان جي ٻوليءَ ۾. |
 | [ ] | UI | `v.howTitle` | How it works | یہ کیسے کام کرتا ہے | هي ڪيئن ڪم ڪري ٿو |
 | [ ] | UI | `v.how1` | Get a slip at the Slip Room | پرچی کمرے سے پرچی لیں | پرچي ڪمري مان پرچي وٺو |
 | [ ] | UI | `v.how2` | Follow the map to your department | نقشے کے ساتھ اپنے شعبے تک جائیں | نقشي سان پنهنجي شعبي تائين وڃو |
@@ -409,7 +409,7 @@ Total strings: 610
 | [ ] | UI | `v.nav.more` | More | مزید | وڌيڪ |
 | [ ] | UI | `v.nav.help` | Help | مدد | مدد |
 | [ ] | UI | `v.gate.title` | Welcome. We will guide you. | خوش آمدید۔ ہم آپ کی رہنمائی کریں گے۔ | ڀليڪار. اسين توهان جي رهنمائي ڪنداسين. |
-| [ ] | UI | `v.gate.lead` | Your visit has three parts: | آپ کے دورے کے تین حصے ہیں: | توهان جي دوري جا ٽي حصا آهن: |
+| [ ] | UI | `v.gate.lead` | Your visit has five parts: | آپ کے دورے کے پانچ حصے ہیں: | توهان جي دوري جا پنج حصا آهن: |
 | [ ] | UI | `v.gate.calm` | Take a breath. You do not need to ask anyone the way. | اطمینان رکھیں۔ کسی سے راستہ پوچھنے کی ضرورت نہیں۔ | آرام سان. ڪنهن کان رستو پڇڻ جي ضرورت ناهي. |
 | [ ] | UI | `v.gate.start` | Start my visit | دورہ شروع کریں | دورو شروع ڪريو |
 | [ ] | UI | `v.slip.title` | Get your slip | اپنی پرچی لیں | پنهنجي پرچي وٺو |
@@ -488,18 +488,73 @@ Total strings: 610
 | [ ] | UI | `v.tour.pain` | Pain point removed | کون سی مشکل ختم ہوئی | ڪهڙي مشڪل ختم ٿي |
 | [ ] | UI | `v.tour.evidence` | From our interviews | ہمارے انٹرویوز سے | اسان جي انٽرويوز مان |
 | [ ] | UI | `v.tour.exit` | Exit tour | ٹور بند کریں | ٽور بند ڪريو |
+| [ ] | UI | `v.need.women` | Women's health | خواتین کی صحت | عورتن جي صحت |
+| [ ] | UI | `v.need.surgery` | Surgery | سرجری | سرجري |
+| [ ] | UI | `v.need.eye` | Eyes | آنکھیں | اکيون |
+| [ ] | UI | `v.need.ent` | Ear, nose, throat | کان، ناک، گلا | ڪن، نڪ، ڳلو |
+| [ ] | UI | `v.need.xray` | X-ray or ultrasound | ایکسرے یا الٹراساؤنڈ | ايڪسري يا الٽراسائونڊ |
+| [ ] | UI | `guide.facilityHere` | {facility}: right here, next to {place}. | {facility}: یہیں، {place} کے ساتھ۔ | {facility}: هتي ئي، {place} جي ڀرسان. |
+| [ ] | UI | `v.turn.after` | After your check-up | معائنے کے بعد | معائني کان پوءِ |
+| [ ] | UI | `v.turn.openCard` | Open the follow-up card | دوبارہ آنے کا کارڈ کھولیں | ٻيهر اچڻ جو ڪارڊ کوليو |
+| [ ] | UI | `v.home.eyebrow` | Pilot guide for visitors | مریضوں کے لیے پائلٹ رہنما | مريضن لاءِ پائلٽ رهنما |
+| [ ] | UI | `v.home.quick` | What do you need today? | آج آپ کو کیا چاہیے؟ | اڄ توهان کي ڇا گهرجي؟ |
+| [ ] | UI | `v.home.depts` | Departments and today's queue | شعبے اور آج کی قطار | شعبا ۽ اڄ جي قطار |
+| [ ] | UI | `v.home.allDepts` | All departments on the map | نقشے پر تمام شعبے | نقشي تي سڀ شعبا |
+| [ ] | UI | `v.home.nowServing` | Now serving | ابھی باری | هاڻي واري |
+| [ ] | UI | `v.home.waiting` | {n} waiting | {n} انتظار میں | {n} انتظار ۾ |
+| [ ] | UI | `v.home.visit` | Visiting hours and help | اوقات اور مدد | وقت ۽ مدد |
+| [ ] | UI | `v.home.helpDesk` | Help desks at the Slip Room and Main Junction. Staff in uniform can always help. | ہیلپ ڈیسک پرچی کمرے اور مرکزی چوراہے پر ہیں۔ وردی میں عملہ ہمیشہ مدد کر سکتا ہے۔ | هيلپ ڊيسڪ پرچي ڪمري ۽ مکيه چوواٽي تي آهن. وردي ۾ عملو هميشه مدد ڪري سگهي ٿو. |
+| [ ] | UI | `v.home.footer` | WayMed pilot for Civil Hospital Karachi. Floor plan, doctors, timings and queues shown here are demo data. | سول ہسپتال کراچی کے لیے وے میڈ پائلٹ۔ یہاں دکھایا گیا نقشہ، ڈاکٹر، اوقات اور قطاریں ڈیمو ڈیٹا ہیں۔ | سول اسپتال ڪراچي لاءِ وي ميڊ پائلٽ. هتي ڏيکاريل نقشو، ڊاڪٽر، وقت ۽ قطارون ڊيمو ڊيٽا آهن. |
+| [ ] | UI | `v.home.pilot` | Pilot | پائلٹ | پائلٽ |
+| [ ] | UI | `v.home.live` | Live | براہ راست | سڌو |
+| [ ] | UI | `v.ask.anytime` | Ask WayMed | وے میڈ سے پوچھیں | وي ميڊ کان پڇو |
+| [ ] | UI | `v.home.sub` | In English, Urdu or Sindhi. No account, no waiting in the wrong line. | اردو، سندھی یا انگریزی میں۔ کوئی اکاؤنٹ نہیں، غلط قطار میں انتظار نہیں۔ | سنڌي، اردو يا انگريزي ۾. ڪو اڪائونٽ ناهي، غلط قطار ۾ انتظار ناهي. |
+| [ ] | UI | `v.journey.title` | Your visit, in five steps | آپ کا دورہ، پانچ قدموں میں | توهان جو دورو، پنجن قدمن ۾ |
+| [ ] | UI | `v.journey.gate` | Open WayMed at the gate and choose your language. | دروازے پر وے میڈ کھولیں اور اپنی زبان چنیں۔ | دروازي تي وي ميڊ کوليو ۽ پنهنجي ٻولي چونڊيو. |
+| [ ] | UI | `v.journey.slip` | Tell us what you need and get your token. | بتائیں کیا چاہیے اور اپنا ٹوکن لیں۔ | ٻڌايو ڇا گهرجي ۽ پنهنجو ٽوڪن وٺو. |
+| [ ] | UI | `v.journey.map` | Follow the next-step card. Wrong turn? We tell you. | اگلے قدم کا کارڈ دیکھیں۔ غلط موڑ پر ہم بتائیں گے۔ | ايندڙ قدم جو ڪارڊ ڏسو. غلط موڙ تي اسين ٻڌائينداسين. |
+| [ ] | UI | `v.journey.wait` | Sit nearby and see your place in the line. | قریب بیٹھیں اور قطار میں اپنی جگہ دیکھیں۔ | ويجهو ويهو ۽ قطار ۾ پنهنجي جاءِ ڏسو. |
+| [ ] | UI | `v.journey.turn` | Your phone turns green: go in. | فون سبز ہو جائے: اندر جائیں۔ | فون سائو ٿي وڃي: اندر وڃو. |
+| [ ] | UI | `v.nav.ask` | Ask | پوچھیں | پڇو |
+| [ ] | UI | `v.map.zoomIn` | Zoom in | زوم اِن | زوم اِن |
+| [ ] | UI | `v.map.zoomOut` | Zoom out | زوم آؤٹ | زوم آئوٽ |
+| [ ] | UI | `v.map.recentre` | Re-centre | دوبارہ مرکز | ٻيهر مرڪز |
+| [ ] | UI | `v.fac.more` | +{n} more | +{n} اور | +{n} ٻيا |
+| [ ] | UI | `v.map.destination` | Destination: {place} | منزل: {place} | منزل: {place} |
+| [ ] | UI | `v.wait.closed` | {dept} is closed now. | {dept} ابھی بند ہے۔ | {dept} هن وقت بند آهي. |
+| [ ] | UI | `v.wait.opens` | It opens {when}. | یہ {when} کھلے گا۔ | اهو {when} کلندو. |
+| [ ] | UI | `v.wait.closedHint` | Your token stays in the line. If you prefer, book a time instead. | آپ کا ٹوکن قطار میں رہے گا۔ چاہیں تو اس کی جگہ وقت بک کر لیں۔ | توهان جو ٽوڪن قطار ۾ رهندو. چاهيو ته ان بدران وقت بُڪ ڪريو. |
+| [ ] | UI | `v.wait.bookTime` | Book a time | وقت بک کریں | وقت بُڪ ڪريو |
+| [ ] | UI | `book.choose` | Choose a time | وقت چنیں | وقت چونڊيو |
+| [ ] | UI | `followup.printOptional` | Print (optional) | پرنٹ کریں (اختیاری) | پرنٽ ڪريو (اختياري) |
+| [ ] | UI | `v.more.tourSub` | Watch a whole visit, about {min} minutes | پورا دورہ دیکھیں، تقریباً {min} منٹ | سڄو دورو ڏسو، لڳ ڀڳ {min} منٽ |
+| [ ] | UI | `v.more.walkSub` | Follow people from our interviews through their visit | ہمارے انٹرویوز کے لوگوں کے ساتھ ان کا دورہ دیکھیں | اسان جي انٽرويوز وارن ماڻهن سان سندن دورو ڏسو |
+| [ ] | UI | `v.more.showSub` | Full-screen slides, about {min} minutes | فل اسکرین سلائیڈز، تقریباً {min} منٹ | مڪمل اسڪرين سلائيڊون، لڳ ڀڳ {min} منٽ |
+| [ ] | UI | `v.home.seeAll` | See all {n} departments | تمام {n} شعبے دیکھیں | سڀ {n} شعبا ڏسو |
+| [ ] | UI | `show.swipe` | Swipe or tap to move | آگے بڑھنے کے لیے سوائپ یا ٹیپ کریں | اڳتي وڌڻ لاءِ سوائپ يا ٽيپ ڪريو |
+| [ ] | UI | `show.rotate` | Turn your phone sideways for a bigger view | بڑا دیکھنے کے لیے فون کو آڑا کریں | وڏو ڏسڻ لاءِ فون کي ترڇو ڪريو |
 | [ ] | Hospital | `hospital.name` | Civil Hospital Karachi (pilot) | سول ہسپتال کراچی (پائلٹ) | سول اسپتال ڪراچي (پائلٽ) |
-| [ ] | Hospital | `hospital.openHours` | Sample hours: Outpatients Mon to Sat, 8:00 to 14:00. Emergency open 24 hours. | نمونہ اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے۔ ایمرجنسی 24 گھنٹے کھلی۔ | نمونو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي. ايمرجنسي 24 ڪلاڪ کليل. |
+| [ ] | Hospital | `hospital.openHours` | Demo hours: Outpatient clinics Monday to Saturday, 8:00 am to 2:00 pm (some evening clinics). Laboratory and Pharmacy every day, 8:00 am to 8:00 pm. Emergency and Radiology open 24 hours. | ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے (کچھ شام کے کلینک)۔ لیبارٹری اور فارمیسی روزانہ صبح 8 سے رات 8۔ ایمرجنسی اور ریڈیالوجی 24 گھنٹے کھلی۔ | ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي (ڪجهه شام جون ڪلينڪون). ليبارٽري ۽ فارميسي روزانو صبح 8 کان رات 8. ايمرجنسي ۽ ريڊيالاجي 24 ڪلاڪ کليل. |
 | [ ] | Department | `emergency.name` | Emergency | ایمرجنسی | ايمرجنسي |
-| [ ] | Department | `emergency.openHours` | Open 24 hours | 24 گھنٹے کھلی | 24 ڪلاڪ کليل |
+| [ ] | Department | `emergency.openHours` | Demo hours: open 24 hours | ڈیمو اوقات: 24 گھنٹے کھلا | ڊيمو وقت: 24 ڪلاڪ کليل |
 | [ ] | Department | `paediatrics.name` | Children (Paediatrics) | بچوں کا شعبہ | ٻارن جو شعبو |
-| [ ] | Department | `paediatrics.openHours` | Sample: 8:00 to 14:00 | نمونہ: صبح 8 سے دوپہر 2 | نمونو: صبح 8 کان منجهند 2 |
+| [ ] | Department | `paediatrics.openHours` | Demo hours: Mon to Sat, 8:00 to 14:00 | ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2 | ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2 |
 | [ ] | Department | `medicine.name` | Medicine (OPD) | میڈیسن او پی ڈی | ميڊيسن او پي ڊي |
-| [ ] | Department | `medicine.openHours` | Sample: 8:00 to 14:00 | نمونہ: صبح 8 سے دوپہر 2 | نمونو: صبح 8 کان منجهند 2 |
+| [ ] | Department | `medicine.openHours` | Demo hours: Mon to Sat, 8:00 to 14:00. Evening clinic Sun, Tue, Thu, Sat, 14:00 to 20:00 | ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2۔ شام کا کلینک اتوار، منگل، جمعرات، ہفتہ، دوپہر 2 سے رات 8 | ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2. شام جي ڪلينڪ آچر، اڱارو، خميس، ڇنڇر، منجهند 2 کان رات 8 |
 | [ ] | Department | `lab.name` | Laboratory | لیبارٹری | ليبارٽري |
-| [ ] | Department | `lab.openHours` | Sample: 8:00 to 20:00 | نمونہ: صبح 8 سے رات 8 | نمونو: صبح 8 کان رات 8 |
+| [ ] | Department | `lab.openHours` | Demo hours: every day, 8:00 to 20:00 | ڈیمو اوقات: روزانہ، صبح 8 سے رات 8 | ڊيمو وقت: روزانو، صبح 8 کان رات 8 |
 | [ ] | Department | `pharmacy.name` | Pharmacy | فارمیسی | فارميسي |
-| [ ] | Department | `pharmacy.openHours` | Sample: 8:00 to 20:00 | نمونہ: صبح 8 سے رات 8 | نمونو: صبح 8 کان رات 8 |
+| [ ] | Department | `pharmacy.openHours` | Demo hours: every day, 8:00 to 20:00 | ڈیمو اوقات: روزانہ، صبح 8 سے رات 8 | ڊيمو وقت: روزانو، صبح 8 کان رات 8 |
+| [ ] | Department | `surgery.name` | Surgery (OPD) | سرجری او پی ڈی | سرجري او پي ڊي |
+| [ ] | Department | `surgery.openHours` | Demo hours: Mon to Sat, 8:00 to 14:00 | ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2 | ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2 |
+| [ ] | Department | `gynae.name` | Women (Gynaecology) | خواتین (گائنی) | عورتون (گائني) |
+| [ ] | Department | `gynae.openHours` | Demo hours: Mon to Sat, 8:00 to 14:00. Evening clinic Sun, Tue, Thu, Sat, 14:00 to 20:00 | ڈیمو اوقات: پیر تا ہفتہ، صبح 8 سے دوپہر 2۔ شام کا کلینک اتوار، منگل، جمعرات، ہفتہ، دوپہر 2 سے رات 8 | ڊيمو وقت: سومر کان ڇنڇر، صبح 8 کان منجهند 2. شام جي ڪلينڪ آچر، اڱارو، خميس، ڇنڇر، منجهند 2 کان رات 8 |
+| [ ] | Department | `ent.name` | ENT (Ear, Nose, Throat) | کان، ناک اور گلا | ڪن، نڪ ۽ ڳلو |
+| [ ] | Department | `ent.openHours` | Demo hours: Mon, Wed, Fri, 9:00 to 13:00 | ڈیمو اوقات: پیر، بدھ، جمعہ، صبح 9 سے دوپہر 1 | ڊيمو وقت: سومر، اربع، جمعو، صبح 9 کان منجهند 1 |
+| [ ] | Department | `eye.name` | Eye | آنکھوں کا شعبہ | اکين جو شعبو |
+| [ ] | Department | `eye.openHours` | Demo hours: Tue, Thu, Sat, 9:00 to 13:00 | ڈیمو اوقات: منگل، جمعرات، ہفتہ، صبح 9 سے دوپہر 1 | ڊيمو وقت: اڱارو، خميس، ڇنڇر، صبح 9 کان منجهند 1 |
+| [ ] | Department | `radiology.name` | Radiology (X-ray, Ultrasound) | ایکسرے اور الٹراساؤنڈ | ايڪسري ۽ الٽراسائونڊ |
+| [ ] | Department | `radiology.openHours` | Demo hours: open 24 hours | ڈیمو اوقات: 24 گھنٹے کھلا | ڊيمو وقت: 24 ڪلاڪ کليل |
 | [ ] | Landmark | `entrance` | Main Entrance | مرکزی دروازہ | مکيه دروازو |
 | [ ] | Landmark | `registration` | Slip Room (Registration) | پرچی کمرہ (رجسٹریشن) | پرچي ڪمرو (رجسٽريشن) |
 | [ ] | Landmark | `ramp` | Ramp | ریمپ | ريمپ |
@@ -512,6 +567,11 @@ Total strings: 610
 | [ ] | Landmark | `door_med` | Medicine OPD door | میڈیسن او پی ڈی کا دروازہ | ميڊيسن او پي ڊي جو دروازو |
 | [ ] | Landmark | `door_lab` | Laboratory door | لیبارٹری کا دروازہ | ليبارٽري جو دروازو |
 | [ ] | Landmark | `door_pha` | Pharmacy window | فارمیسی کی کھڑکی | فارميسي جي دري |
+| [ ] | Landmark | `door_sur` | Surgery OPD door | سرجری او پی ڈی کا دروازہ | سرجري او پي ڊي جو دروازو |
+| [ ] | Landmark | `door_gyn` | Women's clinic door | خواتین کلینک کا دروازہ | عورتن جي ڪلينڪ جو دروازو |
+| [ ] | Landmark | `door_ent` | ENT clinic door | ای این ٹی کلینک کا دروازہ | اي اين ٽي ڪلينڪ جو دروازو |
+| [ ] | Landmark | `door_eye` | Eye clinic door | آنکھوں کے کلینک کا دروازہ | اکين جي ڪلينڪ جو دروازو |
+| [ ] | Landmark | `door_rad` | X-ray room door | ایکسرے روم کا دروازہ | ايڪسري روم جو دروازو |
 | [ ] | Facility | `f_water_junction` | Drinking water | پینے کا پانی | پيئڻ جو پاڻي |
 | [ ] | Facility | `f_water_waiting` | Drinking water | پینے کا پانی | پيئڻ جو پاڻي |
 | [ ] | Facility | `f_wc_registration` | Washrooms | واش روم | واش روم |
@@ -521,11 +581,16 @@ Total strings: 610
 | [ ] | Facility | `f_prayer` | Prayer area | نماز کی جگہ | نماز جي جاءِ |
 | [ ] | Facility | `f_help_registration` | Help desk | ہیلپ ڈیسک | هيلپ ڊيسڪ |
 | [ ] | Facility | `f_help_junction` | Help desk | ہیلپ ڈیسک | هيلپ ڊيسڪ |
-| [ ] | Doctor (sample) | `d_ped_1` | Dr. Sample A (Children) | ڈاکٹر نمونہ اے (بچے) | ڊاڪٽر نمونو اي (ٻار) |
-| [ ] | Doctor (sample) | `d_ped_2` | Dr. Sample B (Children) | ڈاکٹر نمونہ بی (بچے) | ڊاڪٽر نمونو بي (ٻار) |
-| [ ] | Doctor (sample) | `d_med_1` | Dr. Sample C (Medicine) | ڈاکٹر نمونہ سی (میڈیسن) | ڊاڪٽر نمونو سي (ميڊيسن) |
-| [ ] | Doctor (sample) | `d_med_2` | Dr. Sample D (Medicine) | ڈاکٹر نمونہ ڈی (میڈیسن) | ڊاڪٽر نمونو ڊي (ميڊيسن) |
+| [ ] | Doctor (sample) | `d_ped_1` | Dr. Ayesha Khan (demo) | ڈاکٹر عائشہ خان (ڈیمو) | ڊاڪٽر عائشه خان (ڊيمو) |
+| [ ] | Doctor (sample) | `d_ped_2` | Dr. Bilal Ahmed (demo) | ڈاکٹر بلال احمد (ڈیمو) | ڊاڪٽر بلال احمد (ڊيمو) |
+| [ ] | Doctor (sample) | `d_med_1` | Dr. Saima Siddiqui (demo) | ڈاکٹر صائمہ صدیقی (ڈیمو) | ڊاڪٽر صائمه صديقي (ڊيمو) |
+| [ ] | Doctor (sample) | `d_med_2` | Dr. Asif Soomro (demo) | ڈاکٹر آصف سومرو (ڈیمو) | ڊاڪٽر آصف سومرو (ڊيمو) |
 | [ ] | Doctor (sample) | `d_lab_1` | Sample collection counter | نمونہ جمع کرنے کا کاؤنٹر | نمونو گڏ ڪرڻ جو ڪائونٽر |
+| [ ] | Doctor (sample) | `d_sur_1` | Dr. Imran Qureshi (demo) | ڈاکٹر عمران قریشی (ڈیمو) | ڊاڪٽر عمران قريشي (ڊيمو) |
+| [ ] | Doctor (sample) | `d_gyn_1` | Dr. Farah Memon (demo) | ڈاکٹر فرح میمن (ڈیمو) | ڊاڪٽر فرح ميمڻ (ڊيمو) |
+| [ ] | Doctor (sample) | `d_gyn_2` | Dr. Nadia Shah (demo) | ڈاکٹر نادیہ شاہ (ڈیمو) | ڊاڪٽر ناديه شاهه (ڊيمو) |
+| [ ] | Doctor (sample) | `d_ent_1` | Dr. Kashif Baloch (demo) | ڈاکٹر کاشف بلوچ (ڈیمو) | ڊاڪٽر ڪاشف بلوچ (ڊيمو) |
+| [ ] | Doctor (sample) | `d_eye_1` | Dr. Sana Abbasi (demo) | ڈاکٹر ثنا عباسی (ڈیمو) | ڊاڪٽر ثنا عباسي (ڊيمو) |
 | [ ] | Story | `HMW` | How might we help first-time visitors reach the right department the first time? | ہم پہلی بار آنے والوں کو پہلی ہی بار صحیح شعبے تک پہنچنے میں کیسے مدد کر سکتے ہیں؟ | اسين پهريون ڀيرو ايندڙن کي پهرين ئي ڀيري صحيح شعبي تائين پهچڻ ۾ ڪيئن مدد ڪري سگهون ٿا؟ |
 | [ ] | Persona | `khurshid.name` | Khurshid | خورشید | خورشيد |
 | [ ] | Persona | `khurshid.role` | Attendant from Thatta | تیماردار، ٹھٹھہ سے | سنڀاليندڙ، ٺٽي کان |

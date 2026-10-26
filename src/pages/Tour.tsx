@@ -613,7 +613,7 @@ export default function Tour() {
   const panel = (
     <div className="v-enter rounded-3xl border border-line bg-[#111] p-6" key={scene.id}>
       <p className="text-xs font-bold uppercase tracking-wide text-accent">
-        {t('v.tour.title')} · {i + 1}/{scenes.length} · ~{Math.round(totalSec / 60)} min
+        {t('v.tour.title')} · {i + 1}/{scenes.length} · ~{Math.round(totalSec / 30) / 2} min
       </p>
       <h2 className="mt-3 text-sm font-bold uppercase tracking-wide text-muted">{t('v.tour.what')}</h2>
       <p className="mt-1 text-lg font-semibold leading-snug">{L(scene.caption)}</p>
@@ -646,18 +646,34 @@ export default function Tour() {
     <VisitorShell wide>
       <div className="grid items-start gap-6 lg:grid-cols-[440px_1fr] lg:gap-10">
       <section aria-label={t('v.tour.title')} className="overflow-hidden rounded-3xl border border-line bg-[#0b0b0b]">
+      {/* Phones: the explanation is pinned on top of the demo card, so it is never below the fold. */}
+      <div key={`x${scene.id}`} className="v-enter border-b border-line bg-[#111] px-4 py-3 lg:hidden">
+        <p className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-wide text-accent">
+          <span>{t('v.tour.what')}</span>
+          <span className="text-muted">
+            {i + 1}/{scenes.length} · ~{Math.round(totalSec / 30) / 2} min
+          </span>
+        </p>
+        <p className="mt-1 text-[0.9375rem] font-semibold leading-snug">{L(scene.caption)}</p>
+        <p className="mt-1.5 flex items-start gap-1.5 text-sm text-muted">
+          <Icon name="check" size={14} className="mt-0.5 shrink-0 text-ok" />
+          <span>
+            <span className="font-bold">{t('v.tour.pain')}:</span> <span className="line-through decoration-[#D92D20]/70">{L(scene.pain)}</span>
+          </span>
+        </p>
+      </div>
       <div className="p-4">
       {scene.chapter && (
         <div className="mb-4">
           <JourneyProgress chapter={scene.chapter} />
         </div>
       )}
-      <div key={scene.id} className="v-enter min-h-[440px]">
+      <div key={scene.id} className="v-enter min-h-[380px] lg:min-h-[440px]">
         {scene.body(ms)}
       </div>
       </div>
       <div className="border-t border-line bg-[#111] px-4 pt-3 pb-3">
-        <p key={`c${scene.id}`} className="v-enter mb-2 text-sm leading-snug">
+        <p key={`c${scene.id}`} className="v-enter mb-2 hidden text-sm leading-snug lg:block">
           <span className="font-bold text-accent">{t('common.simulation')}: </span>
           {L(scene.caption)}
         </p>
@@ -690,7 +706,7 @@ export default function Tour() {
         </div>
       </div>
       </section>
-      {panel}
+      <div className="hidden lg:block">{panel}</div>
       </div>
     </VisitorShell>
   );

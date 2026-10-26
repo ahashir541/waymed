@@ -23,19 +23,37 @@ interface Props {
   viewBox?: string;
   /** Facility to highlight (the destination). */
   highlight?: string;
+  /** Text size multiplier, so labels stay readable when the plan is drawn small (phones). */
+  labelScale?: number;
 }
 
 export const PLAN_W = 1000;
 export const PLAN_H = 640;
 
-export function FloorPlan({ data, route, showFacilities, heat, className = '', routeColor, drawKey, title, dot, viewBox, highlight }: Props) {
-  const { L, t } = usePrefs();
+export function FloorPlan({ data, route, showFacilities, heat, className = '', routeColor, drawKey, title, dot, viewBox, highlight, labelScale = 1 }: Props) {
+  const { L, t, lang } = usePrefs();
   const nodes = useMemo(() => new Map(data.landmarks.map((l) => [l.id, l])), [data.landmarks]);
   const routeLen = route ? Math.ceil(polylineLength(route.points)) + 10 : 0;
   const start = route ? nodes.get(route.from) : null;
   const end = route ? route.points[route.points.length - 1] : null;
   const maxHeat = heat ? Math.max(1, ...Object.values(heat)) : 1;
   const color = routeColor ?? 'var(--wm-accent)';
+  const k = labelScale;
+  // "You are here" goes above the start point unless a room is in the way, then below.
+  const tag = useMemo(() => {
+    if (!start) return null;
+    const w = 150 * k;
+    const h = 34 * k;
+    const box = (above: boolean): Box => (above ? [start.x - w / 2, start.y - 22 - h, start.x + w / 2, start.y - 22] : [start.x - w / 2, start.y + 22, start.x + w / 2, start.y + 22 + h]);
+    const rooms: Box[] = data.departments.map((d) => [d.room.x, d.room.y, d.room.x + d.room.w, d.room.y + d.room.h]);
+    const above = start.y - 22 - h > 0 && !rooms.some((r) => overlaps(r, box(true)));
+    return { above, box: box(above), w, h };
+  }, [start, data.departments, k]);
+  // Recomputed only when the plan, language, start or text size changes (L is a fresh function each render).
+  const labels = useMemo(
+    () => placeLabels(data, (l) => l.name[lang] || l.name.en, start ?? null, tag?.box ?? null, k),
+    [data, lang, start, tag, k],
+  );
 
   return (
     <svg viewBox={viewBox ?? `0 0 ${PLAN_W} ${PLAN_H}`} className={`w-full h-auto ${className}`} role="img" aria-label={title ?? t('guide.planLabel')}>
@@ -79,7 +97,7 @@ export function FloorPlan({ data, route, showFacilities, heat, className = '', r
             y={d.room.y + d.room.h / 2}
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize={d.room.h < 50 ? 19 : 23}
+            fontSize={(d.room.h < 50 ? 19 : 23) * Math.min(k, 1.15)}
             fontWeight="700"
             fill="var(--wm-ink)"
           >
@@ -125,15 +143,16 @@ export function FloorPlan({ data, route, showFacilities, heat, className = '', r
       {data.landmarks
         .filter((l) => l.kind !== 'door')
         .map((l) => {
-          // Put the label above when a neighbour on the same row would collide with it.
-          const crowded = data.landmarks.some((o) => o.id !== l.id && o.kind !== 'door' && Math.abs(o.y - l.y) < 20 && l.x - o.x > 0 && l.x - o.x < 220);
+          const lb = route?.from !== l.id ? labels.get(l.id) : undefined;
           return (
-          <g key={l.id}>
-            <circle cx={l.x} cy={l.y} r={l.kind === 'waypoint' ? 7 : 11} fill="var(--wm-surface-solid)" stroke="var(--wm-ink)" strokeWidth="3" />
-            {route?.from !== l.id && <text x={l.x} y={l.y + (l.y > 590 || crowded ? -22 : 34)} textAnchor="middle" fontSize={l.kind === 'waypoint' ? 18 : 22} fontWeight="600" fill="var(--wm-muted)">
-              {L(l.name)}
-            </text>}
-          </g>
+            <g key={l.id}>
+              <circle cx={l.x} cy={l.y} r={l.kind === 'waypoint' ? 7 : 11} fill="var(--wm-surface-solid)" stroke="var(--wm-ink)" strokeWidth="3" />
+              {lb && (
+                <text x={lb.x} y={lb.y} textAnchor={lb.anchor} fontSize={lb.size} fontWeight="600" fill="var(--wm-muted)" stroke="var(--wm-plan-bg)" strokeWidth="6" strokeLinejoin="round" paintOrder="stroke">
+                  {L(l.name)}
+                </text>
+              )}
+            </g>
           );
         })}
 
@@ -162,16 +181,18 @@ export function FloorPlan({ data, route, showFacilities, heat, className = '', r
       )}
 
       {/* Start and destination markers */}
-      {start && (
+      {start && tag && (
         <g>
           <circle cx={start.x} cy={start.y} r="16" fill={color} className="pulse-ring" />
           <circle cx={start.x} cy={start.y} r="14" fill={color} stroke="#fff" strokeWidth="4" />
-          <g transform={`translate(${start.x} ${start.y - 30})`}>
-            <rect x="-72" y="-22" width="144" height="34" rx="17" fill="var(--wm-navy)" />
-            <text x="0" y="0" textAnchor="middle" dominantBaseline="middle" fill="#fff" fontSize="17" fontWeight="700">
-              {t('guide.youAreHere')}
-            </text>
-          </g>
+          <path
+            d={tag.above ? `M${start.x - 8} ${start.y - 23}L${start.x} ${start.y - 14}L${start.x + 8} ${start.y - 23}Z` : `M${start.x - 8} ${start.y + 23}L${start.x} ${start.y + 14}L${start.x + 8} ${start.y + 23}Z`}
+            fill="var(--wm-navy)"
+          />
+          <rect x={tag.box[0]} y={tag.box[1]} width={tag.w} height={tag.h} rx={tag.h / 2} fill="var(--wm-navy)" />
+          <text x={start.x} y={(tag.box[1] + tag.box[3]) / 2} textAnchor="middle" dominantBaseline="central" fill="#fff" fontSize={17 * k} fontWeight="700">
+            {t('guide.youAreHere')}
+          </text>
         </g>
       )}
       {end && (
@@ -185,4 +206,41 @@ export function FloorPlan({ data, route, showFacilities, heat, className = '', r
       )}
     </svg>
   );
+}
+
+type Box = [number, number, number, number];
+interface LabelSpot {
+  x: number;
+  y: number;
+  anchor: 'start' | 'middle' | 'end';
+  size: number;
+}
+const overlaps = (a: Box, b: Box) => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
+
+/** Greedy label placement: below, above, right or left of each landmark, avoiding rooms, the
+ *  facility icons, the "You are here" tag and labels already placed. Widths are estimated from the text length. */
+function placeLabels(data: HospitalData, name: (l: HospitalData['landmarks'][number]) => string, start: { x: number; y: number } | null, tag: Box | null, k: number) {
+  const taken: Box[] = data.departments.map((d) => [d.room.x, d.room.y, d.room.x + d.room.w, d.room.y + d.room.h]);
+  for (const f of data.facilities) taken.push([f.x - 19, f.y - 19, f.x + 19, f.y + 19]);
+  if (tag) taken.push(tag);
+  const out = new Map<string, LabelSpot>();
+  for (const l of data.landmarks) {
+    if (l.kind === 'door' || (start && l.x === start.x && l.y === start.y)) continue;
+    const size = (l.kind === 'waypoint' ? 18 : 22) * k;
+    const w = name(l).length * size * 0.56;
+    const below: LabelSpot = { x: l.x, y: l.y + 14 + size, anchor: 'middle', size };
+    const above: LabelSpot = { x: l.x, y: l.y - 16, anchor: 'middle', size };
+    const right: LabelSpot = { x: l.x + 20, y: l.y + size / 3, anchor: 'start', size };
+    const left: LabelSpot = { x: l.x - 20, y: l.y + size / 3, anchor: 'end', size };
+    const order = l.y > 590 ? [above, right, left, below] : [below, above, right, left];
+    const box = (c: LabelSpot): Box => {
+      const x0 = c.anchor === 'middle' ? c.x - w / 2 : c.anchor === 'start' ? c.x : c.x - w;
+      return [x0, c.y - size, x0 + w, c.y + 4];
+    };
+    const inside = (b: Box) => b[0] >= 0 && b[2] <= PLAN_W && b[1] >= 0 && b[3] <= PLAN_H;
+    const pick = order.find((c) => inside(box(c)) && !taken.some((t) => overlaps(t, box(c)))) ?? order[0];
+    taken.push(box(pick));
+    out.set(l.id, pick);
+  }
+  return out;
 }

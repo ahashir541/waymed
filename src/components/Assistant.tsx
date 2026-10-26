@@ -27,6 +27,16 @@ export function Assistant({ inline = false, floating = false }: { inline?: boole
   const saved = useSavedToken();
   const navigate = useNavigate();
   const [open, setOpen] = useState(inline);
+  // On phones the floating assistant opens from the bottom navigation ("Ask"), not a floating button.
+  useEffect(() => {
+    if (!floating) return;
+    const toggle = () => setOpen((o) => !o);
+    addEventListener('wm:ask', toggle);
+    return () => removeEventListener('wm:ask', toggle);
+  }, [floating]);
+  useEffect(() => {
+    if (floating) dispatchEvent(new CustomEvent('wm:ask-state', { detail: open }));
+  }, [floating, open]);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
@@ -120,7 +130,7 @@ export function Assistant({ inline = false, floating = false }: { inline?: boole
       <button
         className={
           floating
-            ? 'no-print fixed bottom-20 end-4 z-40 flex h-14 items-center gap-2 rounded-full bg-accent px-4 text-base font-bold text-on-accent shadow-[0_10px_30px_-8px_rgba(224,168,0,0.6)] transition-transform hover:scale-105 md:bottom-6 md:end-6 md:px-5'
+            ? 'no-print fixed bottom-6 end-6 z-40 hidden h-12 items-center gap-2 rounded-full bg-accent px-4 text-base font-bold text-on-accent shadow-[0_10px_30px_-8px_rgba(224,168,0,0.6)] transition-transform hover:scale-105 md:flex'
             : 'no-print fixed bottom-4 end-4 z-40 flex min-h-16 items-center gap-2 rounded-full bg-accent px-5 text-lg font-bold text-on-accent shadow-xl transition-transform hover:scale-105'
         }
         onClick={() => setOpen((o) => !o)}
@@ -137,20 +147,27 @@ export function Assistant({ inline = false, floating = false }: { inline?: boole
           aria-label={t('assistant.title')}
           className={
             inline
-              ? 'flex h-[min(70dvh,560px)] flex-col overflow-hidden rounded-2xl border border-line bg-surface'
+              ? 'flex h-[max(460px,calc(100dvh-240px))] flex-col overflow-hidden rounded-2xl border border-line bg-surface md:h-[min(72dvh,620px)]'
               : floating
-                ? 'no-print v-pop fixed bottom-36 end-3 z-40 flex h-[min(70vh,600px)] w-[min(94vw,400px)] flex-col overflow-hidden rounded-3xl border border-line bg-solid shadow-2xl md:bottom-24 md:end-6'
+                ? 'no-print v-pop fixed inset-x-2 bottom-[calc(66px+env(safe-area-inset-bottom))] z-40 flex h-[min(76dvh,600px)] flex-col overflow-hidden rounded-3xl border border-line bg-solid shadow-2xl md:inset-x-auto md:bottom-24 md:end-6 md:w-[400px]'
                 : 'no-print glass fade-up fixed bottom-24 end-3 z-40 flex max-h-[min(78vh,720px)] w-[min(94vw,440px)] flex-col overflow-hidden rounded-3xl bg-solid/95'
           }
         >
           <header className="border-b border-line p-4">
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-xl font-bold">{t('assistant.title')}</h2>
+              <span className="flex items-center gap-1">
               <button className="btn btn-ghost min-h-11 px-3" aria-pressed={voiceOn} onClick={() => (setVoiceOn(!voiceOn), stopSpeaking())} title={t('common.listen')}>
                 <Icon name="speaker" />
                 <span className="sr-only">{t('common.listen')}</span>
                 {!voiceOn && <Icon name="x" size={16} />}
               </button>
+              {floating && (
+                <button className="btn btn-ghost min-h-11 px-3 md:hidden" onClick={() => setOpen(false)} aria-label={t('common.close')}>
+                  <Icon name="x" />
+                </button>
+              )}
+              </span>
             </div>
             <p className="text-base text-muted">{t('assistant.label')}</p>
             {last?.source === 'rules' && msgs.length > 1 && <p className="text-base font-semibold text-accent">{t('assistant.rulesMode')}</p>}
@@ -172,9 +189,9 @@ export function Assistant({ inline = false, floating = false }: { inline?: boole
             {busy && <p className="text-muted">{t('common.loading')}</p>}
           </div>
           {last?.chips?.length ? (
-            <div className="flex gap-2 overflow-x-auto border-t border-line p-3">
+            <div className="flex max-h-32 flex-wrap gap-2 overflow-y-auto border-t border-line p-3">
               {last.chips.map((c) => (
-                <button key={c} className="chip shrink-0 text-base" onClick={() => void send(c)}>
+                <button key={c} className="chip max-w-full text-base" onClick={() => void send(c)}>
                   {c}
                 </button>
               ))}

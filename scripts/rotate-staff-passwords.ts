@@ -12,7 +12,7 @@ const staff = listStaff(db);
 for (const u of staff) updateStaff(db, u.id, { password: pw });
 db.close();
 const file = 'data/STAFF-LOGINS.txt';
-let text = '';
+let text: string;
 try {
   text = readFileSync(file, 'utf8');
 } catch {

@@ -15,7 +15,8 @@ export async function presetLang(ctx: BrowserContext, lang: 'en' | 'ur' | 'sd') 
 }
 
 export async function chooseLanguage(page: Page, name: 'English' | 'اردو' | 'سنڌي') {
-  await page.locator('section[aria-labelledby="lang-title"] button', { hasText: name }).click();
+  // Kiosk: full-screen picker. Visitor pages: the compact language bar on top of the page.
+  await page.locator('section[aria-labelledby="lang-title"] button, [data-lang-bar] button', { hasText: name }).first().click();
 }
 
 export async function loginUI(page: Page, email: string, next: string) {

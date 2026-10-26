@@ -5,7 +5,7 @@ import { stepText, placeName } from '../lib/directions.ts';
 import { usePrefs, safeStorage } from '../lib/prefs.tsx';
 import { useBackend } from '../lib/store.tsx';
 import { speak, stopSpeaking, canSpeak, type ClipId } from '../lib/voice.ts';
-import { FloorPlan } from './FloorPlan.tsx';
+import { MapViewport } from './MapViewport.tsx';
 import { Icon } from './Icon.tsx';
 import { DeptMark } from './DeptMark.tsx';
 
@@ -130,12 +130,8 @@ export function RouteView({ data, from, dest, emergency, kiosk }: Props) {
   return (
     <section className="grid gap-5 lg:grid-cols-[1.35fr_1fr]" aria-label={t('guide.steps')}>
       <div className="glass rounded-3xl p-3 sm:p-4">
-        {/* On phones the plan keeps a readable size and can be panned sideways. */}
-        <div className="overflow-x-auto rounded-2xl" tabIndex={0} role="region" aria-label={t('guide.planLabel')}>
-          <div className="min-w-[560px]">
-            <FloorPlan data={data} route={shown} showFacilities={showFacilities || !!facility} highlight={facility?.id} routeColor={emergency ? '#C81E3A' : (dept?.color ?? '#E0A800')} />
-          </div>
-        </div>
+        {/* Opens fitted to the route; pinch or drag inside the map to look around. */}
+        <MapViewport data={data} route={shown} showFacilities={showFacilities || !!facility} highlight={facility?.id} routeColor={emergency ? '#C81E3A' : (dept?.color ?? '#E0A800')} />
         <div className="no-print mt-3 flex flex-wrap gap-2">
           <label className={`chip ${kiosk ? 'min-h-14 text-xl' : ''}`}>
             <input type="checkbox" className="size-5 accent-teal-700" checked={stepFree} onChange={(e) => setStepFree(e.target.checked)} />

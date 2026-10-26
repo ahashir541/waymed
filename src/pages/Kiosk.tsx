@@ -24,6 +24,13 @@ export function tokenIdFromQr(text: string): string | null {
 }
 
 function Scanner({ onToken, onFail }: { onToken: (id: string) => void; onFail: () => void }) {
+  // Keep the latest callbacks in refs so the camera starts once, not on every kiosk re-render.
+  const onTokenRef = useRef(onToken);
+  const onFailRef = useRef(onFail);
+  useEffect(() => {
+    onTokenRef.current = onToken;
+    onFailRef.current = onFail;
+  });
   const { t } = usePrefs();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState('');
@@ -31,6 +38,7 @@ function Scanner({ onToken, onFail }: { onToken: (id: string) => void; onFail: (
     let stream: MediaStream | null = null;
     let raf = 0;
     let stopped = false;
+    let failTimer: ReturnType<typeof setTimeout> | undefined;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const Detector = (window as unknown as { BarcodeDetector?: new (o: { formats: string[] }) => { detect: (v: HTMLVideoElement) => Promise<{ rawValue: string }[]> } }).BarcodeDetector;
@@ -52,7 +60,7 @@ function Scanner({ onToken, onFail }: { onToken: (id: string) => void; onFail: (
           /* keep scanning */
         }
         const id = text ? tokenIdFromQr(text) : null;
-        if (id) return onToken(id);
+        if (id) return onTokenRef.current(id);
       }
       raf = requestAnimationFrame(() => void tick());
     };
@@ -68,15 +76,16 @@ function Scanner({ onToken, onFail }: { onToken: (id: string) => void; onFail: (
         void tick();
       } catch {
         setError(t('kiosk.cameraDenied'));
-        setTimeout(onFail, 1800);
+        failTimer = setTimeout(() => !stopped && onFailRef.current(), 1800);
       }
     })();
     return () => {
       stopped = true;
+      clearTimeout(failTimer);
       cancelAnimationFrame(raf);
       stream?.getTracks().forEach((tr) => tr.stop());
     };
-  }, [onToken, onFail, t]);
+  }, [t]);
   return (
     <div className="grid gap-4">
       <p className="text-3xl font-bold">{t('kiosk.scanHint')}</p>

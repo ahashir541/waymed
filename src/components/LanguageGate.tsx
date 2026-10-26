@@ -6,11 +6,43 @@ import { translate, hasDictionary, LANG_NAMES } from '../lib/i18n/core.ts';
 import { speakMany, hasVoice, playClips } from '../lib/voice.ts';
 import { Icon } from './Icon.tsx';
 
-/** Language first: every visitor entry screen starts here until a language is chosen in this tab. */
+/** Language first. The kiosk (big) shows a full picker; visitor pages, including QR deep links,
+ *  open straight away with a compact language bar on top until a language is chosen. */
 export function LanguageGate({ children, big }: { children: ReactNode; big?: boolean }) {
   const { langChosen } = usePrefs();
   if (langChosen) return <>{children}</>;
+  if (!big) {
+    return (
+      <>
+        <LanguageBar />
+        {children}
+      </>
+    );
+  }
   return <LanguagePicker big={big} />;
+}
+
+/** One-row language choice that never blocks the page. */
+export function LanguageBar() {
+  useAllLanguages();
+  const { lang, setLang } = usePrefs();
+  return (
+    <div role="group" data-lang-bar aria-label={translate('en', 'lang.title')} className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl border border-line bg-surface p-2">
+      <Icon name="globe" size={18} className="ms-1 shrink-0 text-accent" />
+      {LANGS.map((l: Lang) => (
+        <button
+          key={l}
+          lang={l}
+          dir={l === 'en' ? 'ltr' : 'rtl'}
+          onClick={() => setLang(l)}
+          aria-pressed={l === lang}
+          className={`min-h-10 flex-1 rounded-xl px-3 text-base font-bold ${l === lang ? 'bg-accent text-on-accent' : 'bg-white/5 hover:bg-white/10'}`}
+        >
+          {LANG_NAMES[l]}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 function LanguagePicker({ big }: { big?: boolean }) {
@@ -45,7 +77,6 @@ function LanguagePicker({ big }: { big?: boolean }) {
           >
             <Icon name="globe" size={big ? 48 : 36} className="text-accent" />
             {LANG_NAMES[l]}
-            {l === 'sd' && hasDictionary('sd') && <span className="text-base font-normal text-muted">{translate('sd', 'lang.sdDraft')}</span>}
           </button>
         ))}
       </div>

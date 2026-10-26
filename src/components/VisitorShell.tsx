@@ -82,7 +82,7 @@ function useNavItems() {
   const visit = useVisit();
   const journeyTo = visit ? chapterPath(visit.chapter) : '/';
   return [
-    { to: journeyTo, icon: 'route', label: t('v.nav.journey'), active: pathname === '/' || pathname.startsWith('/visit') || pathname.startsWith('/t/') },
+    { to: journeyTo, icon: 'route', label: t('v.nav.journey'), active: pathname === '/' || pathname.startsWith('/visit/') || pathname.startsWith('/t/') },
     { to: '/g', icon: 'pin', label: t('v.nav.map'), active: pathname.startsWith('/g') || pathname.startsWith('/w/') },
     { to: '/more', icon: 'plus', label: t('v.nav.more'), active: ['/more', '/book', '/prepare', '/followup', '/assistant', '/demo/walk', '/tour'].some((p) => pathname.startsWith(p)) },
     { to: '/help', icon: 'helpdesk', label: t('v.nav.help'), active: pathname.startsWith('/help') },
@@ -103,7 +103,7 @@ function TopNav() {
               className={`inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors ${it.active ? 'bg-accent-soft text-accent' : 'text-muted hover:bg-white/5 hover:text-ink'}`}
             >
               <Icon name={it.icon} size={17} strokeWidth={it.active ? 2.4 : 2} />
-              {it.label}
+              <span className="sr-only lg:not-sr-only">{it.label}</span>
             </Link>
           </li>
         ))}
@@ -112,12 +112,20 @@ function TopNav() {
   );
 }
 
-/** Bottom navigation, only on narrow screens. */
-function BottomNav() {
+/** Bottom navigation, only on narrow screens. "Ask" opens the voice assistant, so no floating
+ *  button ever covers page content on a phone. */
+function BottomNav({ ask }: { ask: boolean }) {
+  const { t } = usePrefs();
   const items = useNavItems();
+  const [askOpen, setAskOpen] = useState(false);
+  useEffect(() => {
+    const on = (e: Event) => setAskOpen(Boolean((e as CustomEvent<boolean>).detail));
+    addEventListener('wm:ask-state', on);
+    return () => removeEventListener('wm:ask-state', on);
+  }, []);
   return (
     <nav aria-label="Main" className="no-print fixed inset-x-0 bottom-0 z-30 border-t border-line bg-[#111] pb-[env(safe-area-inset-bottom)] md:hidden">
-      <ul className="grid grid-cols-4">
+      <ul className={`grid ${ask ? 'grid-cols-5' : 'grid-cols-4'}`}>
         {items.map((it) => (
           <li key={it.label}>
             <Link to={it.to} aria-current={it.active ? 'page' : undefined} className={`flex min-h-[58px] flex-col items-center justify-center gap-0.5 text-xs font-semibold transition-colors ${it.active ? 'text-accent' : 'text-muted hover:text-ink'}`}>
@@ -126,6 +134,23 @@ function BottomNav() {
             </Link>
           </li>
         ))}
+        {ask && (
+          <li>
+            <button
+              type="button"
+              onClick={() => dispatchEvent(new Event('wm:ask'))}
+              aria-expanded={askOpen}
+              aria-controls="wm-assistant"
+              aria-label={t('assistant.open')}
+              className={`flex min-h-[58px] w-full flex-col items-center justify-center gap-0.5 text-xs font-semibold ${askOpen ? 'text-accent' : 'text-muted hover:text-ink'}`}
+            >
+              <span className={`grid size-7 place-items-center rounded-full ${askOpen ? 'bg-accent text-on-accent' : 'bg-accent-soft text-accent'}`}>
+                <Icon name={askOpen ? 'x' : 'mic'} size={16} strokeWidth={2.4} />
+              </span>
+              {t('v.nav.ask')}
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
@@ -155,7 +180,7 @@ export function VisitorShell({ children, wide, hideNav }: Props) {
   }, []);
 
   return (
-    <div className="vbackdrop min-h-dvh overflow-x-clip pb-24 md:pb-10">
+    <div className="vbackdrop min-h-dvh overflow-x-clip pb-[calc(84px+env(safe-area-inset-bottom))] md:pb-24">
       <a href="#vmain" className="sr-only-focusable btn btn-primary absolute start-2 top-2 z-50">
         {t('app.skip')}
       </a>
@@ -184,17 +209,17 @@ export function VisitorShell({ children, wide, hideNav }: Props) {
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 md:px-6">
           <Link to="/" aria-label={`${t('app.name')} - ${t('common.home')}`} className="flex shrink-0 items-center gap-2 rounded-xl">
             <img src="/icon.svg" alt="" width={34} height={34} className="rounded-[9px]" />
-            <span className="hidden leading-tight sm:block">
+            <span className={`hidden leading-tight sm:block ${hideNav ? '' : 'md:hidden lg:block'}`}>
               <span className="block text-base font-extrabold tracking-tight">{t('app.name')}</span>
               <span className="block max-w-[14rem] truncate text-xs text-muted">{L(data.hospital.name)}</span>
             </span>
           </Link>
           {!hideNav && (
-            <div className="ms-4">
+            <div className="md:ms-1 lg:ms-4">
               <TopNav />
             </div>
           )}
-          <div className="ms-auto flex items-center gap-2">
+          <div className="ms-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             <LanguageChip />
             <button className="vchip px-2.5" aria-pressed={large} onClick={() => setLarge(!large)} aria-label={t('settings.largerText')} title={t('settings.largerText')}>
               <span aria-hidden="true" className="text-sm font-black leading-none">
@@ -220,7 +245,7 @@ export function VisitorShell({ children, wide, hideNav }: Props) {
           {children}
         </div>
       </main>
-      {!hideNav && <BottomNav />}
+      {!hideNav && <BottomNav ask={!pathname.startsWith('/assistant') && !pathname.startsWith('/tour')} />}
       {!hideNav && !pathname.startsWith('/assistant') && !pathname.startsWith('/tour') && (
         <Suspense fallback={null}>
           <Assistant floating />

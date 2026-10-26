@@ -188,7 +188,7 @@ export const sd: Record<DictKey, string> = {
   'book.estimate': 'مهرباني ڪري {start} کان {end} جي وچ ۾ اچو.', // TODO: native review
   'book.taken': 'معاف ڪجو، هي وقت هاڻي ڪنهن ٻئي ورتو. ٻيو وقت چونڊيو.', // TODO: native review
   'book.noSlots': 'ايندڙ 22 ڪلاڪن ۾ ڪو وقت خالي ناهي.', // TODO: native review
-  'book.window': 'رڳو ايندڙ 22 ڪلاڪن لاءِ بُڪنگ کليل آهي.', // TODO: native review
+  'book.window': 'توهان اڄ يا سڀاڻي لاءِ وقت وٺي سگهو ٿا.', // TODO: native review
   'book.notBookable': 'هي شعبو بُڪنگ نٿو وٺي. رجسٽريشن ڪائونٽر تي اچو.', // TODO: native review
   'book.doctorAway': 'اڄ دستياب ناهي', // TODO: native review
 
@@ -215,7 +215,7 @@ export const sd: Record<DictKey, string> = {
   'followup.r2': 'ليبارٽري ڪائونٽر کان پڇو ته رپورٽ ڪهڙي ڏينهن ملندي.', // TODO: native review
   'followup.r3': 'دوا رڳو ڊاڪٽر جي لکيل مطابق کائو.', // TODO: native review
   'followup.r4': 'جيڪڏهن مريض جي حالت خراب ٿئي ته هڪدم ايمرجنسي اچو. تاريخ جو انتظار نه ڪريو.', // TODO: native review
-  'followup.staffNote': 'عملو: تاريخ ۽ شعبو لکو، پوءِ پرنٽ ڪريو يا ڏيو. ڪجهه به محفوظ نٿو ٿئي.', // TODO: native review
+  'followup.staffNote': 'توهان ۽ توهان جي گهر وارن لاءِ. چاهيو ته ايندڙ تاريخ ۽ شعبو لکو. ڪجهه محفوظ ناهي ٿيندو.', // TODO: native review
 
   'desk.title': 'رجسٽريشن ڪائونٽر', // TODO: native review
   'desk.issue': 'پرچي جاري ڪريو', // TODO: native review
@@ -403,7 +403,7 @@ export const sd: Record<DictKey, string> = {
   'health.llm': 'لينگويج ماڊل ڳنڍيل آهي', // TODO: native review
   'health.rules': 'سادا جواب موڊ (ماڊل جي ڪنجي ناهي)', // TODO: native review
 
-  'v.focus': 'وي ميڊ توهان کي اسپتال جي دروازي کان صحيح شعبي تائين، قدم به قدم، توهان جي ٻوليءَ ۾ وٺي وڃي ٿو.', // TODO: native review
+  'v.focus': 'اسپتال جي دروازي کان صحيح شعبي تائين، توهان جي ٻوليءَ ۾.', // TODO: native review
   'v.howTitle': 'هي ڪيئن ڪم ڪري ٿو', // TODO: native review
   'v.how1': 'پرچي ڪمري مان پرچي وٺو', // TODO: native review
   'v.how2': 'نقشي سان پنهنجي شعبي تائين وڃو', // TODO: native review
@@ -423,7 +423,7 @@ export const sd: Record<DictKey, string> = {
   'v.nav.more': 'وڌيڪ', // TODO: native review
   'v.nav.help': 'مدد', // TODO: native review
   'v.gate.title': 'ڀليڪار. اسين توهان جي رهنمائي ڪنداسين.', // TODO: native review
-  'v.gate.lead': 'توهان جي دوري جا ٽي حصا آهن:', // TODO: native review
+  'v.gate.lead': 'توهان جي دوري جا پنج حصا آهن:', // TODO: native review
   'v.gate.calm': 'آرام سان. ڪنهن کان رستو پڇڻ جي ضرورت ناهي.', // TODO: native review
   'v.gate.start': 'دورو شروع ڪريو', // TODO: native review
   'v.slip.title': 'پنهنجي پرچي وٺو', // TODO: native review
@@ -522,4 +522,29 @@ export const sd: Record<DictKey, string> = {
   'v.home.pilot': 'پائلٽ', // TODO: native review
   'v.home.live': 'سڌو', // TODO: native review
   'v.ask.anytime': 'وي ميڊ کان پڇو', // TODO: native review
+  'v.home.sub': 'سنڌي، اردو يا انگريزي ۾. ڪو اڪائونٽ ناهي، غلط قطار ۾ انتظار ناهي.', // TODO: native review
+  'v.journey.title': 'توهان جو دورو، پنجن قدمن ۾', // TODO: native review
+  'v.journey.gate': 'دروازي تي وي ميڊ کوليو ۽ پنهنجي ٻولي چونڊيو.', // TODO: native review
+  'v.journey.slip': 'ٻڌايو ڇا گهرجي ۽ پنهنجو ٽوڪن وٺو.', // TODO: native review
+  'v.journey.map': 'ايندڙ قدم جو ڪارڊ ڏسو. غلط موڙ تي اسين ٻڌائينداسين.', // TODO: native review
+  'v.journey.wait': 'ويجهو ويهو ۽ قطار ۾ پنهنجي جاءِ ڏسو.', // TODO: native review
+  'v.journey.turn': 'فون سائو ٿي وڃي: اندر وڃو.', // TODO: native review
+  'v.nav.ask': 'پڇو', // TODO: native review
+  'v.map.zoomIn': 'زوم اِن', // TODO: native review
+  'v.map.zoomOut': 'زوم آئوٽ', // TODO: native review
+  'v.map.recentre': 'ٻيهر مرڪز', // TODO: native review
+  'v.fac.more': '+{n} ٻيا', // TODO: native review
+  'v.map.destination': 'منزل: {place}', // TODO: native review
+  'v.wait.closed': '{dept} هن وقت بند آهي.', // TODO: native review
+  'v.wait.opens': 'اهو {when} کلندو.', // TODO: native review
+  'v.wait.closedHint': 'توهان جو ٽوڪن قطار ۾ رهندو. چاهيو ته ان بدران وقت بُڪ ڪريو.', // TODO: native review
+  'v.wait.bookTime': 'وقت بُڪ ڪريو', // TODO: native review
+  'book.choose': 'وقت چونڊيو', // TODO: native review
+  'followup.printOptional': 'پرنٽ ڪريو (اختياري)', // TODO: native review
+  'v.more.tourSub': 'سڄو دورو ڏسو، لڳ ڀڳ {min} منٽ', // TODO: native review
+  'v.more.walkSub': 'اسان جي انٽرويوز وارن ماڻهن سان سندن دورو ڏسو', // TODO: native review
+  'v.more.showSub': 'مڪمل اسڪرين سلائيڊون، لڳ ڀڳ {min} منٽ', // TODO: native review
+  'v.home.seeAll': 'سڀ {n} شعبا ڏسو', // TODO: native review
+  'show.swipe': 'اڳتي وڌڻ لاءِ سوائپ يا ٽيپ ڪريو', // TODO: native review
+  'show.rotate': 'وڏو ڏسڻ لاءِ فون کي ترڇو ڪريو', // TODO: native review
 };

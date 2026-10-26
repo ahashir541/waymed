@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { Layout, PageTitle } from '../components/Layout.tsx';
 import { LanguageGate } from '../components/LanguageGate.tsx';
@@ -12,8 +12,11 @@ import { ApiError } from '../lib/backend/types.ts';
 import type { Slot, TokenView } from '../lib/types.ts';
 
 export function Book() {
-  const { t, L } = usePrefs();
+  const { t, L, lang } = usePrefs();
   const { data } = useHospital();
+  const docRef = useRef<HTMLElement>(null);
+  const slotRef = useRef<HTMLElement>(null);
+  const dateFmt = new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'ur-PK', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Asia/Karachi' });
   const backend = useBackend();
   const [q, setQ] = useSearchParams();
   const deptId = q.get('dept') ?? '';
@@ -36,6 +39,16 @@ export function Book() {
       setPicked((p) => ((s as Slot[]).some((x) => x.start === p && x.status === 'free') ? p : null));
     });
   }, [backend, doctorId]);
+
+  // Guide the eye: after a department, show the doctors; after a doctor, show the times.
+  const scrollTo = (el: HTMLElement | null) => el && setTimeout(() => el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }), 60);
+  const canBook = !!dept?.bookable;
+  useEffect(() => {
+    if (deptId && canBook) scrollTo(docRef.current);
+  }, [deptId, canBook]);
+  useEffect(() => {
+    if (doctorId) scrollTo(slotRef.current);
+  }, [doctorId]);
 
   const now = Date.now();
   if (booked) {
@@ -88,9 +101,9 @@ export function Book() {
         </section>
 
         {dept?.bookable && (
-          <section aria-labelledby="b-doc" className="mb-6">
+          <section ref={docRef} aria-labelledby="b-doc" className="mb-6 scroll-mt-24">
             <h2 id="b-doc" className="mb-3 text-xl font-bold text-muted">
-              2. {t('book.doctor')} {data.sample && <span className="font-normal">· {t('common.sample')}</span>}
+              2. {t('book.doctor')} {data.sample && <span className="font-normal">· {t('v.demoData')}</span>}
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {doctors.map((d) => (
@@ -101,7 +114,7 @@ export function Book() {
                   className={`glass flex min-h-16 items-center gap-3 rounded-2xl p-3 text-start text-lg font-semibold ${d.id === doctorId ? 'ring-4 ring-accent' : ''}`}
                 >
                   <Icon name="stethoscope" className="text-accent" />
-                  <span className="flex-1">
+                  <span className="min-w-0 flex-1">
                     {L(d.name)}
                     {!d.available && <span className="block text-base font-normal text-danger">{t('book.doctorAway')}</span>}
                   </span>
@@ -112,7 +125,7 @@ export function Book() {
         )}
 
         {doctorId && (
-          <section aria-labelledby="b-slot">
+          <section ref={slotRef} aria-labelledby="b-slot" className="scroll-mt-24">
             <h2 id="b-slot" className="mb-3 text-xl font-bold text-muted">
               3. {t('book.slot')}
             </h2>
@@ -120,11 +133,14 @@ export function Book() {
             {slots && !slots.some((s) => s.status === 'free') && <p className="text-lg">{t('book.noSlots')}</p>}
             {slots &&
               (['today', 'tomorrow'] as const).map((day) => {
-                const list = slots.filter((s) => fmtDay(s.start, now) === day && s.status !== 'past');
+                // Times outside the doctor's hours are left out; booked ones stay, marked "Not available".
+                const list = slots.filter((s) => fmtDay(s.start, now) === day && s.status !== 'past' && s.status !== 'unavailable');
                 if (!list.length) return null;
                 return (
                   <div key={day} className="mb-4">
-                    <h3 className="mb-2 text-lg font-bold">{t(day === 'today' ? 'common.today' : 'common.tomorrow')}</h3>
+                    <h3 className="mb-2 text-lg font-bold">
+                      {t(day === 'today' ? 'common.today' : 'common.tomorrow')} <span className="font-normal text-muted">· {dateFmt.format(list[0].start)}</span>
+                    </h3>
                     <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-8">
                       {list.map((s) => {
                         const free = s.status === 'free';
@@ -152,8 +168,9 @@ export function Book() {
                 {error}
               </p>
             )}
+            <div className="sticky bottom-[calc(66px+env(safe-area-inset-bottom))] z-10 -mx-4 border-t border-line bg-[#0b0b0b] px-4 py-3 md:bottom-0">
             <button
-              className="btn btn-primary sticky bottom-24 min-h-16 w-full text-xl shadow-xl"
+              className="btn btn-primary min-h-14 w-full text-xl disabled:bg-[#2a2a2a] disabled:text-muted disabled:opacity-100"
               disabled={picked === null || busy}
               onClick={async () => {
                 if (picked === null) return;
@@ -172,8 +189,9 @@ export function Book() {
                 }
               }}
             >
-              <Icon name="calendar" /> {picked !== null ? t('book.confirm', { time: fmtTime(picked) }) : t('book.slot')}
+              <Icon name="calendar" /> {picked !== null ? t('book.confirm', { time: fmtTime(picked) }) : t('book.choose')}
             </button>
+            </div>
             <p className="mt-3 text-base text-muted">{t('book.noPersonal')}</p>
           </section>
         )}

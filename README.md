@@ -11,12 +11,13 @@ anonymous insights.
 > WayMed are **sample data**, and every Sindhi string is a draft awaiting native review. See
 > [Known limitations and pilot checklist](#known-limitations-and-pilot-checklist).
 
-**WayMed takes you from the hospital gate to the right department, step by step, in your language.**
+**From the hospital gate to the right department, in your language.**
 
 ## How to use WayMed in 30 seconds
 
 1. At the gate, open WayMed (scan the poster QR) and tap **I am at the hospital gate**.
-2. Walk to the **Slip Room**, choose what you need (Check-up, Child, Test or lab, Medicines), and
+2. Walk to the **Slip Room**, choose what you need (Check-up, Child, Women, Surgery, Eye, ENT,
+   Test or lab, X-ray, Medicines), and
    tap **Get my slip**. Accident or emergency goes straight to the Emergency route, with no slip.
 3. Follow the **Next step** card. Share your location for wrong-turn alerts, or tap
    **I reached …** at each place (checkpoint mode).
@@ -32,14 +33,31 @@ and pre-visit information.
 - **Five-part journey with a progress bar:** Gate → Slip → Map → Wait → Your turn
   (`/visit/gate` … `/visit/turn`), plus the **Journey, Map, More, Help** navigation.
 - **Look and feel:**
-  - black and dark-yellow theme, 16px body text, 20–28px headings, buttons at least 48px tall
+  - black and dark-yellow theme, 16px body text, 20–32px headings, buttons at least 48px tall
+  - the first screen has a short headline, an animated floor plan, and an animated **How it works**
+    strip that plays the five parts of a visit (tap a step to jump to it)
+  - a floating **Ask WayMed** voice assistant on every visitor page; it answers in the language you
+    type or speak, Sindhi included
+  - **After your check-up**: the "Your turn" screen links to the follow-up card
   - one main action per screen
   - smooth transform and opacity animations that switch off with reduced motion
   - Urdu and Sindhi flip right-to-left
 - **Web layout:**
   - top navigation (Journey, Map, More, Help) with the language, text-size and red Emergency buttons
   - content at a comfortable reading width; the map step and the demo tour use two columns
-  - on narrow screens the navigation moves to a bottom bar
+  - on narrow screens the navigation moves to a bottom bar with an **Ask** button for the voice
+    assistant, so no floating button covers page content on a phone
+- **Built for presenting on a phone** (checked at 360, 390 and 430 px, English and Urdu):
+  - no sideways scrolling or cut text on any visitor page (`node scripts/check-overflow.ts`, and a
+    Playwright test that fails if anything sticks out of the screen)
+  - the map opens fitted to the route, labels never smaller than 11 px, pinch/drag/zoom inside the
+    map only, a Re-centre button, and a "You are here" tag that never covers a place name
+  - QR and deep links open the page straight away with a small language bar on top (only the
+    kiosk shows the full-screen language picker)
+  - inside the visit each part of the Slip chapter has its own address (`?step=walk|need|yours`),
+    so refresh and Back keep your place; routes start from the last place you confirmed
+  - one source for facilities ("nearest to you", with how many places have each) and for opening
+    hours (`Department.hours`); a closed department says so, says when it opens, and offers a booking
 - **No staff, desk or admin link** appears anywhere in the visitor app. Staff open their pages by
   their own address.
 - **Slips:** a visitor can take a slip on their phone at the Slip Room
@@ -50,7 +68,8 @@ and pre-visit information.
 ## How to run the demo
 
 - **Demo tour** (`/tour`, or "Take the demo tour" on the first screen) plays the whole journey
-  automatically in about 3 minutes, in a demo card with captions:
+  automatically in about 3.5 minutes (16 scenes, from "Before you come" and booking to the
+  follow-up card), in a demo card with captions:
   - a simulated visitor dot and GPS walk
   - a simulated wrong turn, caught by the same wrong-turn detector the real app uses, with the
     alert, vibration and sound
@@ -134,6 +153,9 @@ Open <http://localhost:8080>. An empty database is filled with the **sample** ho
 automatically. `create-admin` asks for a password (at least 10 characters), or reads it from the
 `WAYMED_PASSWORD` environment variable. It never takes the password as an argument. Then sign in
 at `/login` and create desk and department accounts in **Admin → Staff accounts**.
+
+To give every staff account a new random password, run `node scripts/rotate-staff-passwords.ts`.
+The new logins are written to `data/STAFF-LOGINS.txt`, which stays out of Git (`/data/` is ignored).
 
 For development (API with auto-restart plus the Vite dev server on <http://localhost:5173>):
 
@@ -287,8 +309,17 @@ with a volume mounted at `/data`. Use the Dockerfile, set the variables above, a
 domain in the host's dashboard, and **run a single instance**: SQLite and the in-memory
 live-update hub are per-process.
 
-Static or serverless hosts (Vercel, Netlify, Firebase Hosting alone) are **not suitable**. Live
-updates need a long-lived connection and the database needs a disk.
+Static or serverless hosts (Vercel, Netlify, Firebase Hosting alone) are **not suitable for the
+live system**. Live updates need a long-lived connection and the database needs a disk.
+
+### Showcase on Vercel (demo only)
+
+`vercel.json` builds a **static showcase**: `npm run build:static` (`vite build --mode static`,
+which reads `.env.static` and sets `VITE_STATIC_DEMO=1`). Every page runs on the in-browser
+sample hospital with the "Simulation · Demo data" banner, and "Leave demo" is hidden. Nothing is
+sent to a server. Import the GitHub repository in Vercel and keep the defaults. To check it
+locally: `npm run build:static`, `npx vite preview --port 4173`, then
+`node scripts/smoke-static.ts`.
 
 If you put a reverse proxy other than Caddy in front: forward `X-Forwarded-For/Proto`, disable
 buffering for `/api/public/stream` and `/api/staff/stream`, and keep idle timeouts above 30 s.
@@ -338,7 +369,9 @@ always-visible "Simulation" banner. Demo mode never calls the live API, so it ca
 production data. Tabs in the same browser stay in sync, so you can show board, phone and staff
 side by side. **Leave demo** returns to live mode.
 
-- **Presenter show** `/demo/show`: fullscreen 16:9, one idea per scene, captions, about 4 minutes
+- **Presenter show** `/demo/show`: fullscreen 16:9, one idea per scene, captions, about 4 minutes.
+  Slides are laid out at 1280×720 and scaled to the screen. On a phone: swipe or tap, a small
+  bottom control bar, no keyboard hints
   on auto-play. Keys: Space/→/PageDown next, ←/PageUp back, A auto-play, P pause, R restart,
   F fullscreen, H hide controls, S safe mode (no animation). A clicker works as arrow keys.
 - **Walk in their shoes** `/demo/walk`: Khurshid, Shams or Ashok, "Today" versus "With WayMed",
@@ -471,12 +504,12 @@ That runs lint, typecheck, unit and integration tests, build and end-to-end test
 |---|---|---|
 | Unit (47) | `npm test` | Route engine (shortest path, step-free, unreachable, turns, nearest facility, trilingual steps), queue logic (urgent first, next/skip/recall, moving average, wait ranges), slots (schedule, booked, blocked, 22 h horizon, Pakistan time), assistant intents and refusals, dictionary parity and Sindhi TODO markers |
 | Integration (24) | `npm test` | Access policy (the "security rules" tests: visitors can read only their token and create only anonymous events; role scoping; CSRF; headers), booking race (one 200 and one 409; the UNIQUE constraint holds even when called directly), retention (nothing older than 24 h; counts kept), realtime (phone sees "called" under 2 s after Next), assistant (3 languages, refusal, LLM failure fallback, grounded action filtering, per-device rate limit), insights (real counts, CSV) |
-| End-to-end (21) | `npm run build` then `npm run test:e2e` | Desk issues a slip → a second phone opens its QR → a third device presses Next → phone and board update **within 2 s**; a booked slot becomes unavailable to a second user live; landmark QR with a saved token routes from that landmark and a guide request reaches staff; kiosk with camera denied works by typed token; visitor journey in en/ur/sd with `dir=rtl` for Urdu and Sindhi; **directions with the network off** after first load; assistant in three languages with medical refusal; Emergency button; visitor API denial; insights show "Not enough data yet" |
+| End-to-end (23) | `npm run build` then `npm run test:e2e` | Desk issues a slip → a second phone opens its QR → a third device presses Next → phone and board update **within 2 s**; a booked slot becomes unavailable to a second user live; landmark QR with a saved token routes from that landmark and a guide request reaches staff; kiosk with camera denied works by typed token; visitor journey in en/ur/sd with `dir=rtl` for Urdu and Sindhi; **directions with the network off** after first load; assistant in three languages with medical refusal; Emergency button; visitor API denial; insights show "Not enough data yet"; **every visitor page fits a 390 px phone in English and Urdu** |
 
 **Latest local run:** lint and typecheck clean · 71/71 unit and integration tests (including
-the wrong-turn detector and visitor self-issued slips) · 21/21 end-to-end tests. The visitor-app
+the wrong-turn detector and visitor self-issued slips) · 23/23 end-to-end tests. The visitor-app
 tests cover:
-- a first screen understood without help, at 16px with 48px buttons
+- a first screen understood without help, at 16px with 48px buttons, and the How it works steps
 - the full live journey on a 375px phone
 - a wrong checkpoint giving the corrected route
 - **location allowed + walking off-route raising the alert**
@@ -484,7 +517,7 @@ tests cover:
 - the demo tour controls
 - **no staff link anywhere in the visitor app**
 - Urdu and Sindhi right-to-left
-- a desktop check: top navigation, 16px text, 20–28px headings, buttons 48–64px tall and no wider than 600px
+- a desktop check: top navigation, 16px text, 20–34px headings, buttons 48–64px tall and no wider than 600px
 
 **Lighthouse** (`npm start`, then `npm run lighthouse`; mobile emulation with throttling).
 Initial JavaScript is about 73 KB gzipped (budget 200 KB). Urdu and Sindhi load as separate
@@ -492,15 +525,19 @@ small chunks, only when needed.
 
 | Page | Performance | Accessibility | Best practices |
 |---|---|---|---|
-| `/` (first screen) | 95 | 100 | 100 |
-| `/help` (Urdu) | 96 | 100 | 100 |
-| `/more` (Sindhi) | 95 | 100 | 100 |
-| `/g/paediatrics` (Map) | 95 | 100 | 100 |
-| `/emergency` | 95 | 100 | 100 |
-| `/book` | 95 | 100 | 100 |
-| `/tour` | 93 | 100 | 100 |
+| `/` (first screen) | 81 | 100 | 100 |
+| `/help` (Urdu) | 92 | 100 | 100 |
+| `/more` (Sindhi) | 94 | 100 | 100 |
+| `/g/paediatrics` (Map) | 84 | 100 | 100 |
+| `/emergency` | 83 | 100 | 100 |
+| `/book` | 90 | 100 | 100 |
+| `/tour` | 94 | 100 | 100 |
 
-Performance scores move a few points between runs on the same machine. Single runs of `/more` have measured as low as 84, so re-run before quoting a number.
+Measured on 27 Oct 2026 after the phone redesign. The first screen and the map pages now do more
+(the animated How it works strip, the fitted map with label placement), and their performance score
+dropped from the mid-90s to the low 80s, mostly in total blocking time on Lighthouse's slowed-down
+phone CPU. Scores move several points between runs on the same machine, so re-run before quoting a
+number.
 
 **Accessibility and languages:** one dictionary (`src/lib/i18n/*.ts`, same keys enforced by
 TypeScript and tests), RTL for Urdu and Sindhi, Noto Naskh Arabic bundled locally, language choice

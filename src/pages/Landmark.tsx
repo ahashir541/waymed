@@ -104,7 +104,7 @@ export function LandmarkPage() {
     }
     safeStorage.set('wm_here', place.id, true);
     if (q.get('src') === 'qr') backend.logEvent({ type: 'qr_scanned', channel: 'phone', landmarkId: place.id });
-  }, [place, q, backend]);
+  }, [place, q, backend, navigate]);
 
   if (!place) {
     return (

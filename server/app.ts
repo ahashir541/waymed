@@ -59,6 +59,10 @@ const entitySchemas: Record<EntityKind, z.ZodType> = {
     floor: z.number().int().min(-5).max(30),
     avgServiceMin: z.number().min(1).max(180),
     openHours: L10n,
+    hours: z
+      .array(z.object({ days: z.array(z.number().int().min(0).max(6)).max(7), open: z.string().regex(/^\d\d:\d\d$/), close: z.string().regex(/^\d\d:\d\d$/) }))
+      .max(14)
+      .optional(),
     nodeId: Id,
     room: z.object({ x: Coord, y: Coord, w: z.number().min(10).max(1000), h: z.number().min(10).max(1000) }),
     bookable: z.boolean(),
