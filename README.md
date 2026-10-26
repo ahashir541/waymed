@@ -571,3 +571,4 @@ light and dark themes.
 - "Skip" means a no-show: it is marked missed and the next token is called.
 - Urdu is the default language until the visitor chooses. Every visitor entry screen asks first.
 - Insights cards need at least 5 data points before showing a number.
+"# waymed" 
