@@ -549,6 +549,7 @@ export const en = {
   'v.story.team': 'Our team',
   'v.story.raw': 'Our raw idea, in one sentence',
   'v.story.then': 'Then we built it: this web app.',
+  'v.story.builtBy': 'Web app built by',
 };
 
 export type DictKey = keyof typeof en;

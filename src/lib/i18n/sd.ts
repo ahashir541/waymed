@@ -552,4 +552,5 @@ export const sd: Record<DictKey, string> = {
   'v.story.team': 'اسان جي ٽيم', // TODO: native review
   'v.story.raw': 'اسان جو خام خيال، هڪ جملي ۾', // TODO: native review
   'v.story.then': 'پوءِ اسان اهو ٺاهيو: هيءَ ويب ايپ.', // TODO: native review
+  'v.story.builtBy': 'ويب ايپ ٺاهي:', // TODO: native review
 };

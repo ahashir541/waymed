@@ -551,4 +551,5 @@ export const ur: Record<DictKey, string> = {
   'v.story.team': 'ہماری ٹیم',
   'v.story.raw': 'ہمارا خام آئیڈیا، ایک جملے میں',
   'v.story.then': 'پھر ہم نے اسے بنایا: یہی ویب ایپ۔',
+  'v.story.builtBy': 'ویب ایپ بنائی:',
 };

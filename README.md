@@ -13,6 +13,8 @@ anonymous insights.
 
 **From the hospital gate to the right department, in your language.**
 
+**Team:** Danish Saleem, Omar Abbas, Ibadullah and Syed Hashir Ali. The web app was built by Syed Hashir Ali.
+
 **One-page summary:** [`WayMed-Patient-Journey.pdf`](WayMed-Patient-Journey.pdf) shows the team, the field
 visit, the chosen HMW, the raw idea and the patient journey step by step (what the patient does in the
 app, what happens in the hospital, which interview problem it solves). Source:

@@ -1,6 +1,6 @@
 import { Icon } from './Icon.tsx';
 import { usePrefs } from '../lib/prefs.tsx';
-import { RAW_IDEA, STORY_STEPS, TEAM_MEMBERS } from '../data/story.ts';
+import { BUILT_BY, RAW_IDEA, STORY_STEPS, TEAM_MEMBERS } from '../data/story.ts';
 
 /** Home page: who we are, where we went, which HMW we chose, the raw idea, and that it became this app. */
 export function StorySection() {
@@ -40,8 +40,13 @@ export function StorySection() {
           <p className="text-xs font-bold uppercase tracking-wide text-[#8a6d00]">{t('v.story.raw')}</p>
           <p className="font-hand mt-1 text-[1.45rem] leading-snug">{L(RAW_IDEA)}</p>
         </blockquote>
-        <figcaption className="flex items-center gap-2 font-semibold text-accent">
-          <Icon name="arrowRight" size={18} className="shrink-0 rtl:rotate-180" /> {t('v.story.then')}
+        <figcaption className="grid gap-1">
+          <span className="flex items-center gap-2 font-semibold text-accent">
+            <Icon name="arrowRight" size={18} className="shrink-0 rtl:rotate-180" /> {t('v.story.then')}
+          </span>
+          <span className="text-sm text-muted">
+            {t('v.story.builtBy')} <span className="ltr font-bold text-ink">{BUILT_BY}</span>
+          </span>
         </figcaption>
       </figure>
     </section>

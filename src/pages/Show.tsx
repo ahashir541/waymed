@@ -14,7 +14,7 @@ import { DeptMark } from '../components/DeptMark.tsx';
 import { FlipText } from '../components/FlipText.tsx';
 import { Slip } from '../components/Slip.tsx';
 import { Icon } from '../components/Icon.tsx';
-import { HMW, PERSONAS, JOURNEY, FEATURE_EVIDENCE, REJECTED, PILOT, RESEARCH, TEAM_MEMBERS, STORY_STEPS, RAW_IDEA } from '../data/story.ts';
+import { HMW, PERSONAS, JOURNEY, FEATURE_EVIDENCE, REJECTED, PILOT, RESEARCH, TEAM_MEMBERS, STORY_STEPS, RAW_IDEA, BUILT_BY } from '../data/story.ts';
 
 interface Scene {
   id: string;
@@ -120,6 +120,9 @@ export default function Show() {
                 {m}
               </span>
             ))}
+            <span className="ms-auto text-[0.85em] text-white/70">
+              {translate(lang, 'v.story.builtBy')} <b className="text-[#E0A800]">{BUILT_BY}</b>
+            </span>
           </p>
           <ol className="grid grid-cols-5 gap-[0.4em]">
             {STORY_STEPS.map((st, k) => (

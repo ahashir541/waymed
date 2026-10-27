@@ -238,8 +238,10 @@ export interface Sticky {
 export const RESEARCH = research as { personas: { code: string; name: string; role: string }[]; groups: ResearchGroup[]; stickies: Sticky[] };
 
 // The team and how the idea was reached, from the team's Ideate notebook (members, raw ideas, the four
-// idea groups and the finalized idea). The team has not chosen a team name, so none is shown.
-export const TEAM_MEMBERS = ['Syed Hashir Ali', 'Ibadullah', 'Danish Saleem', 'Omar Abbas'];
+// idea groups and the finalized idea). The team has no team name, so the members are listed instead.
+export const TEAM_MEMBERS = ['Danish Saleem', 'Omar Abbas', 'Ibadullah', 'Syed Hashir Ali'];
+/** The team member who built the web app. */
+export const BUILT_BY = 'Syed Hashir Ali';
 
 export const STORY_STEPS: { icon: string; title: L10n; text: L10n }[] = [
   {
