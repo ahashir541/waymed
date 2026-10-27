@@ -30,7 +30,7 @@ test('first screen explains what to do, with one primary action', async ({ brows
   // How it works: five steps, tap one to see it.
   await expect(page.getByRole('heading', { name: 'Your visit, in five steps' })).toBeVisible();
   await page.getByRole('button', { name: '3. Map' }).click();
-  await expect(page.getByText('Follow the next-step card. Wrong turn? We tell you.')).toBeVisible();
+  await expect(page.getByText('Follow the next-step card.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'I am at the hospital gate' })).toBeVisible();
   await expect(page.getByRole('banner').getByRole('link', { name: 'Emergency', exact: true })).toBeVisible();
   // Natural sizing: 16px body text and buttons at least 48px tall.
@@ -176,7 +176,7 @@ test('Urdu and Sindhi flip the visitor app to right-to-left', async ({ browser }
 });
 
 test('on a desktop screen it is a normal web app with top navigation and sensible sizes', async ({ browser }) => {
-  const ctx = await browser.newContext({ viewport: { width: 1366, height: 820 } });
+  const ctx = await browser.newContext({ viewport: { width: 1366, height: 900 } });
   await presetLang(ctx, 'en');
   const page = await ctx.newPage();
   await page.goto('/');
@@ -191,5 +191,8 @@ test('on a desktop screen it is a normal web app with top navigation and sensibl
   expect(btn!.height).toBeGreaterThanOrEqual(48);
   expect(btn!.height).toBeLessThanOrEqual(64);
   expect(btn!.width).toBeLessThanOrEqual(600);
+  // A short laptop window at 100% zoom (e.g. 1280 x 600 with 150% Windows scaling) gets a compact size.
+  await page.setViewportSize({ width: 1264, height: 600 });
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).fontSize)).toBe('13px');
   await ctx.close();
 });

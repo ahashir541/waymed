@@ -72,7 +72,7 @@ export const sd: Record<DictKey, string> = {
   'home.kiosk': 'ڪيوسڪ موڊ', // TODO: native review
   'home.board': 'داخلا بورڊ', // TODO: native review
   'home.demo': 'ڊيمو ۽ پريزنٽيشن', // TODO: native review
-  'home.privacy': 'ڪو اڪائونٽ ناهي. ڪيمرا سان نگراني ناهي. پرچي تي رڳو ٽوڪن نمبر ۽ شعبو هوندو آهي.', // TODO: native review
+  'home.privacy': 'ڪو اڪائونٽ ناهي. ڪا نگراني ناهي. ڪا ذاتي معلومات ناهي.', // TODO: native review
 
   'guide.whereTitle': 'توهان ڪٿي وڃڻ چاهيو ٿا؟', // TODO: native review
   'guide.departments': 'شعبا', // TODO: native review
@@ -518,16 +518,16 @@ export const sd: Record<DictKey, string> = {
   'v.home.waiting': '{n} انتظار ۾', // TODO: native review
   'v.home.visit': 'وقت ۽ مدد', // TODO: native review
   'v.home.helpDesk': 'هيلپ ڊيسڪ پرچي ڪمري ۽ مکيه چوواٽي تي آهن. وردي ۾ عملو هميشه مدد ڪري سگهي ٿو.', // TODO: native review
-  'v.home.footer': 'سول اسپتال ڪراچي لاءِ وي ميڊ پائلٽ. هتي ڏيکاريل نقشو، ڊاڪٽر، وقت ۽ قطارون ڊيمو ڊيٽا آهن.', // TODO: native review
+  'v.home.footer': 'سول اسپتال ڪراچي لاءِ وي ميڊ پائلٽ. ڏيکاريل سڄو ڊيٽا ڊيمو آهي.', // TODO: native review
   'v.home.pilot': 'پائلٽ', // TODO: native review
   'v.home.live': 'سڌو', // TODO: native review
   'v.ask.anytime': 'وي ميڊ کان پڇو', // TODO: native review
-  'v.home.sub': 'سنڌي، اردو يا انگريزي ۾. ڪو اڪائونٽ ناهي، غلط قطار ۾ انتظار ناهي.', // TODO: native review
+  'v.home.sub': 'سنڌي، اردو يا انگريزي. اڪائونٽ جي ضرورت ناهي.', // TODO: native review
   'v.journey.title': 'توهان جو دورو، پنجن قدمن ۾', // TODO: native review
-  'v.journey.gate': 'دروازي تي وي ميڊ کوليو ۽ پنهنجي ٻولي چونڊيو.', // TODO: native review
-  'v.journey.slip': 'ٻڌايو ڇا گهرجي ۽ پنهنجو ٽوڪن وٺو.', // TODO: native review
-  'v.journey.map': 'ايندڙ قدم جو ڪارڊ ڏسو. غلط موڙ تي اسين ٻڌائينداسين.', // TODO: native review
-  'v.journey.wait': 'ويجهو ويهو ۽ قطار ۾ پنهنجي جاءِ ڏسو.', // TODO: native review
+  'v.journey.gate': 'ڪيو آر اسڪين ڪريو ۽ ٻولي چونڊيو.', // TODO: native review
+  'v.journey.slip': 'ٻڌايو ڇا گهرجي. ٽوڪن وٺو.', // TODO: native review
+  'v.journey.map': 'ايندڙ قدم جو ڪارڊ ڏسو.', // TODO: native review
+  'v.journey.wait': 'قطار ۾ پنهنجي جاءِ ڏسو.', // TODO: native review
   'v.journey.turn': 'فون سائو ٿي وڃي: اندر وڃو.', // TODO: native review
   'v.nav.ask': 'پڇو', // TODO: native review
   'v.map.zoomIn': 'زوم اِن', // TODO: native review
@@ -547,4 +547,9 @@ export const sd: Record<DictKey, string> = {
   'v.home.seeAll': 'سڀ {n} شعبا ڏسو', // TODO: native review
   'show.swipe': 'اڳتي وڌڻ لاءِ سوائپ يا ٽيپ ڪريو', // TODO: native review
   'show.rotate': 'وڏو ڏسڻ لاءِ فون کي ترڇو ڪريو', // TODO: native review
+  'v.story.eyebrow': 'اسان جي ڊيزائن ٿنڪنگ ڪهاڻي', // TODO: native review
+  'v.story.title': 'هڪ اسپتال جي دوري کان هن ايپ تائين', // TODO: native review
+  'v.story.team': 'اسان جي ٽيم', // TODO: native review
+  'v.story.raw': 'اسان جو خام خيال، هڪ جملي ۾', // TODO: native review
+  'v.story.then': 'پوءِ اسان اهو ٺاهيو: هيءَ ويب ايپ.', // TODO: native review
 };

@@ -14,7 +14,7 @@ import { DeptMark } from '../components/DeptMark.tsx';
 import { FlipText } from '../components/FlipText.tsx';
 import { Slip } from '../components/Slip.tsx';
 import { Icon } from '../components/Icon.tsx';
-import { HMW, PERSONAS, JOURNEY, FEATURE_EVIDENCE, REJECTED, PILOT, RESEARCH } from '../data/story.ts';
+import { HMW, PERSONAS, JOURNEY, FEATURE_EVIDENCE, REJECTED, PILOT, RESEARCH, TEAM_MEMBERS, STORY_STEPS, RAW_IDEA } from '../data/story.ts';
 
 interface Scene {
   id: string;
@@ -100,6 +100,39 @@ export default function Show() {
             <p className="text-[1.4em] text-[#E0A800]">{translate(lang, 'app.tagline')}</p>
             <p className="mx-auto mt-[1em] max-w-[22em] text-[1.25em] leading-snug">{L(HMW)}</p>
           </div>
+        </div>
+      ),
+    },
+    {
+      id: 'team',
+      sec: 24,
+      title: S('Who we are and how we got here', 'ہم کون ہیں اور یہاں تک کیسے پہنچے', 'اسان ڪير آهيون ۽ هتي ڪيئن پهتاسين'),
+      caption: S(
+        'We visited Civil Hospital Karachi, turned what we heard into 5 problem themes, chose one HMW, compared 4 ideas, and built this web app.',
+        'ہم سول ہسپتال کراچی گئے، سنی باتوں سے 5 موضوعات بنائے، ایک HMW چنا، 4 آئیڈیاز پرکھے، اور یہ ویب ایپ بنائی۔',
+        'اسان سول اسپتال ڪراچي وياسين، ٻڌل ڳالهين مان 5 موضوع ٺاهيا، هڪ HMW چونڊيو، 4 خيال پرکيا، ۽ هيءَ ويب ايپ ٺاهي.',
+      ),
+      body: () => (
+        <div className="grid h-full grid-rows-[auto_1fr_auto] gap-[0.5em]">
+          <p className="ltr flex flex-wrap items-center gap-[0.4em] text-[0.9em]">
+            {TEAM_MEMBERS.map((m) => (
+              <span key={m} className="rounded-full bg-white/10 px-[0.6em] py-[0.15em] font-bold">
+                {m}
+              </span>
+            ))}
+          </p>
+          <ol className="grid grid-cols-5 gap-[0.4em]">
+            {STORY_STEPS.map((st, k) => (
+              <li key={k} className={`fade-up rounded-[0.5em] p-[0.5em] ${k === STORY_STEPS.length - 1 ? 'bg-[#E0A800] text-black' : 'bg-white/[0.07]'}`} style={{ animationDelay: `${k * 350}ms` }}>
+                <Icon name={st.icon} size="1.3em" className={k === STORY_STEPS.length - 1 ? '' : 'text-[#E0A800]'} />
+                <p className="mt-[0.2em] text-[0.95em] font-black leading-tight">{L(st.title)}</p>
+                <p className="mt-[0.2em] text-[0.8em] leading-snug opacity-90">{L(st.text)}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="fade-up font-hand -rotate-[0.5deg] rounded-[0.4em] bg-[#fdf6d8] px-[0.7em] py-[0.35em] text-[1.05em] leading-snug text-black" style={{ animationDelay: '1900ms' }}>
+            {L(RAW_IDEA)}
+          </p>
         </div>
       ),
     },

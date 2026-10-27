@@ -240,7 +240,7 @@ export function VisitorShell({ children, wide, hideNav }: Props) {
           <JourneyProgress chapter={chapter} />
         </div>
       )}
-      <main id="vmain" className={`vshell mx-auto px-4 pt-6 md:px-6 md:pt-8 ${wide ? 'max-w-6xl' : 'max-w-xl'}`}>
+      <main id="vmain" className={`vshell mx-auto px-4 pt-6 md:px-6 md:pt-7 ${wide ? 'max-w-6xl' : 'max-w-xl'}`}>
         <div key={pathname} className="v-enter">
           {children}
         </div>

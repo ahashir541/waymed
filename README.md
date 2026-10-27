@@ -13,6 +13,12 @@ anonymous insights.
 
 **From the hospital gate to the right department, in your language.**
 
+**One-page summary:** [`WayMed-Patient-Journey.pdf`](WayMed-Patient-Journey.pdf) shows the team, the field
+visit, the chosen HMW, the raw idea and the patient journey step by step (what the patient does in the
+app, what happens in the hospital, which interview problem it solves). Source:
+`docs/journey-onepager.html`; rebuild it with `node scripts/make-journey-pdf.ts`. The same story is on the
+home page ("Our design-thinking story") and on slide 2 of the presenter show.
+
 ## How to use WayMed in 30 seconds
 
 1. At the gate, open WayMed (scan the poster QR) and tap **I am at the hospital gate**.

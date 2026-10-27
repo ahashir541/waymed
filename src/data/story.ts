@@ -236,3 +236,42 @@ export interface Sticky {
   text: string;
 }
 export const RESEARCH = research as { personas: { code: string; name: string; role: string }[]; groups: ResearchGroup[]; stickies: Sticky[] };
+
+// The team and how the idea was reached, from the team's Ideate notebook (members, raw ideas, the four
+// idea groups and the finalized idea). The team has not chosen a team name, so none is shown.
+export const TEAM_MEMBERS = ['Syed Hashir Ali', 'Ibadullah', 'Danish Saleem', 'Omar Abbas'];
+
+export const STORY_STEPS: { icon: string; title: L10n; text: L10n }[] = [
+  {
+    icon: 'building',
+    title: { en: 'We visited', ur: 'ہم گئے', sd: 'اسان وياسين' }, // TODO: native review
+    text: { en: 'Civil Hospital Karachi. 6 interviews with families and staff.', ur: 'سول ہسپتال کراچی۔ گھر والوں اور عملے کے 6 انٹرویو۔', sd: 'سول اسپتال ڪراچي. گهر وارن ۽ عملي جا 6 انٽرويو.' }, // TODO: native review
+  },
+  {
+    icon: 'clipboard',
+    title: { en: 'We found 5 problems', ur: 'ہمیں 5 مسائل ملے', sd: 'اسان کي 5 مسئلا مليا' }, // TODO: native review
+    text: { en: '34 notes, 5 themes. The biggest: people get lost.', ur: '34 نوٹس، 5 موضوعات۔ سب سے بڑا: لوگ راستہ بھول جاتے ہیں۔', sd: '34 نوٽس، 5 موضوع. سڀ کان وڏو: ماڻهو رستو ڀلجي وڃن ٿا.' }, // TODO: native review
+  },
+  {
+    icon: 'flag',
+    title: { en: 'We chose one HMW', ur: 'ہم نے ایک HMW چنا', sd: 'اسان هڪ HMW چونڊيو' }, // TODO: native review
+    text: { en: 'Help first-time visitors reach the right department the first time.', ur: 'پہلی بار آنے والوں کو پہلی ہی بار صحیح شعبے تک پہنچانا۔', sd: 'پهريون ڀيرو ايندڙن کي پهرين ئي ڀيري صحيح شعبي تائين پهچائڻ.' }, // TODO: native review
+  },
+  {
+    icon: 'activity',
+    title: { en: 'We compared 4 ideas', ur: 'ہم نے 4 آئیڈیاز پرکھے', sd: 'اسان 4 خيال پرکيا' }, // TODO: native review
+    text: { en: 'Kept: phone, QR, slip, kiosks. Dropped: cameras and robots.', ur: 'رکے: فون، کیو آر، پرچی، کیوسک۔ چھوڑے: کیمرے اور روبوٹ۔', sd: 'رکيا: فون، ڪيو آر، پرچي، ڪيوسڪ. ڇڏيا: ڪئميرا ۽ روبوٽ.' }, // TODO: native review
+  },
+  {
+    icon: 'route',
+    title: { en: 'This web app', ur: 'یہ ویب ایپ', sd: 'هي ويب ايپ' }, // TODO: native review
+    text: { en: 'WayMed: the way and your turn, on your own phone.', ur: 'وے میڈ: راستہ اور آپ کی باری، اپنے فون پر۔', sd: 'وي ميڊ: رستو ۽ توهان جي واري، پنهنجي فون تي.' }, // TODO: native review
+  },
+];
+
+/** The idea in one raw sentence, as the team would write it by hand before building anything. */
+export const RAW_IDEA: L10n = {
+  en: 'A web app on the patient’s own phone: scan the QR at the gate, pick Urdu, Sindhi or English, get a slip with a token, and it shows the way to the right department step by step and tells you when it is your turn. No camera, no account.',
+  ur: 'مریض کے اپنے فون پر ایک ویب ایپ: دروازے پر کیو آر اسکین کریں، اردو، سندھی یا انگریزی چنیں، ٹوکن والی پرچی لیں، اور یہ قدم بہ قدم صحیح شعبے کا راستہ دکھائے اور باری آنے پر بتائے۔ نہ کیمرہ، نہ اکاؤنٹ۔',
+  sd: 'مريض جي پنهنجي فون تي هڪ ويب ايپ: دروازي تي ڪيو آر اسڪين ڪريو، سنڌي، اردو يا انگريزي چونڊيو، ٽوڪن واري پرچي وٺو، ۽ اها قدم به قدم صحيح شعبي جو رستو ڏيکاري ۽ واري اچڻ تي ٻڌائي. نه ڪئميرا، نه اڪائونٽ.', // TODO: native review
+}; // TODO: native review

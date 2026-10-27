@@ -16,9 +16,9 @@ export const sampleHospital: HospitalData = {
       sd: 'سول اسپتال ڪراچي (پائلٽ)', // TODO: native review
     },
     openHours: {
-      en: 'Demo hours: Outpatient clinics Monday to Saturday, 8:00 am to 2:00 pm (some evening clinics). Laboratory and Pharmacy every day, 8:00 am to 8:00 pm. Emergency and Radiology open 24 hours.',
-      ur: 'ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے (کچھ شام کے کلینک)۔ لیبارٹری اور فارمیسی روزانہ صبح 8 سے رات 8۔ ایمرجنسی اور ریڈیالوجی 24 گھنٹے کھلی۔',
-      sd: 'ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي (ڪجهه شام جون ڪلينڪون). ليبارٽري ۽ فارميسي روزانو صبح 8 کان رات 8. ايمرجنسي ۽ ريڊيالاجي 24 ڪلاڪ کليل.', // TODO: native review
+      en: 'Demo hours: OPD Mon to Sat, 8:00 to 14:00 · Lab and Pharmacy daily, 8:00 to 20:00 · Emergency and Radiology 24 hours',
+      ur: 'ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، 8 سے 2 · لیب اور فارمیسی روزانہ، 8 سے 8 · ایمرجنسی اور ریڈیالوجی 24 گھنٹے',
+      sd: 'ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، 8 کان 2 · ليب ۽ فارميسي روزانو، 8 کان 8 · ايمرجنسي ۽ ريڊيالاجي 24 ڪلاڪ', // TODO: native review
     },
     helpline: '',
     address: { en: 'Baba-e-Urdu Road, Saddar, Karachi', ur: 'بابائے اردو روڈ، صدر، کراچی', sd: 'بابائي اردو روڊ، صدر، ڪراچي' }, // TODO: native review

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>WayMed: patient journey (one page)</title>
+<!-- Source of WayMed-Patient-Journey.pdf. Regenerate with: node scripts/make-journey-pdf.ts -->
+<style>
+  @font-face { font-family: 'Manrope'; font-weight: 200 800; src: url('../public/fonts/manrope-latin.woff2') format('woff2'); }
+  @font-face { font-family: 'Caveat'; font-weight: 400 700; src: url('../public/fonts/caveat-latin.woff2') format('woff2'); }
+  @page { size: A4; margin: 0; }
+  :root { --ink: #141414; --muted: #555; --line: #d9d9d9; --accent: #e0a800; --soft: #fff6d6; --red: #c8261b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { width: 210mm; height: 297mm; padding: 8mm 9mm 7mm; font: 8pt/1.28 'Segoe UI', system-ui, Arial, sans-serif; color: var(--ink); }
+  h1, h2, h3, .d { font-family: 'Manrope', 'Segoe UI', sans-serif; letter-spacing: -0.01em; margin: 0; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; background: #0b0b0b; color: #fff; border-radius: 3.5mm; padding: 3.2mm 4.5mm; }
+  header h1 { font-size: 16pt; font-weight: 800; }
+  header h1 span { color: var(--accent); }
+  header p { margin: 1mm 0 0; color: #cfcfcf; font-size: 8.4pt; }
+  .team { text-align: right; font-size: 8pt; color: #cfcfcf; white-space: nowrap; }
+  .team b { display: block; color: #fff; font-family: 'Manrope'; font-size: 8.6pt; }
+  .row { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5mm; margin-top: 3mm; }
+  .box { border: 0.3mm solid var(--line); border-radius: 3mm; padding: 2.5mm 3mm; }
+  h2 { font-size: 10pt; font-weight: 800; margin-bottom: 1.6mm; }
+  h2 small { font: 600 7.4pt 'Segoe UI', sans-serif; color: var(--muted); letter-spacing: 0; margin-left: 1.5mm; }
+  .path { list-style: none; margin: 0; padding: 0; display: grid; gap: 1mm; }
+  .path li { display: grid; grid-template-columns: 5mm 1fr; gap: 1.8mm; align-items: start; }
+  .path li i { font-style: normal; display: grid; place-items: center; width: 5mm; height: 5mm; border-radius: 50%; background: var(--accent); font: 800 7.5pt 'Manrope'; }
+  .hmw { margin: 1.3mm 0 0; padding: 1.7mm 2.6mm; background: #0b0b0b; color: #fff; border-radius: 2mm; font: 700 9.4pt/1.3 'Manrope'; }
+  .hmw span { color: var(--accent); }
+  .note { background: var(--soft); border-radius: 2mm; padding: 2.5mm 3.5mm 3mm; transform: rotate(-0.6deg); box-shadow: 0 1.2mm 3mm rgba(0,0,0,.12); margin-top: 1mm; }
+  .note small { font: 700 6.8pt 'Segoe UI'; letter-spacing: .05em; text-transform: uppercase; color: #8a6d00; }
+  .note p { margin: .6mm 0 0; font: 400 14.5pt/1.15 'Caveat', cursive; color: #1d2a6b; }
+  .became { margin-top: 3mm; display: flex; align-items: center; gap: 2mm; font: 800 9pt 'Manrope'; }
+  .became b { background: var(--accent); border-radius: 1.5mm; padding: .6mm 2mm; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.2mm; margin-top: 2mm; }
+  .chips span { border: 0.3mm solid var(--line); border-radius: 5mm; padding: .5mm 2mm; font-size: 7.4pt; }
+  .chips .x { color: var(--muted); text-decoration: line-through; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 3mm; font-size: 7.6pt; }
+  th { text-align: left; font: 800 7.8pt 'Manrope'; background: #0b0b0b; color: #fff; padding: 1.5mm 1.8mm; }
+  th:first-child { border-top-left-radius: 2mm; } th:last-child { border-top-right-radius: 2mm; }
+  td { padding: 1.2mm 1.8mm; border-bottom: 0.3mm solid var(--line); vertical-align: top; }
+  td:first-child { font: 800 8pt 'Manrope'; white-space: nowrap; }
+  td:first-child em { display: block; font: 600 6.8pt 'Segoe UI'; color: var(--muted); font-style: normal; }
+  td.ev { color: #3a3a3a; }
+  td.ev q { font-style: italic; }
+  td.ev b { color: #7a5c00; }
+  tr.sos td { background: #fdeceb; } tr.sos td:first-child { color: var(--red); }
+  tr:nth-child(even):not(.sos) td { background: #fafafa; }
+  .foot { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin-top: 2.6mm; font-size: 7.4pt; }
+  .foot h3 { font-size: 8.4pt; font-weight: 800; margin-bottom: .8mm; }
+  .foot ul { margin: 0; padding-left: 3.5mm; }
+  .tiny { margin-top: 2.2mm; font-size: 6.9pt; color: var(--muted); display: flex; justify-content: space-between; gap: 4mm; }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>WayMed <span>·</span> Guidance Network</h1>
+      <p>How a first-time patient gets help at Civil Hospital Karachi, from the gate to the right department, using our web app.</p>
+    </div>
+    <div class="team"><b>Our team</b>Syed Hashir Ali · Ibadullah · Danish Saleem · Omar Abbas</div>
+  </header>
+
+  <div class="row">
+    <section class="box">
+      <h2>How we got here <small>design thinking, step by step</small></h2>
+      <ol class="path">
+        <li><i>1</i><div><b>We visited Civil Hospital Karachi</b> and talked to 6 people: 3 patient attendants (from Thatta, Sanghar and a father of a 7-year-old), a child specialist, a doctor’s assistant and a nurse intern.</div></li>
+        <li><i>2</i><div><b>34 sticky notes, 5 problem themes</b>, each a possible “How might we”: no safe place to rest · <u>lost without guidance</u> · left in the dark · money and lost work · an overstretched system.</div></li>
+        <li><i>3</i><div><b>We finalized one HMW</b> (theme “lost without guidance”):</div></li>
+      </ol>
+      <p class="hmw"><span>HMW:</span> How might we help first-time visitors reach the right department the first time?</p>
+      <ol class="path" start="4" style="margin-top:1.6mm">
+        <li><i>4</i><div><b>We compared 4 idea groups</b> for advantages, disadvantages, usability and scale, then finalized an “Intelligent Hospital Navigation System”. We kept what needs no new hardware and dropped what hurts privacy or costs too much:</div></li>
+      </ol>
+      <div class="chips">
+        <span>Sign boards &amp; displays</span><span>Phone, QR &amp; web guidance</span><span>Smart slip (QR token)</span><span>Kiosks &amp; boards</span><span>Voice assistant</span><span class="x">Camera tracking</span><span class="x">Guide robots</span>
+      </div>
+    </section>
+
+    <section class="box">
+      <h2>Our idea, raw <small>as we first wrote it, by hand</small></h2>
+      <div class="note">
+        <small>One sentence</small>
+        <p>A web app on the patient’s own phone: scan the QR at the gate, pick Urdu, Sindhi or English, get a slip with a token, and it shows the way to the right department step by step and tells you when it is your turn. No camera, no account.</p>
+      </div>
+      <div class="became">↓ This idea became <b>the WayMed web app</b></div>
+      <p style="margin:1.5mm 0 0">Works on any phone browser, at a kiosk, and on the entrance board. Every screen in <b>Urdu, Sindhi and English</b> with icons, colours and a Listen button. A red <b>Emergency</b> button is on every screen.</p>
+      <p style="margin:1.2mm 0 0;color:var(--muted)">Live demo: <b style="color:var(--ink)">waymed-nvfl.vercel.app</b> (sample hospital data, clearly marked).</p>
+    </section>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th style="width:17%">Step</th><th style="width:31%">What the patient does in the app</th><th style="width:27%">What happens in the hospital</th><th>Problem solved (from our interviews)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1 · Before coming<em>at home</em></td><td>Opens a shared link: what to bring, opening hours, “only one or two attendants”. Can book a time.</td><td>Nothing yet: the family arrives prepared.</td><td class="ev"><b>S1:</b> <q>patients arrive with little early guidance</q> · <b>D1:</b> 6 to 9 attendants crowd each child</td></tr>
+      <tr><td>2 · At the gate<em>Main Entrance</em></td><td>Scans the QR poster, picks a language, taps “I am at the hospital gate”. Sees the 5 parts of the visit.</td><td>A QR poster at the gate. The guard only points to it.</td><td class="ev"><b>P1:</b> <q>did not know where to go or whom to ask</q></td></tr>
+      <tr><td>3 · Slip Room<em>Registration</em></td><td>Chooses the need (Check-up, Child, Women, Eye…) and gets a slip with a token. No name, no phone number.</td><td>The desk issues or prints the slip. The department already sees the token coming.</td><td class="ev">The right department is chosen <b>before</b> walking, not by trial and error.</td></tr>
+      <tr><td>4 · Walk<em>to the department</em></td><td>Follows one “next step” card and a route in the department’s colour and shape. Location optional, or taps “I reached …”.</td><td>Colour-coded signs and a QR sticker at every landmark.</td><td class="ev"><b>P2:</b> one person said <q>emergency no. 3</q>, another sent him elsewhere</td></tr>
+      <tr><td>5 · Wrong turn<em>anywhere</em></td><td>The phone warns “turn back”, or the next QR sticker shows “You are here” and a new route. “I feel lost” calls a guide.</td><td>Staff receive the guide request with the place.</td><td class="ev"><b>P2:</b> <q>hours lost while the child got worse</q></td></tr>
+      <tr><td>6 · Wait<em>near the room</em></td><td>Sees people ahead and a time range, and the nearest water, washroom and seats. The family can follow the same token.</td><td>The entrance board shows “now serving”. Staff press Next.</td><td class="ev"><b>P2:</b> <q>no news from inside</q> · <b>P1:</b> no place to sit</td></tr>
+      <tr><td>7 · Your turn<em>doctor’s room</em></td><td>The phone turns green and vibrates: “Your turn now, go in”.</td><td>The doctor’s room calls the token.</td><td class="ev">No crowding at the door to ask “is it my turn?”</td></tr>
+      <tr><td>8 · After check-up<em>going home</em></td><td>Gets a follow-up card in their language: next date, bring reports, come to Emergency if worse.</td><td>Doctor or desk may write the date; printing is optional.</td><td class="ev"><b>P1:</b> unclear follow-up after discharge · <b>S1:</b> follow-up gap</td></tr>
+      <tr class="sos"><td>Emergency<em>any moment</em></td><td>Presses the red Emergency button: one fastest route from where they stand, no slip needed.</td><td>Straight to Emergency; staff are told “Emergency”.</td><td class="ev"><b>P2:</b> child unwell, sent between places</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot">
+    <div class="box"><h3>Who does what</h3><ul><li><b>Patient / family:</b> scan, choose, follow, wait, go in.</li><li><b>Hospital:</b> QR posters and stickers, slip desk, “Next” button, entrance board.</li></ul></div>
+    <div class="box"><h3>What it does not do</h3><ul><li>No medical advice or diagnosis.</li><li>No camera tracking, no accounts, no names stored.</li><li>Cannot make the lab or doctors faster.</li></ul></div>
+    <div class="box"><h3>How we will know it works</h3><ul><li>First-time-right rate (one-tap question).</li><li>Time from gate to department.</li><li>Pilot: one department, two weeks.</li></ul></div>
+  </div>
+  <p class="tiny"><span>Evidence codes: P1 Khurshid (attendant, Thatta) · P2 Shams (father of a 7-year-old) · D1 Dr. Tahira (child specialist) · S1 Abdullah (doctor’s assistant). Interview points are paraphrased, not measured.</span><span>Floor plan, doctors and timings in the demo are sample data.</span></p>
+</body>
+</html>

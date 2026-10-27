@@ -13,7 +13,7 @@ and then remove the `// TODO: native review` marker on that line.
 Review **safety strings first** (Emergency, medical-advice refusal, "come to Emergency if worse", token status).
 Also check that simple, everyday Sindhi is used for visitors with low literacy.
 
-Total strings: 675
+Total strings: 680
 
 | Done | Area | Key | English | Urdu | Sindhi (draft) |
 |---|---|---|---|---|---|
@@ -533,6 +533,11 @@ Total strings: 675
 | [ ] | UI | `v.home.seeAll` | See all {n} departments | تمام {n} شعبے دیکھیں | سڀ {n} شعبا ڏسو |
 | [ ] | UI | `show.swipe` | Swipe or tap to move | آگے بڑھنے کے لیے سوائپ یا ٹیپ کریں | اڳتي وڌڻ لاءِ سوائپ يا ٽيپ ڪريو |
 | [ ] | UI | `show.rotate` | Turn your phone sideways for a bigger view | بڑا دیکھنے کے لیے فون کو آڑا کریں | وڏو ڏسڻ لاءِ فون کي ترڇو ڪريو |
+| [ ] | UI | `v.story.eyebrow` | Our design-thinking story | ہماری ڈیزائن تھنکنگ کہانی | اسان جي ڊيزائن ٿنڪنگ ڪهاڻي |
+| [ ] | UI | `v.story.title` | From one hospital visit to this app | ایک ہسپتال کے دورے سے اس ایپ تک | هڪ اسپتال جي دوري کان هن ايپ تائين |
+| [ ] | UI | `v.story.team` | Our team | ہماری ٹیم | اسان جي ٽيم |
+| [ ] | UI | `v.story.raw` | Our raw idea, in one sentence | ہمارا خام آئیڈیا، ایک جملے میں | اسان جو خام خيال، هڪ جملي ۾ |
+| [ ] | UI | `v.story.then` | Then we built it: this web app. | پھر ہم نے اسے بنایا: یہی ویب ایپ۔ | پوءِ اسان اهو ٺاهيو: هيءَ ويب ايپ. |
 | [ ] | Hospital | `hospital.name` | Civil Hospital Karachi (pilot) | سول ہسپتال کراچی (پائلٹ) | سول اسپتال ڪراچي (پائلٽ) |
 | [ ] | Hospital | `hospital.openHours` | Demo hours: Outpatient clinics Monday to Saturday, 8:00 am to 2:00 pm (some evening clinics). Laboratory and Pharmacy every day, 8:00 am to 8:00 pm. Emergency and Radiology open 24 hours. | ڈیمو اوقات: او پی ڈی پیر تا ہفتہ، صبح 8 سے دوپہر 2 بجے (کچھ شام کے کلینک)۔ لیبارٹری اور فارمیسی روزانہ صبح 8 سے رات 8۔ ایمرجنسی اور ریڈیالوجی 24 گھنٹے کھلی۔ | ڊيمو وقت: او پي ڊي سومر کان ڇنڇر، صبح 8 کان منجهند 2 وڳي (ڪجهه شام جون ڪلينڪون). ليبارٽري ۽ فارميسي روزانو صبح 8 کان رات 8. ايمرجنسي ۽ ريڊيالاجي 24 ڪلاڪ کليل. |
 | [ ] | Department | `emergency.name` | Emergency | ایمرجنسی | ايمرجنسي |

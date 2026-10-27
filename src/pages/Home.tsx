@@ -5,6 +5,7 @@ import { Icon } from '../components/Icon.tsx';
 import { DeptBadge } from '../components/DeptMark.tsx';
 import { FloorPlan } from '../components/FloorPlan.tsx';
 import { JourneySteps } from '../components/JourneySteps.tsx';
+import { StorySection } from '../components/StorySection.tsx';
 import { usePrefs, safeStorage } from '../lib/prefs.tsx';
 import { useHospital, useQueues, useStore } from '../lib/store.tsx';
 import { findRoute } from '../lib/route.ts';
@@ -96,14 +97,15 @@ export function Home() {
             </p>
             <div>
               <p className="text-sm font-bold uppercase tracking-wide text-accent">{t('v.home.eyebrow')}</p>
-              <h1 className="mt-2 max-w-[22ch] text-[1.75rem] font-extrabold leading-[1.15] tracking-tight lg:text-[2rem]">{t('v.focus')}</h1>
+              <h1 className="mt-2 max-w-[22ch] text-[1.75rem] font-extrabold leading-[1.15] lg:text-[2.125rem]">{t('v.focus')}</h1>
               <p className="mt-3 max-w-md text-lg text-muted">{t('v.home.sub')}</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {visit ? (
-                <button className="vbtn v-glow" onClick={() => navigate(chapterPath(visit.chapter))}>
-                  <Icon name="play" size={20} /> {t('v.resume')}
-                  {visit.label && <span className="ltr font-black">· {visit.label}</span>}
+                <button className="vbtn v-glow sm:col-span-2" onClick={() => navigate(chapterPath(visit.chapter))}>
+                  <Icon name="play" size={20} className="shrink-0" />
+                  <span className="whitespace-nowrap">{t('v.resume')}</span>
+                  {visit.label && <span className="ltr shrink-0 whitespace-nowrap rounded-full bg-black/15 px-2 py-0.5 text-sm font-black">{visit.label}</span>}
                 </button>
               ) : (
                 <button
@@ -141,18 +143,20 @@ export function Home() {
 
         <JourneySteps />
 
+        <StorySection />
+
         {/* Quick actions */}
         <section aria-labelledby="quick-h">
           <h2 id="quick-h" className={sectionTitle}>
             {t('v.home.quick')}
           </h2>
           <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3">
-            <QuickCard to="/g" icon="pin" title={t('v.map.title')} sub={t('guide.whereTitle')} />
-            <QuickCard to="/emergency" icon="siren" title={t('emergency.title')} sub={t('emergency.lead')} tone="danger" />
-            <QuickCard to="/book" icon="calendar" title={t('home.book')} sub={t('book.window')} />
-            <QuickCard to="/prepare" icon="check" title={t('home.prepare')} sub={t('prepare.b1')} />
-            <QuickCard to="/assistant" icon="mic" title={t('v.more.assistant')} sub={t('assistant.label')} />
-            <QuickCard to="/followup" icon="clipboard" title={t('home.followup')} sub={t('followup.r4')} />
+            <QuickCard to="/g" icon="pin" title={t('v.map.title')} />
+            <QuickCard to="/emergency" icon="siren" title={t('emergency.title')} tone="danger" />
+            <QuickCard to="/book" icon="calendar" title={t('home.book')} />
+            <QuickCard to="/prepare" icon="check" title={t('home.prepare')} />
+            <QuickCard to="/assistant" icon="mic" title={t('v.more.assistant')} />
+            <QuickCard to="/followup" icon="clipboard" title={t('home.followup')} />
           </div>
         </section>
 
@@ -177,7 +181,6 @@ export function Home() {
                     <DeptBadge dept={d} size={36} />
                     <span className="min-w-0 font-bold leading-snug">{L(d.name)}</span>
                   </span>
-                  <span className="text-xs text-muted">{L(d.openHours)}</span>
                   <span className="mt-auto flex items-center justify-between gap-2 border-t border-line pt-2 text-sm">
                     <span className="text-muted">{t('v.home.nowServing')}</span>
                     <span className="ltr font-black tabular-nums">{q?.nowServing?.label ?? '—'}</span>
@@ -202,9 +205,6 @@ export function Home() {
               <Icon name="clock" size={18} className="text-accent" /> {t('prepare.hours')}
             </p>
             <p className="mt-2 text-muted">{L(data.hospital.openHours)}</p>
-            <p className="mt-4 flex items-start gap-2 text-sm text-muted">
-              <Icon name="helpdesk" size={16} className="mt-0.5 shrink-0 text-accent" /> {t('v.home.helpDesk')}
-            </p>
           </div>
           <Link to="/emergency" className="vtile flex flex-col justify-between gap-3 rounded-2xl border border-[#D92D20]/40 bg-[#D92D20]/10 p-5">
             <span className="flex items-center gap-2 font-bold text-danger">

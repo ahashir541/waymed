@@ -645,7 +645,8 @@ export default function Tour() {
   return (
     <VisitorShell wide>
       <div className="grid items-start gap-6 lg:grid-cols-[440px_1fr] lg:gap-10">
-      <section aria-label={t('v.tour.title')} className="overflow-hidden rounded-3xl border border-line bg-[#0b0b0b]">
+      {/* Desktop: the demo card always fits the window; only its middle scrolls, the controls stay visible. */}
+      <section aria-label={t('v.tour.title')} className="overflow-hidden rounded-3xl border border-line bg-[#0b0b0b] lg:sticky lg:top-[calc(4rem+1rem)] lg:flex lg:max-h-[calc(100dvh-8.5rem)] lg:flex-col">
       {/* Phones: the explanation is pinned on top of the demo card, so it is never below the fold. */}
       <div key={`x${scene.id}`} className="v-enter border-b border-line bg-[#111] px-4 py-3 lg:hidden">
         <p className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-wide text-accent">
@@ -662,17 +663,17 @@ export default function Tour() {
           </span>
         </p>
       </div>
-      <div className="p-4">
+      <div className="p-4 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
       {scene.chapter && (
         <div className="mb-4">
           <JourneyProgress chapter={scene.chapter} />
         </div>
       )}
-      <div key={scene.id} className="v-enter min-h-[380px] lg:min-h-[440px]">
+      <div key={scene.id} className="v-enter min-h-[380px] lg:min-h-0">
         {scene.body(ms)}
       </div>
       </div>
-      <div className="border-t border-line bg-[#111] px-4 pt-3 pb-3">
+      <div className="shrink-0 border-t border-line bg-[#111] px-4 pt-3 pb-3">
         <p key={`c${scene.id}`} className="v-enter mb-2 hidden text-sm leading-snug lg:block">
           <span className="font-bold text-accent">{t('common.simulation')}: </span>
           {L(scene.caption)}
@@ -706,7 +707,7 @@ export default function Tour() {
         </div>
       </div>
       </section>
-      <div className="hidden lg:block">{panel}</div>
+      <div className="hidden lg:sticky lg:top-[calc(4rem+1rem)] lg:block">{panel}</div>
       </div>
     </VisitorShell>
   );
