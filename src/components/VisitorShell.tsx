@@ -13,6 +13,7 @@ import { STATIC_DEMO } from '../lib/store.tsx';
 import { LANG_NAMES } from '../lib/i18n/core.ts';
 import { CHAPTERS, chapterPath, useVisit, type Chapter } from '../lib/visit.ts';
 import { Icon } from './Icon.tsx';
+import { BUILT_BY } from '../data/story.ts';
 
 export function LanguageChip() {
   const { lang, setLang, t } = usePrefs();
@@ -245,6 +246,10 @@ export function VisitorShell({ children, wide, hideNav }: Props) {
           {children}
         </div>
       </main>
+      {/* Credit on every visitor page. */}
+      <footer className="no-print mx-auto mt-10 max-w-6xl px-4 text-center text-xs text-muted md:px-6">
+        WayMed · {t('v.story.builtBy')} <span className="ltr font-semibold text-ink">{BUILT_BY}</span>
+      </footer>
       {!hideNav && <BottomNav ask={!pathname.startsWith('/assistant') && !pathname.startsWith('/tour')} />}
       {!hideNav && !pathname.startsWith('/assistant') && !pathname.startsWith('/tour') && (
         <Suspense fallback={null}>
